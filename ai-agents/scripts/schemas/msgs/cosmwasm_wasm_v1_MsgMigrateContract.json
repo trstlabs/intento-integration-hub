@@ -1,0 +1,30 @@
+{
+  "$ref": "#/definitions/MsgMigrateContract",
+  "definitions": {
+    "MsgMigrateContract": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID references the new WASM code"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Migrate Contract",
+      "description": "MsgMigrateContract runs a code upgrade/ downgrade for a smart contract"
+    }
+  }
+}

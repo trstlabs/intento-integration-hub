@@ -1,0 +1,63 @@
+{
+  "$ref": "#/definitions/MsgCreatePeriodicVestingAccount",
+  "definitions": {
+    "MsgCreatePeriodicVestingAccount": {
+      "properties": {
+        "fromAddress": {
+          "type": "string"
+        },
+        "toAddress": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "start of vesting as unix time (in seconds)."
+        },
+        "vestingPeriods": {
+          "items": {
+            "$ref": "#/definitions/cosmos.vesting.v1beta1.Period"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Periodic Vesting Account",
+      "description": "MsgCreateVestingAccount defines a message that enables creating a vesting account."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "cosmos.vesting.v1beta1.Period": {
+      "properties": {
+        "length": {
+          "type": "string",
+          "description": "Period duration in seconds."
+        },
+        "amount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Period",
+      "description": "Period defines a length of time and amount of coins that will vest."
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/wasm parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the MsgUpdateParams request type. Since: 0.40"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    },
+    "cosmwasm.wasm.v1.Params": {
+      "properties": {
+        "codeUploadAccess": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false
+        },
+        "instantiateDefaultPermission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of wasm parameters."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgUpdateStopLoss",
+  "definitions": {
+    "MsgUpdateStopLoss": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Stop Loss"
+    }
+  }
+}

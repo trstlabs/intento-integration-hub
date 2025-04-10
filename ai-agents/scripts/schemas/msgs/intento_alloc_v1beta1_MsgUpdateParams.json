@@ -1,0 +1,96 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "params": {
+          "$ref": "#/definitions/intento.alloc.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the request type for updating module's params. Since: v14"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.alloc.v1beta1.DistributionProportions": {
+      "properties": {
+        "developerRewards": {
+          "type": "string"
+        },
+        "communityPool": {
+          "type": "string"
+        },
+        "relayerIncentives": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Distribution Proportions",
+      "description": "DistributionProportions defines the proportion that each bucket  receives."
+    },
+    "intento.alloc.v1beta1.Params": {
+      "properties": {
+        "distributionProportions": {
+          "$ref": "#/definitions/intento.alloc.v1beta1.DistributionProportions",
+          "additionalProperties": false,
+          "description": "distribution_proportions defines the proportion of the minted denom"
+        },
+        "weightedDeveloperRewardsReceivers": {
+          "items": {
+            "$ref": "#/definitions/intento.alloc.v1beta1.WeightedAddress"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "addresses to receive developer rewards"
+        },
+        "supplementAmount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "SupplementAmount is the amount to be supplemented from the pool on top of newly minted coins."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the alloc module."
+    },
+    "intento.alloc.v1beta1.WeightedAddress": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Weighted Address",
+      "description": "WeightedAddress defines an address with a weight."
+    }
+  }
+}

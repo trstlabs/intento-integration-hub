@@ -1,0 +1,44 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.distribution.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/distribution parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.distribution.v1beta1.Params": {
+      "properties": {
+        "communityTax": {
+          "type": "string"
+        },
+        "baseProposerReward": {
+          "type": "string",
+          "description": "Deprecated: The base_proposer_reward field is deprecated and is no longer used in the x/distribution module's reward mechanism."
+        },
+        "bonusProposerReward": {
+          "type": "string",
+          "description": "Deprecated: The bonus_proposer_reward field is deprecated and is no longer used in the x/distribution module's reward mechanism."
+        },
+        "withdrawAddrEnabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of params for the distribution module."
+    }
+  }
+}

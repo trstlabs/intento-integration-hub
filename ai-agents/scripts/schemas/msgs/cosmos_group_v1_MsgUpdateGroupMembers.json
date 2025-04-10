@@ -1,0 +1,49 @@
+{
+  "$ref": "#/definitions/MsgUpdateGroupMembers",
+  "definitions": {
+    "MsgUpdateGroupMembers": {
+      "properties": {
+        "admin": {
+          "type": "string",
+          "description": "admin is the account address of the group admin."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "group_id is the unique ID of the group."
+        },
+        "memberUpdates": {
+          "items": {
+            "$ref": "#/definitions/cosmos.group.v1.MemberRequest"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "member_updates is the list of members to update, set weight to 0 to remove a member."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Group Members",
+      "description": "MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type."
+    },
+    "cosmos.group.v1.MemberRequest": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "address is the member's account address."
+        },
+        "weight": {
+          "type": "string",
+          "description": "weight is the member's voting weight that should be greater than 0."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "metadata is any arbitrary metadata attached to the member."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Member Request",
+      "description": "MemberRequest represents a group member to be used in Msg server requests. Contrary to `Member`, it doesn't have any `added_at` field since this field cannot be set as part of requests."
+    }
+  }
+}

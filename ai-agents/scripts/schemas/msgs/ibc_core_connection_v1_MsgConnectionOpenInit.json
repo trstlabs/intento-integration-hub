@@ -1,0 +1,83 @@
+{
+  "$ref": "#/definitions/MsgConnectionOpenInit",
+  "definitions": {
+    "MsgConnectionOpenInit": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Counterparty",
+          "additionalProperties": false
+        },
+        "version": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Version",
+          "additionalProperties": false
+        },
+        "delayPeriod": {
+          "type": "string"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Init",
+      "description": "MsgConnectionOpenInit defines the msg sent by an account on Chain A to initialize a connection with Chain B."
+    },
+    "ibc.core.commitment.v1.MerklePrefix": {
+      "properties": {
+        "keyPrefix": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Merkle Prefix",
+      "description": "MerklePrefix is merkle path prefixed to the key. The constructed key from the Path and the key will be append(Path.KeyPath, append(Path.KeyPrefix, key...))"
+    },
+    "ibc.core.connection.v1.Counterparty": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "identifies the client on the counterparty chain associated with a given connection."
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "identifies the connection end on the counterparty chain associated with a given connection."
+        },
+        "prefix": {
+          "$ref": "#/definitions/ibc.core.commitment.v1.MerklePrefix",
+          "additionalProperties": false,
+          "description": "commitment merkle prefix of the counterparty chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines the counterparty chain associated with a connection end."
+    },
+    "ibc.core.connection.v1.Version": {
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "unique version identifier"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of features compatible with the specified identifier"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Version",
+      "description": "Version defines the versioning scheme used to negotiate the IBC version in the connection handshake."
+    }
+  }
+}

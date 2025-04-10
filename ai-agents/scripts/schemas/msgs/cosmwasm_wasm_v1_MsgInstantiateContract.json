@@ -1,0 +1,56 @@
+{
+  "$ref": "#/definitions/MsgInstantiateContract",
+  "definitions": {
+    "MsgInstantiateContract": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "admin": {
+          "type": "string",
+          "description": "Admin is an optional address that can execute migrations"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID is the reference to the stored WASM code"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label is optional metadata to be stored with a contract instance."
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        },
+        "funds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Funds coins that are transferred to the contract on instantiation"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Instantiate Contract",
+      "description": "MsgInstantiateContract create a new smart contract instance for the given code id."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}

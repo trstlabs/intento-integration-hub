@@ -1,0 +1,41 @@
+{
+  "$ref": "#/definitions/MsgCommunityPoolSpend",
+  "definitions": {
+    "MsgCommunityPoolSpend": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "recipient": {
+          "type": "string"
+        },
+        "amount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Community Pool Spend",
+      "description": "MsgCommunityPoolSpend defines a message for sending tokens from the community pool to another account. This message is typically executed via a governance proposal with the governance module being the executing authority."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}

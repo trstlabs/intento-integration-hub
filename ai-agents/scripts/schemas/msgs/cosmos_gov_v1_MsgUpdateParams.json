@@ -1,0 +1,122 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.gov.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/gov parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "cosmos.gov.v1.Params": {
+      "properties": {
+        "minDeposit": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Minimum deposit for a proposal to enter voting period."
+        },
+        "maxDepositPeriod": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "Maximum period for Atom holders to deposit on a proposal. Initial value: 2 months.",
+          "format": "regex"
+        },
+        "votingPeriod": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "Duration of the voting period.",
+          "format": "regex"
+        },
+        "quorum": {
+          "type": "string",
+          "description": "Minimum percentage of total stake needed to vote for a result to be  considered valid."
+        },
+        "threshold": {
+          "type": "string",
+          "description": "Minimum proportion of Yes votes for proposal to pass. Default value: 0.5."
+        },
+        "vetoThreshold": {
+          "type": "string",
+          "description": "Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3."
+        },
+        "minInitialDepositRatio": {
+          "type": "string",
+          "description": "The ratio representing the proportion of the deposit value that must be paid at proposal submission."
+        },
+        "proposalCancelRatio": {
+          "type": "string",
+          "description": "The cancel ratio which will not be returned back to the depositors when a proposal is cancelled."
+        },
+        "proposalCancelDest": {
+          "type": "string",
+          "description": "The address which will receive (proposal_cancel_ratio * deposit) proposal deposits. If empty, the (proposal_cancel_ratio * deposit) proposal deposits will be burned."
+        },
+        "expeditedVotingPeriod": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "Duration of the voting period of an expedited proposal.",
+          "format": "regex"
+        },
+        "expeditedThreshold": {
+          "type": "string",
+          "description": "Minimum proportion of Yes votes for proposal to pass. Default value: 0.67."
+        },
+        "expeditedMinDeposit": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Minimum expedited deposit for a proposal to enter voting period."
+        },
+        "burnVoteQuorum": {
+          "type": "boolean",
+          "description": "burn deposits if a proposal does not meet quorum"
+        },
+        "burnProposalDepositPrevote": {
+          "type": "boolean",
+          "description": "burn deposits if the proposal does not enter voting period"
+        },
+        "burnVoteVeto": {
+          "type": "boolean",
+          "description": "burn deposits if quorum with vote type no_veto is met"
+        },
+        "minDepositRatio": {
+          "type": "string",
+          "description": "The ratio representing the proportion of the deposit value minimum that must be met when making a deposit. Default value: 0.01. Meaning that for a chain with a min_deposit of 100stake, a deposit of 1stake would be required."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the x/gov module."
+    }
+  }
+}

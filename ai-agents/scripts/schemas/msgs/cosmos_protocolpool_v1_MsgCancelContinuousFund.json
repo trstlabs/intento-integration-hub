@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgCancelContinuousFund",
+  "definitions": {
+    "MsgCancelContinuousFund": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the account address of authority."
+        },
+        "recipient": {
+          "type": "string",
+          "description": "Recipient is the account address string of the recipient whose funds are to be cancelled."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Continuous Fund",
+      "description": "MsgCancelContinuousFund defines a message to cancel continuous funds for a specific recipient."
+    }
+  }
+}

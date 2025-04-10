@@ -1,0 +1,18 @@
+{
+  "$ref": "#/definitions/MsgCancelSpotOrder",
+  "definitions": {
+    "MsgCancelSpotOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Spot Order"
+    }
+  }
+}

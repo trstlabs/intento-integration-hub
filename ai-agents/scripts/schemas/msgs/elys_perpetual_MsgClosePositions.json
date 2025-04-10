@@ -1,0 +1,49 @@
+{
+  "$ref": "#/definitions/MsgClosePositions",
+  "definitions": {
+    "MsgClosePositions": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "liquidate": {
+          "items": {
+            "$ref": "#/definitions/elys.perpetual.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "stopLoss": {
+          "items": {
+            "$ref": "#/definitions/elys.perpetual.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "takeProfit": {
+          "items": {
+            "$ref": "#/definitions/elys.perpetual.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Close Positions"
+    },
+    "elys.perpetual.PositionRequest": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Position Request"
+    }
+  }
+}

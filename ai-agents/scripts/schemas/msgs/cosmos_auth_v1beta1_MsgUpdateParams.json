@@ -1,0 +1,45 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.auth.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/auth parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.auth.v1beta1.Params": {
+      "properties": {
+        "maxMemoCharacters": {
+          "type": "string"
+        },
+        "txSigLimit": {
+          "type": "string"
+        },
+        "txSizeCostPerByte": {
+          "type": "string"
+        },
+        "sigVerifyCostEd25519": {
+          "type": "string"
+        },
+        "sigVerifyCostSecp256k1": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the auth module."
+    }
+  }
+}

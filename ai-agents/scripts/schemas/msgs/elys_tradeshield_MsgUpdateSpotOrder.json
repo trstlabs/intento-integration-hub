@@ -1,0 +1,41 @@
+{
+  "$ref": "#/definitions/MsgUpdateSpotOrder",
+  "definitions": {
+    "MsgUpdateSpotOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "legacyOrderPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyOrderPriceV1",
+          "additionalProperties": false
+        },
+        "orderPrice": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Spot Order"
+    },
+    "elys.tradeshield.LegacyOrderPriceV1": {
+      "properties": {
+        "baseDenom": {
+          "type": "string"
+        },
+        "quoteDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Order Price V 1"
+    }
+  }
+}

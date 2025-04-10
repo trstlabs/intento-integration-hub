@@ -1,0 +1,59 @@
+{
+  "$ref": "#/definitions/MsgSendPacket",
+  "definitions": {
+    "MsgSendPacket": {
+      "properties": {
+        "sourceClient": {
+          "type": "string"
+        },
+        "timeoutTimestamp": {
+          "type": "string"
+        },
+        "payloads": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.channel.v2.Payload"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Send Packet",
+      "description": "MsgSendPacket sends an outgoing IBC packet."
+    },
+    "ibc.core.channel.v2.Payload": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "specifies the source port of the packet."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "specifies the destination port of the packet."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of the specified application."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "the encoding used for the provided value."
+        },
+        "value": {
+          "type": "string",
+          "description": "the raw bytes for the payload.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Payload",
+      "description": "Payload contains the source and destination ports and payload for the application (version, encoding, raw bytes)"
+    }
+  }
+}

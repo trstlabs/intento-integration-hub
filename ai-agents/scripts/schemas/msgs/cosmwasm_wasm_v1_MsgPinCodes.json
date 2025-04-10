@@ -1,0 +1,24 @@
+{
+  "$ref": "#/definitions/MsgPinCodes",
+  "definitions": {
+    "MsgPinCodes": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "codeIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "CodeIDs references the new WASM codes"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Pin Codes",
+      "description": "MsgPinCodes is the MsgPinCodes request type. Since: 0.40"
+    }
+  }
+}

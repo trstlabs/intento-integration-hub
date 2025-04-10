@@ -1,0 +1,25 @@
+{
+  "$ref": "#/definitions/MsgUpdatePool",
+  "definitions": {
+    "MsgUpdatePool": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "leverageMax": {
+          "type": "string"
+        },
+        "maxLeveragelpRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool"
+    }
+  }
+}

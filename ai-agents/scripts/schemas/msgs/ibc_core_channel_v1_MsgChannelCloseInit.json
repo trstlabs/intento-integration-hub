@@ -1,0 +1,22 @@
+{
+  "$ref": "#/definitions/MsgChannelCloseInit",
+  "definitions": {
+    "MsgChannelCloseInit": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Close Init",
+      "description": "MsgChannelCloseInit defines a msg sent by a Relayer to Chain A to close a channel with Chain B."
+    }
+  }
+}

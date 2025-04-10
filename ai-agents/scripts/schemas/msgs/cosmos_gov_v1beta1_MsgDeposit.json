@@ -1,0 +1,43 @@
+{
+  "$ref": "#/definitions/MsgDeposit",
+  "definitions": {
+    "MsgDeposit": {
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "description": "proposal_id defines the unique id of the proposal."
+        },
+        "depositor": {
+          "type": "string",
+          "description": "depositor defines the deposit addresses from the proposals."
+        },
+        "amount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "amount to be deposited by depositor."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Deposit",
+      "description": "MsgDeposit defines a message to submit a deposit to an existing proposal."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}

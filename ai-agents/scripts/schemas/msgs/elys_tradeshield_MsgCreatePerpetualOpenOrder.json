@@ -1,0 +1,77 @@
+{
+  "$ref": "#/definitions/MsgCreatePerpetualOpenOrder",
+  "definitions": {
+    "MsgCreatePerpetualOpenOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "legacyTriggerPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyTriggerPriceV1",
+          "additionalProperties": false
+        },
+        "triggerPrice": {
+          "type": "string"
+        },
+        "collateral": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tradingAsset": {
+          "type": "string"
+        },
+        "position": {
+          "enum": [
+            "UNSPECIFIED",
+            "LONG",
+            "SHORT"
+          ],
+          "type": "string",
+          "title": "Perpetual Position"
+        },
+        "leverage": {
+          "type": "string"
+        },
+        "takeProfitPrice": {
+          "type": "string"
+        },
+        "stopLossPrice": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Perpetual Open Order"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.tradeshield.LegacyTriggerPriceV1": {
+      "properties": {
+        "tradingAssetDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Trigger Price V 1"
+    }
+  }
+}

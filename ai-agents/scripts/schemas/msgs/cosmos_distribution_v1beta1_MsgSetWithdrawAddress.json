@@ -1,0 +1,19 @@
+{
+  "$ref": "#/definitions/MsgSetWithdrawAddress",
+  "definitions": {
+    "MsgSetWithdrawAddress": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        },
+        "withdrawAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Set Withdraw Address",
+      "description": "MsgSetWithdrawAddress sets the withdraw address for a delegator (or validator self-delegation)."
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.leveragelp.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.leveragelp.Params": {
+      "properties": {
+        "leverageMax": {
+          "type": "string"
+        },
+        "maxOpenPositions": {
+          "type": "string"
+        },
+        "poolOpenThreshold": {
+          "type": "string"
+        },
+        "safetyFactor": {
+          "type": "string"
+        },
+        "whitelistingEnabled": {
+          "type": "boolean"
+        },
+        "epochLength": {
+          "type": "string"
+        },
+        "fallbackEnabled": {
+          "type": "boolean"
+        },
+        "numberPerBlock": {
+          "type": "string",
+          "description": "Number of positions to process per block"
+        },
+        "enabledPools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "exitBuffer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}

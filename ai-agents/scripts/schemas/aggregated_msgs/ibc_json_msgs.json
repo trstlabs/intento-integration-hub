@@ -1,0 +1,2342 @@
+[
+{
+  "$ref": "#/definitions/MsgRegisterInterchainAccount",
+  "definitions": {
+    "MsgRegisterInterchainAccount": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "ordering": {
+          "enum": [
+            "ORDER_NONE_UNSPECIFIED",
+            "ORDER_UNORDERED",
+            "ORDER_ORDERED"
+          ],
+          "type": "string",
+          "title": "Order",
+          "description": "Order defines if a channel is ORDERED or UNORDERED"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Interchain Account",
+      "description": "MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSendTx",
+  "definitions": {
+    "MsgSendTx": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "packetData": {
+          "$ref": "#/definitions/ibc.applications.interchain_accounts.v1.InterchainAccountPacketData",
+          "additionalProperties": false
+        },
+        "relativeTimeout": {
+          "type": "string",
+          "description": "Relative timeout timestamp provided will be added to the current block time during transaction execution. The timeout timestamp must be non-zero."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Send Tx",
+      "description": "MsgSendTx defines the payload for Msg/SendTx"
+    },
+    "ibc.applications.interchainAccounts.v1.InterchainAccountPacketData": {
+      "properties": {
+        "type": {
+          "enum": [
+            "TYPE_UNSPECIFIED",
+            "TYPE_EXECUTE_TX"
+          ],
+          "type": "string",
+          "title": "Type",
+          "description": "Type defines a classification of message issued from a controller chain to its associated interchain accounts host"
+        },
+        "data": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "memo": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Interchain Account Packet Data",
+      "description": "InterchainAccountPacketData is comprised of a raw transaction, type of transaction and optional memo field."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.applications.interchain_accounts.controller.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the 27-interchain-accounts/controller parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the payload for Msg/UpdateParams"
+    },
+    "ibc.applications.interchainAccounts.controller.v1.Params": {
+      "properties": {
+        "controllerEnabled": {
+          "type": "boolean",
+          "description": "controller_enabled enables or disables the controller submodule."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of on-chain interchain accounts parameters. The following parameters may be used to disable the controller submodule."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgModuleQuerySafe",
+  "definitions": {
+    "MsgModuleQuerySafe": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "requests": {
+          "items": {
+            "$ref": "#/definitions/ibc.applications.interchain_accounts.host.v1.QueryRequest"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "requests defines the module safe queries to execute."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Module Query Safe",
+      "description": "MsgModuleQuerySafe defines the payload for Msg/ModuleQuerySafe"
+    },
+    "ibc.applications.interchainAccounts.host.v1.QueryRequest": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "path defines the path of the query request as defined by ADR-021. https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-021-protobuf-query-encoding.md#custom-query-registration-and-routing"
+        },
+        "data": {
+          "type": "string",
+          "description": "data defines the payload of the query request as defined by ADR-021. https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-021-protobuf-query-encoding.md#custom-query-registration-and-routing",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Query Request",
+      "description": "QueryRequest defines the parameters for a particular query request by an interchain account."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.applications.interchain_accounts.host.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the 27-interchain-accounts/host parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the payload for Msg/UpdateParams"
+    },
+    "ibc.applications.interchainAccounts.host.v1.Params": {
+      "properties": {
+        "hostEnabled": {
+          "type": "boolean",
+          "description": "host_enabled enables or disables the host submodule."
+        },
+        "allowMessages": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of on-chain interchain accounts parameters. The following parameters may be used to disable the host submodule."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgTransfer",
+  "definitions": {
+    "MsgTransfer": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "the port on which the packet will be sent"
+        },
+        "sourceChannel": {
+          "type": "string",
+          "description": "the channel by which the packet will be sent"
+        },
+        "token": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false,
+          "description": "token to be transferred"
+        },
+        "sender": {
+          "type": "string",
+          "description": "the sender address"
+        },
+        "receiver": {
+          "type": "string",
+          "description": "the recipient address on the destination chain"
+        },
+        "timeoutHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "Timeout height relative to the current block height. If you are sending with IBC v1 protocol, either timeout_height or timeout_timestamp must be set. If you are sending with IBC v2 protocol, timeout_timestamp must be set, and timeout_height must be omitted."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "Timeout timestamp in absolute nanoseconds since unix epoch. If you are sending with IBC v1 protocol, either timeout_height or timeout_timestamp must be set. If you are sending with IBC v2 protocol, timeout_timestamp must be set."
+        },
+        "memo": {
+          "type": "string",
+          "description": "optional memo"
+        },
+        "encoding": {
+          "type": "string",
+          "description": "optional encoding"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Transfer",
+      "description": "MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between ICS20 enabled chains. See ICS Spec here: https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.applications.transfer.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the transfer parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "ibc.applications.transfer.v1.Params": {
+      "properties": {
+        "sendEnabled": {
+          "type": "boolean",
+          "description": "send_enabled enables or disables all cross-chain token transfers from this chain."
+        },
+        "receiveEnabled": {
+          "type": "boolean",
+          "description": "receive_enabled enables or disables all cross-chain token transfers to this chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of IBC transfer parameters. NOTE: To prevent a single token from being transferred, set the TransfersEnabled parameter to true and then set the bank module's SendEnabled parameter for the denomination to false."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgAcknowledgement",
+  "definitions": {
+    "MsgAcknowledgement": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+          "additionalProperties": false
+        },
+        "acknowledgement": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofAcked": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Acknowledgement",
+      "description": "MsgAcknowledgement receives incoming IBC acknowledgement"
+    },
+    "ibc.core.channel.v1.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourcePort": {
+          "type": "string",
+          "description": "identifies the port on the sending chain."
+        },
+        "sourceChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the sending chain."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "identifies the port on the receiving chain."
+        },
+        "destinationChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the receiving chain."
+        },
+        "data": {
+          "type": "string",
+          "description": "actual opaque bytes transferred directly to the application module",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "timeoutHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "block height after which the packet times out"
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "block timestamp (in nanoseconds) after which the packet times out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgChannelCloseConfirm",
+  "definitions": {
+    "MsgChannelCloseConfirm": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "proofInit": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Close Confirm",
+      "description": "MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of channel state to CLOSED on Chain A."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgChannelCloseInit",
+  "definitions": {
+    "MsgChannelCloseInit": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Close Init",
+      "description": "MsgChannelCloseInit defines a msg sent by a Relayer to Chain A to close a channel with Chain B."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgChannelOpenAck",
+  "definitions": {
+    "MsgChannelOpenAck": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "counterpartyChannelId": {
+          "type": "string"
+        },
+        "counterpartyVersion": {
+          "type": "string"
+        },
+        "proofTry": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Open Ack",
+      "description": "MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge the change of channel state to TRYOPEN on Chain B."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgChannelOpenConfirm",
+  "definitions": {
+    "MsgChannelOpenConfirm": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "proofAck": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Open Confirm",
+      "description": "MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of channel state to OPEN on Chain A."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgChannelOpenInit",
+  "definitions": {
+    "MsgChannelOpenInit": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channel": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Channel",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Open Init",
+      "description": "MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It is called by a relayer on Chain A."
+    },
+    "ibc.core.channel.v1.Channel": {
+      "properties": {
+        "state": {
+          "enum": [
+            "STATE_UNINITIALIZED_UNSPECIFIED",
+            "STATE_INIT",
+            "STATE_TRYOPEN",
+            "STATE_OPEN",
+            "STATE_CLOSED"
+          ],
+          "type": "string",
+          "title": "State",
+          "description": "State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN, or UNINITIALIZED."
+        },
+        "ordering": {
+          "enum": [
+            "ORDER_NONE_UNSPECIFIED",
+            "ORDER_UNORDERED",
+            "ORDER_ORDERED"
+          ],
+          "type": "string",
+          "title": "Order",
+          "description": "Order defines if a channel is ORDERED or UNORDERED"
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Counterparty",
+          "additionalProperties": false,
+          "description": "counterparty channel end"
+        },
+        "connectionHops": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of connection identifiers, in order, along which packets sent on this channel will travel"
+        },
+        "version": {
+          "type": "string",
+          "description": "opaque channel version, which is agreed upon during the handshake"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Channel",
+      "description": "Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets."
+    },
+    "ibc.core.channel.v1.Counterparty": {
+      "properties": {
+        "portId": {
+          "type": "string",
+          "description": "port on the counterparty chain which owns the other end of the channel."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "channel end on the counterparty chain"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines a channel end counterparty"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgChannelOpenTry",
+  "definitions": {
+    "MsgChannelOpenTry": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "previousChannelId": {
+          "type": "string",
+          "description": "Deprecated: this field is unused. Crossing hello's are no longer supported in core IBC."
+        },
+        "channel": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Channel",
+          "additionalProperties": false,
+          "description": "NOTE: the version field within the channel has been deprecated. Its value will be ignored by core IBC."
+        },
+        "counterpartyVersion": {
+          "type": "string"
+        },
+        "proofInit": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Open Try",
+      "description": "MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel on Chain B. The version field within the Channel field has been deprecated. Its value will be ignored by core IBC."
+    },
+    "ibc.core.channel.v1.Channel": {
+      "properties": {
+        "state": {
+          "enum": [
+            "STATE_UNINITIALIZED_UNSPECIFIED",
+            "STATE_INIT",
+            "STATE_TRYOPEN",
+            "STATE_OPEN",
+            "STATE_CLOSED"
+          ],
+          "type": "string",
+          "title": "State",
+          "description": "State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN, or UNINITIALIZED."
+        },
+        "ordering": {
+          "enum": [
+            "ORDER_NONE_UNSPECIFIED",
+            "ORDER_UNORDERED",
+            "ORDER_ORDERED"
+          ],
+          "type": "string",
+          "title": "Order",
+          "description": "Order defines if a channel is ORDERED or UNORDERED"
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Counterparty",
+          "additionalProperties": false,
+          "description": "counterparty channel end"
+        },
+        "connectionHops": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of connection identifiers, in order, along which packets sent on this channel will travel"
+        },
+        "version": {
+          "type": "string",
+          "description": "opaque channel version, which is agreed upon during the handshake"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Channel",
+      "description": "Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets."
+    },
+    "ibc.core.channel.v1.Counterparty": {
+      "properties": {
+        "portId": {
+          "type": "string",
+          "description": "port on the counterparty chain which owns the other end of the channel."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "channel end on the counterparty chain"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines a channel end counterparty"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRecvPacket",
+  "definitions": {
+    "MsgRecvPacket": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+          "additionalProperties": false
+        },
+        "proofCommitment": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Recv Packet",
+      "description": "MsgRecvPacket receives incoming IBC packet"
+    },
+    "ibc.core.channel.v1.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourcePort": {
+          "type": "string",
+          "description": "identifies the port on the sending chain."
+        },
+        "sourceChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the sending chain."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "identifies the port on the receiving chain."
+        },
+        "destinationChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the receiving chain."
+        },
+        "data": {
+          "type": "string",
+          "description": "actual opaque bytes transferred directly to the application module",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "timeoutHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "block height after which the packet times out"
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "block timestamp (in nanoseconds) after which the packet times out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgTimeout",
+  "definitions": {
+    "MsgTimeout": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+          "additionalProperties": false
+        },
+        "proofUnreceived": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "nextSequenceRecv": {
+          "type": "string"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Timeout",
+      "description": "MsgTimeout receives timed-out packet"
+    },
+    "ibc.core.channel.v1.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourcePort": {
+          "type": "string",
+          "description": "identifies the port on the sending chain."
+        },
+        "sourceChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the sending chain."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "identifies the port on the receiving chain."
+        },
+        "destinationChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the receiving chain."
+        },
+        "data": {
+          "type": "string",
+          "description": "actual opaque bytes transferred directly to the application module",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "timeoutHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "block height after which the packet times out"
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "block timestamp (in nanoseconds) after which the packet times out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgTimeoutOnClose",
+  "definitions": {
+    "MsgTimeoutOnClose": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+          "additionalProperties": false
+        },
+        "proofUnreceived": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofClose": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "nextSequenceRecv": {
+          "type": "string"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Timeout On Close",
+      "description": "MsgTimeoutOnClose timed-out packet upon counterparty channel closure."
+    },
+    "ibc.core.channel.v1.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourcePort": {
+          "type": "string",
+          "description": "identifies the port on the sending chain."
+        },
+        "sourceChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the sending chain."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "identifies the port on the receiving chain."
+        },
+        "destinationChannel": {
+          "type": "string",
+          "description": "identifies the channel end on the receiving chain."
+        },
+        "data": {
+          "type": "string",
+          "description": "actual opaque bytes transferred directly to the application module",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "timeoutHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "block height after which the packet times out"
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "block timestamp (in nanoseconds) after which the packet times out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgAcknowledgement",
+  "definitions": {
+    "MsgAcknowledgement": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v2.Packet",
+          "additionalProperties": false
+        },
+        "acknowledgement": {
+          "$ref": "#/definitions/ibc.core.channel.v2.Acknowledgement",
+          "additionalProperties": false
+        },
+        "proofAcked": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Acknowledgement",
+      "description": "MsgAcknowledgement receives incoming IBC acknowledgement."
+    },
+    "ibc.core.channel.v2.Acknowledgement": {
+      "properties": {
+        "appAcknowledgements": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Acknowledgement",
+      "description": "Acknowledgement contains a list of all ack results associated with a single packet. In the case of a successful receive, the acknowledgement will contain an app acknowledgement for each application that received a payload in the same order that the payloads were sent in the packet. If the receive is not successful, the acknowledgement will contain a single app acknowledgment which will be a constant error acknowledgment as defined by the IBC v2 protocol."
+    },
+    "ibc.core.channel.v2.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourceClient": {
+          "type": "string",
+          "description": "identifies the sending client on the sending chain."
+        },
+        "destinationClient": {
+          "type": "string",
+          "description": "identifies the receiving client on the receiving chain."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "timeout timestamp in seconds after which the packet times out."
+        },
+        "payloads": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.channel.v2.Payload"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "a list of payloads, each one for a specific application."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.channel.v2.Payload": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "specifies the source port of the packet."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "specifies the destination port of the packet."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of the specified application."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "the encoding used for the provided value."
+        },
+        "value": {
+          "type": "string",
+          "description": "the raw bytes for the payload.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Payload",
+      "description": "Payload contains the source and destination ports and payload for the application (version, encoding, raw bytes)"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRecvPacket",
+  "definitions": {
+    "MsgRecvPacket": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v2.Packet",
+          "additionalProperties": false
+        },
+        "proofCommitment": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Recv Packet",
+      "description": "MsgRecvPacket receives an incoming IBC packet."
+    },
+    "ibc.core.channel.v2.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourceClient": {
+          "type": "string",
+          "description": "identifies the sending client on the sending chain."
+        },
+        "destinationClient": {
+          "type": "string",
+          "description": "identifies the receiving client on the receiving chain."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "timeout timestamp in seconds after which the packet times out."
+        },
+        "payloads": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.channel.v2.Payload"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "a list of payloads, each one for a specific application."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.channel.v2.Payload": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "specifies the source port of the packet."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "specifies the destination port of the packet."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of the specified application."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "the encoding used for the provided value."
+        },
+        "value": {
+          "type": "string",
+          "description": "the raw bytes for the payload.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Payload",
+      "description": "Payload contains the source and destination ports and payload for the application (version, encoding, raw bytes)"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSendPacket",
+  "definitions": {
+    "MsgSendPacket": {
+      "properties": {
+        "sourceClient": {
+          "type": "string"
+        },
+        "timeoutTimestamp": {
+          "type": "string"
+        },
+        "payloads": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.channel.v2.Payload"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Send Packet",
+      "description": "MsgSendPacket sends an outgoing IBC packet."
+    },
+    "ibc.core.channel.v2.Payload": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "specifies the source port of the packet."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "specifies the destination port of the packet."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of the specified application."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "the encoding used for the provided value."
+        },
+        "value": {
+          "type": "string",
+          "description": "the raw bytes for the payload.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Payload",
+      "description": "Payload contains the source and destination ports and payload for the application (version, encoding, raw bytes)"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgTimeout",
+  "definitions": {
+    "MsgTimeout": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v2.Packet",
+          "additionalProperties": false
+        },
+        "proofUnreceived": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Timeout",
+      "description": "MsgTimeout receives timed-out packet"
+    },
+    "ibc.core.channel.v2.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourceClient": {
+          "type": "string",
+          "description": "identifies the sending client on the sending chain."
+        },
+        "destinationClient": {
+          "type": "string",
+          "description": "identifies the receiving client on the receiving chain."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "timeout timestamp in seconds after which the packet times out."
+        },
+        "payloads": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.channel.v2.Payload"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "a list of payloads, each one for a specific application."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.channel.v2.Payload": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "specifies the source port of the packet."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "specifies the destination port of the packet."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of the specified application."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "the encoding used for the provided value."
+        },
+        "value": {
+          "type": "string",
+          "description": "the raw bytes for the payload.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Payload",
+      "description": "Payload contains the source and destination ports and payload for the application (version, encoding, raw bytes)"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCreateClient",
+  "definitions": {
+    "MsgCreateClient": {
+      "properties": {
+        "clientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "light client state"
+        },
+        "consensusState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "consensus state associated with the client that corresponds to a given height."
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Client",
+      "description": "MsgCreateClient defines a message to create an IBC client"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgDeleteClientCreator",
+  "definitions": {
+    "MsgDeleteClientCreator": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client identifier"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Delete Client Creator",
+      "description": "MsgDeleteClientCreator defines a message to delete the client creator of a client"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgIBCSoftwareUpgrade",
+  "definitions": {
+    "MsgIBCSoftwareUpgrade": {
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/cosmos.upgrade.v1beta1.Plan",
+          "additionalProperties": false
+        },
+        "upgradedClientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "An UpgradedClientState must be provided to perform an IBC breaking upgrade. This will make the chain commit to the correct upgraded (self) client state before the upgrade occurs, so that connecting chains can verify that the new upgraded client is valid by verifying a proof on the previous version of the chain. This will allow IBC connections to persist smoothly across planned chain upgrades. Correspondingly, the UpgradedClientState field has been deprecated in the Cosmos SDK to allow for this logic to exist solely in the 02-client module."
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg IBC Software Upgrade",
+      "description": "MsgIBCSoftwareUpgrade defines the message used to schedule an upgrade of an IBC client using a v1 governance proposal"
+    },
+    "cosmos.upgrade.v1beta1.Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit."
+        },
+        "time": {
+          "type": "string",
+          "description": "Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.",
+          "format": "date-time"
+        },
+        "height": {
+          "type": "string",
+          "description": "The height at which the upgrade must be performed."
+        },
+        "info": {
+          "type": "string",
+          "description": "Any application specific upgrade info to be included on-chain such as a git commit that validators could automatically upgrade to"
+        },
+        "upgradedClientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been moved to the IBC module in the sub module 02-client. If this field is not empty, an error will be thrown."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Plan",
+      "description": "Plan specifies information about a planned upgrade and when it should occur."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRecoverClient",
+  "definitions": {
+    "MsgRecoverClient": {
+      "properties": {
+        "subjectClientId": {
+          "type": "string",
+          "description": "the client identifier for the client to be updated if the proposal passes"
+        },
+        "substituteClientId": {
+          "type": "string",
+          "description": "the substitute client identifier for the client which will replace the subject client"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Recover Client",
+      "description": "MsgRecoverClient defines the message used to recover a frozen or expired client."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSubmitMisbehaviour",
+  "definitions": {
+    "MsgSubmitMisbehaviour": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client unique identifier"
+        },
+        "misbehaviour": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "misbehaviour used for freezing the light client"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Submit Misbehaviour",
+      "description": "MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for light client misbehaviour. This message has been deprecated. Use MsgUpdateClient instead."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateClient",
+  "definitions": {
+    "MsgUpdateClient": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client unique identifier"
+        },
+        "clientMessage": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "client message to update the light client"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Client",
+      "description": "MsgUpdateClient defines an sdk.Msg to update a IBC client state using the given client message."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.core.client.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the client parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the sdk.Msg type to update the client parameters."
+    },
+    "ibc.core.client.v1.Params": {
+      "properties": {
+        "allowedClients": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "allowed_clients defines the list of allowed client state types which can be created and interacted with. If a client type is removed from the allowed clients list, usage of this client will be disabled until it is added again to the list."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of IBC light client parameters."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpgradeClient",
+  "definitions": {
+    "MsgUpgradeClient": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client unique identifier"
+        },
+        "clientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "upgraded client state"
+        },
+        "consensusState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "upgraded consensus state, only contains enough information to serve as a basis of trust in update logic"
+        },
+        "proofUpgradeClient": {
+          "type": "string",
+          "description": "proof that old chain committed to new client",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofUpgradeConsensusState": {
+          "type": "string",
+          "description": "proof that old chain committed to new consensus state",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Upgrade Client",
+      "description": "MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client state"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRegisterCounterparty",
+  "definitions": {
+    "MsgRegisterCounterparty": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client identifier"
+        },
+        "counterpartyMerklePrefix": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "counterparty merkle prefix",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "counterpartyClientId": {
+          "type": "string",
+          "description": "counterparty client identifier"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Counterparty",
+      "description": "MsgRegisterCounterparty defines a message to register a counterparty on a client"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateClientConfig",
+  "definitions": {
+    "MsgUpdateClientConfig": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client identifier"
+        },
+        "config": {
+          "$ref": "#/definitions/ibc.core.client.v2.Config",
+          "additionalProperties": false,
+          "description": "allowed relayers NOTE: All fields in the config must be supplied."
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Client Config",
+      "description": "MsgUpdateClientConfig defines the sdk.Msg type to update the configuration for a given client"
+    },
+    "ibc.core.client.v2.Config": {
+      "properties": {
+        "allowedRelayers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "allowed_relayers defines the set of allowed relayers for IBC V2 protocol for the given client"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Config",
+      "description": "Config is a **per-client** configuration struct that sets which relayers are allowed to relay v2 IBC messages for a given client. If it is set, then only relayers in the allow list can send v2 messages If it is not set, then the client allows permissionless relaying of v2 messages"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgConnectionOpenAck",
+  "definitions": {
+    "MsgConnectionOpenAck": {
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "counterpartyConnectionId": {
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Version",
+          "additionalProperties": false
+        },
+        "clientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "Deprecated: this field is unused."
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "proofTry": {
+          "type": "string",
+          "description": "proof of the initialization the connection on Chain B: `UNINITIALIZED -> TRYOPEN`",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofClient": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofConsensus": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "consensusHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "Deprecated: this field is unused."
+        },
+        "signer": {
+          "type": "string"
+        },
+        "hostConsensusStateProof": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Ack",
+      "description": "MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to acknowledge the change of connection state to TRYOPEN on Chain B."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    },
+    "ibc.core.connection.v1.Version": {
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "unique version identifier"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of features compatible with the specified identifier"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Version",
+      "description": "Version defines the versioning scheme used to negotiate the IBC version in the connection handshake."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgConnectionOpenConfirm",
+  "definitions": {
+    "MsgConnectionOpenConfirm": {
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "proofAck": {
+          "type": "string",
+          "description": "proof for the change of the connection state on Chain A: `INIT -> OPEN`",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Confirm",
+      "description": "MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of connection state to OPEN on Chain A."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgConnectionOpenInit",
+  "definitions": {
+    "MsgConnectionOpenInit": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Counterparty",
+          "additionalProperties": false
+        },
+        "version": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Version",
+          "additionalProperties": false
+        },
+        "delayPeriod": {
+          "type": "string"
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Init",
+      "description": "MsgConnectionOpenInit defines the msg sent by an account on Chain A to initialize a connection with Chain B."
+    },
+    "ibc.core.commitment.v1.MerklePrefix": {
+      "properties": {
+        "keyPrefix": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Merkle Prefix",
+      "description": "MerklePrefix is merkle path prefixed to the key. The constructed key from the Path and the key will be append(Path.KeyPath, append(Path.KeyPrefix, key...))"
+    },
+    "ibc.core.connection.v1.Counterparty": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "identifies the client on the counterparty chain associated with a given connection."
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "identifies the connection end on the counterparty chain associated with a given connection."
+        },
+        "prefix": {
+          "$ref": "#/definitions/ibc.core.commitment.v1.MerklePrefix",
+          "additionalProperties": false,
+          "description": "commitment merkle prefix of the counterparty chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines the counterparty chain associated with a connection end."
+    },
+    "ibc.core.connection.v1.Version": {
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "unique version identifier"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of features compatible with the specified identifier"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Version",
+      "description": "Version defines the versioning scheme used to negotiate the IBC version in the connection handshake."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgConnectionOpenTry",
+  "definitions": {
+    "MsgConnectionOpenTry": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "previousConnectionId": {
+          "type": "string",
+          "description": "Deprecated: this field is unused. Crossing hellos are no longer supported in core IBC."
+        },
+        "clientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "Deprecated: this field is unused."
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Counterparty",
+          "additionalProperties": false
+        },
+        "delayPeriod": {
+          "type": "string"
+        },
+        "counterpartyVersions": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.connection.v1.Version"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "proofInit": {
+          "type": "string",
+          "description": "proof of the initialization the connection on Chain A: `UNINITIALIZED -> INIT`",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofClient": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofConsensus": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "consensusHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "Deprecated: this field is unused."
+        },
+        "signer": {
+          "type": "string"
+        },
+        "hostConsensusStateProof": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Try",
+      "description": "MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a connection on Chain B."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    },
+    "ibc.core.commitment.v1.MerklePrefix": {
+      "properties": {
+        "keyPrefix": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Merkle Prefix",
+      "description": "MerklePrefix is merkle path prefixed to the key. The constructed key from the Path and the key will be append(Path.KeyPath, append(Path.KeyPrefix, key...))"
+    },
+    "ibc.core.connection.v1.Counterparty": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "identifies the client on the counterparty chain associated with a given connection."
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "identifies the connection end on the counterparty chain associated with a given connection."
+        },
+        "prefix": {
+          "$ref": "#/definitions/ibc.core.commitment.v1.MerklePrefix",
+          "additionalProperties": false,
+          "description": "commitment merkle prefix of the counterparty chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines the counterparty chain associated with a connection end."
+    },
+    "ibc.core.connection.v1.Version": {
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "unique version identifier"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of features compatible with the specified identifier"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Version",
+      "description": "Version defines the versioning scheme used to negotiate the IBC version in the connection handshake."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the connection parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the sdk.Msg type to update the connection parameters."
+    },
+    "ibc.core.connection.v1.Params": {
+      "properties": {
+        "maxExpectedTimePerBlock": {
+          "type": "string",
+          "description": "maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the largest amount of time that the chain might reasonably take to produce the next block under normal operating conditions. A safe choice is 3-5x the expected time per block."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of Connection parameters."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgMigrateContract",
+  "definitions": {
+    "MsgMigrateContract": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "the client id of the contract"
+        },
+        "checksum": {
+          "type": "string",
+          "description": "checksum is the sha256 hash of the new wasm byte code for the contract",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Migrate Contract",
+      "description": "MsgMigrateContract defines the request type for the MigrateContract rpc."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRemoveChecksum",
+  "definitions": {
+    "MsgRemoveChecksum": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "checksum": {
+          "type": "string",
+          "description": "checksum is the sha256 hash to be removed from the store",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Remove Checksum",
+      "description": "MsgRemoveChecksum defines the request type for the MsgRemoveChecksum rpc."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgStoreCode",
+  "definitions": {
+    "MsgStoreCode": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "wasm byte code of light client contract. It can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store Code",
+      "description": "MsgStoreCode defines the request type for the StoreCode rpc."
+    }
+  }
+}
+]

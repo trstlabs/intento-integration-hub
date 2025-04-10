@@ -1,0 +1,66 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/elys.estaking.Params",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "elys.estaking.IncentiveInfo": {
+      "properties": {
+        "edenAmountPerYear": {
+          "type": "string",
+          "description": "reward amount in eden for 1 year"
+        },
+        "blocksDistributed": {
+          "type": "string",
+          "description": "blocks distributed"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Incentive Info"
+    },
+    "elys.estaking.Params": {
+      "properties": {
+        "stakeIncentives": {
+          "$ref": "#/definitions/elys.estaking.IncentiveInfo",
+          "additionalProperties": false
+        },
+        "edenCommitVal": {
+          "type": "string"
+        },
+        "edenbCommitVal": {
+          "type": "string"
+        },
+        "maxEdenRewardAprStakers": {
+          "type": "string",
+          "description": "Maximum eden reward apr for stakers - [0 - 0.3]"
+        },
+        "edenBoostApr": {
+          "type": "string"
+        },
+        "providerVestingEpochIdentifier": {
+          "type": "string"
+        },
+        "providerStakingRewardsPortion": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}

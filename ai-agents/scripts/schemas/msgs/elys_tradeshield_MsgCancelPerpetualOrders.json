@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgCancelPerpetualOrders",
+  "definitions": {
+    "MsgCancelPerpetualOrders": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Perpetual Orders"
+    }
+  }
+}

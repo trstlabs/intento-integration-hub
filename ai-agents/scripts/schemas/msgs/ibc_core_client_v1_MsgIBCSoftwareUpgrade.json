@@ -1,0 +1,68 @@
+{
+  "$ref": "#/definitions/MsgIBCSoftwareUpgrade",
+  "definitions": {
+    "MsgIBCSoftwareUpgrade": {
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/cosmos.upgrade.v1beta1.Plan",
+          "additionalProperties": false
+        },
+        "upgradedClientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "An UpgradedClientState must be provided to perform an IBC breaking upgrade. This will make the chain commit to the correct upgraded (self) client state before the upgrade occurs, so that connecting chains can verify that the new upgraded client is valid by verifying a proof on the previous version of the chain. This will allow IBC connections to persist smoothly across planned chain upgrades. Correspondingly, the UpgradedClientState field has been deprecated in the Cosmos SDK to allow for this logic to exist solely in the 02-client module."
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg IBC Software Upgrade",
+      "description": "MsgIBCSoftwareUpgrade defines the message used to schedule an upgrade of an IBC client using a v1 governance proposal"
+    },
+    "cosmos.upgrade.v1beta1.Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sets the name for the upgrade. This name will be used by the upgraded version of the software to apply any special \"on-upgrade\" commands during the first BeginBlock method after the upgrade is applied. It is also used to detect whether a software version can handle a given upgrade. If no upgrade handler with this name has been set in the software, it will be assumed that the software is out-of-date when the upgrade Time or Height is reached and the software will exit."
+        },
+        "time": {
+          "type": "string",
+          "description": "Deprecated: Time based upgrades have been deprecated. Time based upgrade logic has been removed from the SDK. If this field is not empty, an error will be thrown.",
+          "format": "date-time"
+        },
+        "height": {
+          "type": "string",
+          "description": "The height at which the upgrade must be performed."
+        },
+        "info": {
+          "type": "string",
+          "description": "Any application specific upgrade info to be included on-chain such as a git commit that validators could automatically upgrade to"
+        },
+        "upgradedClientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been moved to the IBC module in the sub module 02-client. If this field is not empty, an error will be thrown."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Plan",
+      "description": "Plan specifies information about a planned upgrade and when it should occur."
+    }
+  }
+}

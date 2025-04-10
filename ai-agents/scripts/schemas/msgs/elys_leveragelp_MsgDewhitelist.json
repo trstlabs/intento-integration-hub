@@ -1,0 +1,18 @@
+{
+  "$ref": "#/definitions/MsgDewhitelist",
+  "definitions": {
+    "MsgDewhitelist": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "whitelistedAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Dewhitelist"
+    }
+  }
+}

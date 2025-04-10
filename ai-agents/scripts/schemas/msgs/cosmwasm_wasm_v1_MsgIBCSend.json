@@ -1,0 +1,31 @@
+{
+  "$ref": "#/definitions/MsgIBCSend",
+  "definitions": {
+    "MsgIBCSend": {
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "the channel by which the packet will be sent"
+        },
+        "timeoutHeight": {
+          "type": "string",
+          "description": "Timeout height relative to the current block height. The timeout is disabled when set to 0."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "Timeout timestamp (in nanoseconds) relative to the current block timestamp. The timeout is disabled when set to 0."
+        },
+        "data": {
+          "type": "string",
+          "description": "Data is the payload to transfer. We must not make assumption what format or content is in here.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg IBC Send",
+      "description": "MsgIBCSend"
+    }
+  }
+}

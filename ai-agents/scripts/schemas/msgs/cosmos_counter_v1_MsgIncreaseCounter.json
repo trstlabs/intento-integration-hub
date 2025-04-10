@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgIncreaseCounter",
+  "definitions": {
+    "MsgIncreaseCounter": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "count": {
+          "type": "string",
+          "description": "count is the number of times to increment the counter."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Increase Counter",
+      "description": "MsgIncreaseCounter defines a count Msg service counter."
+    }
+  }
+}

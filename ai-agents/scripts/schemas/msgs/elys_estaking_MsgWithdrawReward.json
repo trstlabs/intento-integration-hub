@@ -1,0 +1,19 @@
+{
+  "$ref": "#/definitions/MsgWithdrawReward",
+  "definitions": {
+    "MsgWithdrawReward": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        },
+        "validatorAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Withdraw Reward",
+      "description": "MsgWithdrawReward represents delegation withdrawal to a delegator from a single validator."
+    }
+  }
+}

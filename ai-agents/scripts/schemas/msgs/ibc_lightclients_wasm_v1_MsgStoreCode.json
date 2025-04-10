@@ -1,0 +1,23 @@
+{
+  "$ref": "#/definitions/MsgStoreCode",
+  "definitions": {
+    "MsgStoreCode": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "wasm byte code of light client contract. It can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store Code",
+      "description": "MsgStoreCode defines the request type for the StoreCode rpc."
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$ref": "#/definitions/MsgUpdatePool",
+  "definitions": {
+    "MsgUpdatePool": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "interestRateMax": {
+          "type": "string"
+        },
+        "interestRateMin": {
+          "type": "string"
+        },
+        "interestRateIncrease": {
+          "type": "string"
+        },
+        "interestRateDecrease": {
+          "type": "string"
+        },
+        "healthGainFactor": {
+          "type": "string"
+        },
+        "maxLeverageRatio": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool"
+    }
+  }
+}

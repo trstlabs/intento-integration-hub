@@ -1,0 +1,106 @@
+{
+  "$ref": "#/definitions/MsgStoreAndInstantiateContract",
+  "definitions": {
+    "MsgStoreAndInstantiateContract": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "WASMByteCode can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "instantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "InstantiatePermission to apply on contract creation, optional"
+        },
+        "unpinCode": {
+          "type": "boolean",
+          "description": "UnpinCode code on upload, optional. As default the uploaded contract is pinned to cache."
+        },
+        "admin": {
+          "type": "string",
+          "description": "Admin is an optional address that can execute migrations"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label is optional metadata to be stored with a contract instance."
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        },
+        "funds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Funds coins that are transferred from the authority account to the contract on instantiation"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source is the URL where the code is hosted"
+        },
+        "builder": {
+          "type": "string",
+          "description": "Builder is the docker image used to build the code deterministically, used for smart contract verification"
+        },
+        "codeHash": {
+          "type": "string",
+          "description": "CodeHash is the SHA256 sum of the code outputted by builder, used for smart contract verification",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store And Instantiate Contract",
+      "description": "MsgStoreAndInstantiateContract is the MsgStoreAndInstantiateContract request type. Since: 0.40"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}

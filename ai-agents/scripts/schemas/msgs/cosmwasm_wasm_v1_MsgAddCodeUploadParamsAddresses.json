@@ -1,0 +1,23 @@
+{
+  "$ref": "#/definitions/MsgAddCodeUploadParamsAddresses",
+  "definitions": {
+    "MsgAddCodeUploadParamsAddresses": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add Code Upload Params Addresses",
+      "description": "MsgAddCodeUploadParamsAddresses is the MsgAddCodeUploadParamsAddresses request type."
+    }
+  }
+}

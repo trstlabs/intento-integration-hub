@@ -1,0 +1,70 @@
+{
+  "$ref": "#/definitions/MsgCreateSpotOrder",
+  "definitions": {
+    "MsgCreateSpotOrder": {
+      "properties": {
+        "orderType": {
+          "enum": [
+            "STOPLOSS",
+            "LIMITSELL",
+            "LIMITBUY",
+            "MARKETBUY"
+          ],
+          "type": "string",
+          "title": "Spot Order Type",
+          "description": "Spot order"
+        },
+        "legacyOrderPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyOrderPriceV1",
+          "additionalProperties": false
+        },
+        "orderPrice": {
+          "type": "string"
+        },
+        "orderAmount": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderTargetDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Spot Order"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.tradeshield.LegacyOrderPriceV1": {
+      "properties": {
+        "baseDenom": {
+          "type": "string"
+        },
+        "quoteDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Order Price V 1"
+    }
+  }
+}

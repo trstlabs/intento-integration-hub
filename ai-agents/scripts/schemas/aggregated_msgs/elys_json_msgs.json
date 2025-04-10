@@ -1,0 +1,2187 @@
+[
+{
+  "$ref": "#/definitions/MsgCreatePool",
+  "definitions": {
+    "MsgCreatePool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolParams": {
+          "$ref": "#/definitions/elys.amm.PoolParams",
+          "additionalProperties": false
+        },
+        "poolAssets": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.PoolAsset"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Pool"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.amm.PoolAsset": {
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "weight": {
+          "type": "string"
+        },
+        "externalLiquidityRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Pool Asset"
+    },
+    "elys.amm.PoolParams": {
+      "properties": {
+        "swapFee": {
+          "type": "string"
+        },
+        "useOracle": {
+          "type": "boolean"
+        },
+        "feeDenom": {
+          "type": "string",
+          "description": "denom for fee collection"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Pool Params"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgExitPool",
+  "definitions": {
+    "MsgExitPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "minAmountsOut": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "shareAmountIn": {
+          "type": "string"
+        },
+        "tokenOutDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Exit Pool"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgFeedMultipleExternalLiquidity",
+  "definitions": {
+    "MsgFeedMultipleExternalLiquidity": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "liquidity": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.ExternalLiquidity"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Feed Multiple External Liquidity"
+    },
+    "elys.amm.AssetAmountDepth": {
+      "properties": {
+        "asset": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Asset Amount Depth"
+    },
+    "elys.amm.ExternalLiquidity": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "amountDepthInfo": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.AssetAmountDepth"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "External Liquidity",
+      "description": "ExternalLiquidity defines price, volume, and time information for an exchange rate."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgJoinPool",
+  "definitions": {
+    "MsgJoinPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "maxAmountsIn": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "shareAmountOut": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Join Pool"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSwapByDenom",
+  "definitions": {
+    "MsgSwapByDenom": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "amount": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "minAmount": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "maxAmount": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "denomIn": {
+          "type": "string"
+        },
+        "denomOut": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Swap By Denom"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSwapExactAmountIn",
+  "definitions": {
+    "MsgSwapExactAmountIn": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.SwapAmountInRoute"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "tokenIn": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tokenOutMinAmount": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Swap Exact Amount In"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.amm.SwapAmountInRoute": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "tokenOutDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Swap Amount In Route"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSwapExactAmountOut",
+  "definitions": {
+    "MsgSwapExactAmountOut": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.SwapAmountOutRoute"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "tokenOut": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tokenInMaxAmount": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Swap Exact Amount Out"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.amm.SwapAmountOutRoute": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "tokenInDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Swap Amount Out Route"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/elys.amm.Params",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.amm.Params": {
+      "properties": {
+        "poolCreationFee": {
+          "type": "string"
+        },
+        "slippageTrackDuration": {
+          "type": "string",
+          "description": "default 1 week: 604,800"
+        },
+        "baseAssets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "weightBreakingFeeExponent": {
+          "type": "string"
+        },
+        "weightBreakingFeeMultiplier": {
+          "type": "string"
+        },
+        "weightBreakingFeePortion": {
+          "type": "string"
+        },
+        "weightRecoveryFeePortion": {
+          "type": "string"
+        },
+        "thresholdWeightDifference": {
+          "type": "string"
+        },
+        "allowedPoolCreators": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "thresholdWeightDifferenceSwapFee": {
+          "type": "string"
+        },
+        "lpLockupDuration": {
+          "type": "string"
+        },
+        "minSlippage": {
+          "type": "string"
+        },
+        "allowedUpfrontSwapMakers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdatePoolParams",
+  "definitions": {
+    "MsgUpdatePoolParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "poolParams": {
+          "$ref": "#/definitions/elys.amm.PoolParams",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool Params"
+    },
+    "elys.amm.PoolParams": {
+      "properties": {
+        "swapFee": {
+          "type": "string"
+        },
+        "useOracle": {
+          "type": "boolean"
+        },
+        "feeDenom": {
+          "type": "string",
+          "description": "denom for fee collection"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Pool Params"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpFrontSwapExactAmountIn",
+  "definitions": {
+    "MsgUpFrontSwapExactAmountIn": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.SwapAmountInRoute"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "tokenIn": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tokenOutMinAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Up Front Swap Exact Amount In"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.amm.SwapAmountInRoute": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "tokenOutDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Swap Amount In Route"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/elys.estaking.Params",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "elys.estaking.IncentiveInfo": {
+      "properties": {
+        "edenAmountPerYear": {
+          "type": "string",
+          "description": "reward amount in eden for 1 year"
+        },
+        "blocksDistributed": {
+          "type": "string",
+          "description": "blocks distributed"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Incentive Info"
+    },
+    "elys.estaking.Params": {
+      "properties": {
+        "stakeIncentives": {
+          "$ref": "#/definitions/elys.estaking.IncentiveInfo",
+          "additionalProperties": false
+        },
+        "edenCommitVal": {
+          "type": "string"
+        },
+        "edenbCommitVal": {
+          "type": "string"
+        },
+        "maxEdenRewardAprStakers": {
+          "type": "string",
+          "description": "Maximum eden reward apr for stakers - [0 - 0.3]"
+        },
+        "edenBoostApr": {
+          "type": "string"
+        },
+        "providerVestingEpochIdentifier": {
+          "type": "string"
+        },
+        "providerStakingRewardsPortion": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgWithdrawAllRewards",
+  "definitions": {
+    "MsgWithdrawAllRewards": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Withdraw All Rewards",
+      "description": "MsgWithdrawAllRewards represents delegation withdrawal to a delegator from all the validators and Eden/EdenB commitment."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgWithdrawElysStakingRewards",
+  "definitions": {
+    "MsgWithdrawElysStakingRewards": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Withdraw Elys Staking Rewards",
+      "description": "MsgWithdrawElysStakingRewards represents delegation withdrawal to a delegator from all the validators."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgWithdrawReward",
+  "definitions": {
+    "MsgWithdrawReward": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        },
+        "validatorAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Withdraw Reward",
+      "description": "MsgWithdrawReward represents delegation withdrawal to a delegator from a single validator."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgAddPool",
+  "definitions": {
+    "MsgAddPool": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "pool": {
+          "$ref": "#/definitions/elys.leveragelp.AddPool",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add Pool"
+    },
+    "elys.leveragelp.AddPool": {
+      "properties": {
+        "ammPoolId": {
+          "type": "string"
+        },
+        "leverageMax": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Add Pool"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClaimRewards",
+  "definitions": {
+    "MsgClaimRewards": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Claim Rewards"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClose",
+  "definitions": {
+    "MsgClose": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lpAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Close"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClosePositions",
+  "definitions": {
+    "MsgClosePositions": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "liquidate": {
+          "items": {
+            "$ref": "#/definitions/elys.leveragelp.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "stopLoss": {
+          "items": {
+            "$ref": "#/definitions/elys.leveragelp.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Close Positions"
+    },
+    "elys.leveragelp.PositionRequest": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Position Request"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgDewhitelist",
+  "definitions": {
+    "MsgDewhitelist": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "whitelistedAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Dewhitelist"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgOpen",
+  "definitions": {
+    "MsgOpen": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "collateralAsset": {
+          "type": "string"
+        },
+        "collateralAmount": {
+          "type": "string"
+        },
+        "ammPoolId": {
+          "type": "string"
+        },
+        "leverage": {
+          "type": "string"
+        },
+        "stopLossPrice": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Open"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRemovePool",
+  "definitions": {
+    "MsgRemovePool": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Remove Pool"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateEnabledPools",
+  "definitions": {
+    "MsgUpdateEnabledPools": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "enabledPools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Enabled Pools"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.leveragelp.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.leveragelp.Params": {
+      "properties": {
+        "leverageMax": {
+          "type": "string"
+        },
+        "maxOpenPositions": {
+          "type": "string"
+        },
+        "poolOpenThreshold": {
+          "type": "string"
+        },
+        "safetyFactor": {
+          "type": "string"
+        },
+        "whitelistingEnabled": {
+          "type": "boolean"
+        },
+        "epochLength": {
+          "type": "string"
+        },
+        "fallbackEnabled": {
+          "type": "boolean"
+        },
+        "numberPerBlock": {
+          "type": "string",
+          "description": "Number of positions to process per block"
+        },
+        "enabledPools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "exitBuffer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdatePool",
+  "definitions": {
+    "MsgUpdatePool": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "leverageMax": {
+          "type": "string"
+        },
+        "maxLeveragelpRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateStopLoss",
+  "definitions": {
+    "MsgUpdateStopLoss": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Stop Loss"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgWhitelist",
+  "definitions": {
+    "MsgWhitelist": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "whitelistedAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Whitelist"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgAddExternalIncentive",
+  "definitions": {
+    "MsgAddExternalIncentive": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "rewardDenom": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "fromBlock": {
+          "type": "string"
+        },
+        "toBlock": {
+          "type": "string"
+        },
+        "amountPerBlock": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add External Incentive"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgAddExternalRewardDenom",
+  "definitions": {
+    "MsgAddExternalRewardDenom": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "rewardDenom": {
+          "type": "string"
+        },
+        "minAmount": {
+          "type": "string"
+        },
+        "supported": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add External Reward Denom"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClaimRewards",
+  "definitions": {
+    "MsgClaimRewards": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Claim Rewards"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgTogglePoolEdenRewards",
+  "definitions": {
+    "MsgTogglePoolEdenRewards": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Toggle Pool Eden Rewards"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/elys.masterchef.Params",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.masterchef.IncentiveInfo": {
+      "properties": {
+        "edenAmountPerYear": {
+          "type": "string",
+          "description": "reward amount in eden for 1 year"
+        },
+        "blocksDistributed": {
+          "type": "string",
+          "description": "blocks distributed"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Incentive Info"
+    },
+    "elys.masterchef.Params": {
+      "properties": {
+        "lpIncentives": {
+          "$ref": "#/definitions/elys.masterchef.IncentiveInfo",
+          "additionalProperties": false
+        },
+        "rewardPortionForLps": {
+          "type": "string",
+          "description": "gas fees and swap fees portion for lps, `100 - reward_portion_for_lps - reward_portion_for_stakers = revenue percent for protocol`."
+        },
+        "rewardPortionForStakers": {
+          "type": "string",
+          "description": "gas fees and swap fees portion for stakers, `100 - reward_portion_for_lps - reward_portion_for_stakers = revenue percent for protocol`."
+        },
+        "maxEdenRewardAprLps": {
+          "type": "string",
+          "description": "Maximum eden reward apr for lps - [0 - 0.3]"
+        },
+        "supportedRewardDenoms": {
+          "items": {
+            "$ref": "#/definitions/elys.masterchef.SupportedRewardDenom"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "protocolRevenueAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params"
+    },
+    "elys.masterchef.SupportedRewardDenom": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "minAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Supported Reward Denom"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdatePoolMultipliers",
+  "definitions": {
+    "MsgUpdatePoolMultipliers": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "poolMultipliers": {
+          "items": {
+            "$ref": "#/definitions/elys.masterchef.PoolMultiplier"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool Multipliers"
+    },
+    "elys.masterchef.PoolMultiplier": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "multiplier": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Pool Multiplier"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClose",
+  "definitions": {
+    "MsgClose": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Close"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClosePositions",
+  "definitions": {
+    "MsgClosePositions": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "liquidate": {
+          "items": {
+            "$ref": "#/definitions/elys.perpetual.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "stopLoss": {
+          "items": {
+            "$ref": "#/definitions/elys.perpetual.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "takeProfit": {
+          "items": {
+            "$ref": "#/definitions/elys.perpetual.PositionRequest"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Close Positions"
+    },
+    "elys.perpetual.PositionRequest": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Position Request"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgDewhitelist",
+  "definitions": {
+    "MsgDewhitelist": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "whitelistedAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Dewhitelist"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgOpen",
+  "definitions": {
+    "MsgOpen": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "position": {
+          "enum": [
+            "UNSPECIFIED",
+            "LONG",
+            "SHORT"
+          ],
+          "type": "string",
+          "title": "Position"
+        },
+        "leverage": {
+          "type": "string"
+        },
+        "tradingAsset": {
+          "type": "string"
+        },
+        "collateral": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "takeProfitPrice": {
+          "type": "string"
+        },
+        "stopLossPrice": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Open"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateEnabledPools",
+  "definitions": {
+    "MsgUpdateEnabledPools": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "enabledPools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Enabled Pools"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateMaxLeverageForPool",
+  "definitions": {
+    "MsgUpdateMaxLeverageForPool": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "leverageMax": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Max Leverage For Pool"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.perpetual.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.perpetual.Params": {
+      "properties": {
+        "leverageMax": {
+          "type": "string"
+        },
+        "borrowInterestRateMax": {
+          "type": "string"
+        },
+        "borrowInterestRateMin": {
+          "type": "string"
+        },
+        "borrowInterestRateIncrease": {
+          "type": "string"
+        },
+        "borrowInterestRateDecrease": {
+          "type": "string"
+        },
+        "healthGainFactor": {
+          "type": "string"
+        },
+        "maxOpenPositions": {
+          "type": "string"
+        },
+        "poolOpenThreshold": {
+          "type": "string"
+        },
+        "borrowInterestPaymentFundPercentage": {
+          "type": "string"
+        },
+        "borrowInterestPaymentFundAddress": {
+          "type": "string"
+        },
+        "safetyFactor": {
+          "type": "string"
+        },
+        "borrowInterestPaymentEnabled": {
+          "type": "boolean"
+        },
+        "whitelistingEnabled": {
+          "type": "boolean"
+        },
+        "perpetualSwapFee": {
+          "type": "string"
+        },
+        "maxLimitOrder": {
+          "type": "string"
+        },
+        "fixedFundingRate": {
+          "type": "string"
+        },
+        "minimumLongTakeProfitPriceRatio": {
+          "type": "string",
+          "description": "minimum value for take_profit_price/current price for long, should be greater than 1"
+        },
+        "maximumLongTakeProfitPriceRatio": {
+          "type": "string",
+          "description": "max value for take_profit_price/current price for long, should be greater than 1"
+        },
+        "maximumShortTakeProfitPriceRatio": {
+          "type": "string",
+          "description": "max value for take_profit_price/current price for short, should be less than 1"
+        },
+        "enableTakeProfitCustodyLiabilities": {
+          "type": "boolean",
+          "description": "No need for minimumShortTakeProfitPriceRatio as it will be 0, checked in validate message"
+        },
+        "weightBreakingFeeFactor": {
+          "type": "string",
+          "description": "We create this and send this value to estimate swap ONLY when opening and closing the position Ideally this value is set to half. When trader open a position if they receive a weight balance bonus (which is half of weight breaking fee, ideally) then while closing position they are charged weight breaking fee. So we just directly apply half weight breaking fee on perpetual swaps Question: does each need to have separate value of this because PoolParams.WeightRecoveryFeePortion can be different Also, if trader has no bonus only fee, then overall we are only applying the fee half time"
+        },
+        "enabledPools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateStopLoss",
+  "definitions": {
+    "MsgUpdateStopLoss": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Stop Loss"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateTakeProfitPrice",
+  "definitions": {
+    "MsgUpdateTakeProfitPrice": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Take Profit Price"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgWhitelist",
+  "definitions": {
+    "MsgWhitelist": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "whitelistedAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Whitelist"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgAddPool",
+  "definitions": {
+    "MsgAddPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "depositDenom": {
+          "type": "string"
+        },
+        "interestRate": {
+          "type": "string"
+        },
+        "interestRateMax": {
+          "type": "string"
+        },
+        "interestRateMin": {
+          "type": "string"
+        },
+        "interestRateIncrease": {
+          "type": "string"
+        },
+        "interestRateDecrease": {
+          "type": "string"
+        },
+        "healthGainFactor": {
+          "type": "string"
+        },
+        "maxLeverageRatio": {
+          "type": "string"
+        },
+        "maxWithdrawRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add Pool"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgBond",
+  "definitions": {
+    "MsgBond": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Bond"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUnbond",
+  "definitions": {
+    "MsgUnbond": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Unbond"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.stablestake.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.stablestake.Params": {
+      "properties": {
+        "legacyDepositDenom": {
+          "type": "string"
+        },
+        "legacyRedemptionRate": {
+          "type": "string"
+        },
+        "epochLength": {
+          "type": "string"
+        },
+        "legacyInterestRate": {
+          "type": "string"
+        },
+        "legacyInterestRateMax": {
+          "type": "string"
+        },
+        "legacyInterestRateMin": {
+          "type": "string"
+        },
+        "legacyInterestRateIncrease": {
+          "type": "string"
+        },
+        "legacyInterestRateDecrease": {
+          "type": "string"
+        },
+        "legacyHealthGainFactor": {
+          "type": "string"
+        },
+        "totalValue": {
+          "type": "string"
+        },
+        "legacyMaxLeverageRatio": {
+          "type": "string"
+        },
+        "legacyMaxWithdrawRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdatePool",
+  "definitions": {
+    "MsgUpdatePool": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "interestRateMax": {
+          "type": "string"
+        },
+        "interestRateMin": {
+          "type": "string"
+        },
+        "interestRateIncrease": {
+          "type": "string"
+        },
+        "interestRateDecrease": {
+          "type": "string"
+        },
+        "healthGainFactor": {
+          "type": "string"
+        },
+        "maxLeverageRatio": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCancelPerpetualOrder",
+  "definitions": {
+    "MsgCancelPerpetualOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Perpetual Order"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCancelPerpetualOrders",
+  "definitions": {
+    "MsgCancelPerpetualOrders": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Perpetual Orders"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCancelSpotOrder",
+  "definitions": {
+    "MsgCancelSpotOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Spot Order"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCancelSpotOrders",
+  "definitions": {
+    "MsgCancelSpotOrders": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "spotOrderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Spot Orders"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCreatePerpetualCloseOrder",
+  "definitions": {
+    "MsgCreatePerpetualCloseOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "legacyTriggerPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyTriggerPriceV1",
+          "additionalProperties": false
+        },
+        "triggerPrice": {
+          "type": "string"
+        },
+        "positionId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Perpetual Close Order"
+    },
+    "elys.tradeshield.LegacyTriggerPriceV1": {
+      "properties": {
+        "tradingAssetDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Trigger Price V 1"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCreatePerpetualOpenOrder",
+  "definitions": {
+    "MsgCreatePerpetualOpenOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "legacyTriggerPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyTriggerPriceV1",
+          "additionalProperties": false
+        },
+        "triggerPrice": {
+          "type": "string"
+        },
+        "collateral": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tradingAsset": {
+          "type": "string"
+        },
+        "position": {
+          "enum": [
+            "UNSPECIFIED",
+            "LONG",
+            "SHORT"
+          ],
+          "type": "string",
+          "title": "Perpetual Position"
+        },
+        "leverage": {
+          "type": "string"
+        },
+        "takeProfitPrice": {
+          "type": "string"
+        },
+        "stopLossPrice": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Perpetual Open Order"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.tradeshield.LegacyTriggerPriceV1": {
+      "properties": {
+        "tradingAssetDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Trigger Price V 1"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCreateSpotOrder",
+  "definitions": {
+    "MsgCreateSpotOrder": {
+      "properties": {
+        "orderType": {
+          "enum": [
+            "STOPLOSS",
+            "LIMITSELL",
+            "LIMITBUY",
+            "MARKETBUY"
+          ],
+          "type": "string",
+          "title": "Spot Order Type",
+          "description": "Spot order"
+        },
+        "legacyOrderPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyOrderPriceV1",
+          "additionalProperties": false
+        },
+        "orderPrice": {
+          "type": "string"
+        },
+        "orderAmount": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderTargetDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Spot Order"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.tradeshield.LegacyOrderPriceV1": {
+      "properties": {
+        "baseDenom": {
+          "type": "string"
+        },
+        "quoteDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Order Price V 1"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgExecuteOrders",
+  "definitions": {
+    "MsgExecuteOrders": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "spotOrderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "perpetualOrderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Execute Orders"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.tradeshield.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.tradeshield.Params": {
+      "properties": {
+        "marketOrderEnabled": {
+          "type": "boolean"
+        },
+        "stakeEnabled": {
+          "type": "boolean"
+        },
+        "processOrdersEnabled": {
+          "type": "boolean"
+        },
+        "swapEnabled": {
+          "type": "boolean"
+        },
+        "perpetualEnabled": {
+          "type": "boolean"
+        },
+        "rewardEnabled": {
+          "type": "boolean"
+        },
+        "leverageEnabled": {
+          "type": "boolean"
+        },
+        "limitProcessOrder": {
+          "type": "string"
+        },
+        "rewardPercentage": {
+          "type": "string",
+          "description": "For incentive system v2"
+        },
+        "marginError": {
+          "type": "string"
+        },
+        "minimumDeposit": {
+          "type": "string"
+        },
+        "tolerance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdatePerpetualOrder",
+  "definitions": {
+    "MsgUpdatePerpetualOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "legacyTriggerPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyTriggerPriceV1",
+          "additionalProperties": false
+        },
+        "triggerPrice": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Perpetual Order"
+    },
+    "elys.tradeshield.LegacyTriggerPriceV1": {
+      "properties": {
+        "tradingAssetDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Trigger Price V 1"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateSpotOrder",
+  "definitions": {
+    "MsgUpdateSpotOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "legacyOrderPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyOrderPriceV1",
+          "additionalProperties": false
+        },
+        "orderPrice": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Spot Order"
+    },
+    "elys.tradeshield.LegacyOrderPriceV1": {
+      "properties": {
+        "baseDenom": {
+          "type": "string"
+        },
+        "quoteDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Order Price V 1"
+    }
+  }
+}
+]

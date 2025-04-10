@@ -1,0 +1,24 @@
+{
+  "$ref": "#/definitions/MsgUnpinCodes",
+  "definitions": {
+    "MsgUnpinCodes": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "codeIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "CodeIDs references the WASM codes"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Unpin Codes",
+      "description": "MsgUnpinCodes is the MsgUnpinCodes request type. Since: 0.40"
+    }
+  }
+}

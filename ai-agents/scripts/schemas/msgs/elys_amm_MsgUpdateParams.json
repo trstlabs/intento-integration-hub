@@ -1,0 +1,75 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/elys.amm.Params",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.amm.Params": {
+      "properties": {
+        "poolCreationFee": {
+          "type": "string"
+        },
+        "slippageTrackDuration": {
+          "type": "string",
+          "description": "default 1 week: 604,800"
+        },
+        "baseAssets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "weightBreakingFeeExponent": {
+          "type": "string"
+        },
+        "weightBreakingFeeMultiplier": {
+          "type": "string"
+        },
+        "weightBreakingFeePortion": {
+          "type": "string"
+        },
+        "weightRecoveryFeePortion": {
+          "type": "string"
+        },
+        "thresholdWeightDifference": {
+          "type": "string"
+        },
+        "allowedPoolCreators": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "thresholdWeightDifferenceSwapFee": {
+          "type": "string"
+        },
+        "lpLockupDuration": {
+          "type": "string"
+        },
+        "minSlippage": {
+          "type": "string"
+        },
+        "allowedUpfrontSwapMakers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params"
+    }
+  }
+}

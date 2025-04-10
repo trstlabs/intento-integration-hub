@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.mint.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/mint parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.mint.v1beta1.Params": {
+      "properties": {
+        "mintDenom": {
+          "type": "string",
+          "description": "type of coin to mint"
+        },
+        "inflationRateChange": {
+          "type": "string",
+          "description": "maximum annual change in inflation rate"
+        },
+        "inflationMax": {
+          "type": "string",
+          "description": "maximum inflation rate"
+        },
+        "inflationMin": {
+          "type": "string",
+          "description": "minimum inflation rate"
+        },
+        "goalBonded": {
+          "type": "string",
+          "description": "goal of percent bonded atoms"
+        },
+        "blocksPerYear": {
+          "type": "string",
+          "description": "expected blocks per year"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the x/mint module."
+    }
+  }
+}

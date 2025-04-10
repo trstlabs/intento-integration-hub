@@ -1,0 +1,1290 @@
+[
+{
+  "$ref": "#/definitions/MsgFundFairburnPool",
+  "definitions": {
+    "MsgFundFairburnPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "amount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Fund Fairburn Pool",
+      "description": "MsgFundFairburnPool allows an account to directly fund the fee collector pool."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "params": {
+          "$ref": "#/definitions/intento.alloc.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the request type for updating module's params. Since: v14"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.alloc.v1beta1.DistributionProportions": {
+      "properties": {
+        "developerRewards": {
+          "type": "string"
+        },
+        "communityPool": {
+          "type": "string"
+        },
+        "relayerIncentives": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Distribution Proportions",
+      "description": "DistributionProportions defines the proportion that each bucket  receives."
+    },
+    "intento.alloc.v1beta1.Params": {
+      "properties": {
+        "distributionProportions": {
+          "$ref": "#/definitions/intento.alloc.v1beta1.DistributionProportions",
+          "additionalProperties": false,
+          "description": "distribution_proportions defines the proportion of the minted denom"
+        },
+        "weightedDeveloperRewardsReceivers": {
+          "items": {
+            "$ref": "#/definitions/intento.alloc.v1beta1.WeightedAddress"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "addresses to receive developer rewards"
+        },
+        "supplementAmount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "SupplementAmount is the amount to be supplemented from the pool on top of newly minted coins."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the alloc module."
+    },
+    "intento.alloc.v1beta1.WeightedAddress": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Weighted Address",
+      "description": "WeightedAddress defines an address with a weight."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClaimClaimable",
+  "definitions": {
+    "MsgClaimClaimable": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Claim Claimable"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgCreateHostedAccount",
+  "definitions": {
+    "MsgCreateHostedAccount": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "hostConnectionId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "feeCoinsSuported": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Hosted Account"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRegisterAccountAndSubmitFlow",
+  "definitions": {
+    "MsgRegisterAccountAndSubmitFlow": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "msgs": {
+          "items": {
+            "properties": {
+              "typeUrl": {
+                "type": "string",
+                "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+              }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Any",
+            "description": "`Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a message in C++.     Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     } Example 2: Pack and unpack a message in Java.     Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }     // or ...     if (any.isSameTypeAs(Foo.getDefaultInstance())) {       foo = any.unpack(Foo.getDefaultInstance());     }  Example 3: Pack and unpack a message in Python.     foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go      foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      } The pack methods provided by protobuf library will by default use 'type.googleapis.com/full.type.name' as the type URL and the unpack methods only use the fully qualified type name after the last '/' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\". JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:     package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }     {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     } If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):     {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "duration": {
+          "type": "string",
+          "description": "duration defines the time that the code should run for"
+        },
+        "startAt": {
+          "type": "string",
+          "description": "start_at when set as a unix time after block inclusion, creates a custom start time for execution"
+        },
+        "interval": {
+          "type": "string",
+          "description": "interval defines the interval between auto_msg calls"
+        },
+        "feeFunds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "optional fees to be used for flow execution limiting the amount of fees incurred"
+        },
+        "configuration": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ExecutionConfiguration",
+          "additionalProperties": false,
+          "description": "optional array of dependent txs that should be executed before execution is allowed"
+        },
+        "version": {
+          "type": "string"
+        },
+        "hostConnectionId": {
+          "type": "string"
+        },
+        "conditions": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ExecutionConditions",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Account And Submit Flow",
+      "description": "MsgRegisterAccountAndSubmitFlow creates an interchain account, submits and schedules an arbitrary msg to be executed by this interchain account"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.intent.v1beta1.Comparison": {
+      "properties": {
+        "flowId": {
+          "type": "string",
+          "description": "get the latest response value from other flow, optional"
+        },
+        "responseIndex": {
+          "type": "integer",
+          "description": "index of the message response, optional"
+        },
+        "responseKey": {
+          "type": "string",
+          "description": "e.g. Amount[0].Amount, FromAddress, optional"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "can be anything from sdk.Int, sdk.Coin, sdk.Coins, string, []string, []sdk.Int"
+        },
+        "operator": {
+          "enum": [
+            "EQUAL",
+            "CONTAINS",
+            "NOT_CONTAINS",
+            "SMALLER_THAN",
+            "LARGER_THAN",
+            "GREATER_EQUAL",
+            "LESS_EQUAL",
+            "STARTS_WITH",
+            "ENDS_WITH",
+            "NOT_EQUAL"
+          ],
+          "type": "string",
+          "title": "enum AfterGetValueOperator {\n   PARSE = 0;\n   MULITPLY = 1;\n   DIVIDE = 2;\n   SUBSTRACT = 3;\n   ADD = 4;\n }",
+          "description": "enum AfterGetValueOperator {   PARSE = 0;   MULITPLY = 1;   DIVIDE = 2;   SUBSTRACT = 3;   ADD = 4; }  Comparison operators that can be used for various types."
+        },
+        "operand": {
+          "type": "string"
+        },
+        "icqConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ICQConfig",
+          "additionalProperties": false,
+          "description": "bool calculate_difference = 7; //True: Calculate the difference with the previous value.  config of ICQ to perform"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Comparison",
+      "description": "Comparison is checked on the response in JSON before execution of flow and outputs true or false"
+    },
+    "intento.intent.v1beta1.ExecutionConditions": {
+      "properties": {
+        "feedbackLoops": {
+          "items": {
+            "$ref": "#/definitions/intento.intent.v1beta1.FeedbackLoop"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Replace value with value from message or response from another flow’s latest output"
+        },
+        "comparisons": {
+          "items": {
+            "$ref": "#/definitions/intento.intent.v1beta1.Comparison"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Comparison with response response value"
+        },
+        "stopOnSuccessOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that when executing succesfully, stops execution"
+        },
+        "stopOnFailureOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that when not executing succesfully, stops execution"
+        },
+        "skipOnFailureOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that should be executed succesfully after their latest call before execution is allowed"
+        },
+        "skipOnSuccessOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that should fail after their latest call before execution is allowed"
+        },
+        "useAndForComparisons": {
+          "type": "boolean",
+          "description": "True: Use AND for combining comparisons. False: Use OR for combining comparisons."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Execution Conditions",
+      "description": "ExecutionConditions provides execution conditions for the flow"
+    },
+    "intento.intent.v1beta1.ExecutionConfiguration": {
+      "properties": {
+        "saveResponses": {
+          "type": "boolean",
+          "description": "if true, the flow response outputs are saved and can be used in logic"
+        },
+        "updatingDisabled": {
+          "type": "boolean",
+          "description": "if true, the flow is not updatable"
+        },
+        "stopOnSuccess": {
+          "type": "boolean",
+          "description": "If true, will execute until we get a successful Flow, if false/unset will always execute"
+        },
+        "stopOnFailure": {
+          "type": "boolean",
+          "description": "If true, will execute until successful Flow, if false/unset will always execute"
+        },
+        "stopOnTimeout": {
+          "type": "boolean",
+          "description": "If true, will stop if message times oiut"
+        },
+        "fallbackToOwnerBalance": {
+          "type": "boolean",
+          "description": "If true, owner account balance is used when trigger account funds run out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Execution Configuration",
+      "description": "ExecutionConfiguration provides the execution-related configuration of the flow"
+    },
+    "intento.intent.v1beta1.FeedbackLoop": {
+      "properties": {
+        "flowId": {
+          "type": "string",
+          "description": "flow to get the latest response value from, optional"
+        },
+        "responseIndex": {
+          "type": "integer",
+          "description": "index of the responses"
+        },
+        "responseKey": {
+          "type": "string",
+          "description": "for example \"Amount\""
+        },
+        "msgsIndex": {
+          "type": "integer",
+          "description": "index of the msg to replace"
+        },
+        "msgKey": {
+          "type": "string",
+          "description": "key of the message to replace (e.g. Amount[0].Amount, FromAddress)"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "can be anything from sdk.Int, sdk.Coin, sdk.Coins, string, []string, []sdk.Int"
+        },
+        "icqConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ICQConfig",
+          "additionalProperties": false,
+          "description": "bool calculate_difference = 7; //True: calculate the difference with the previous value instead of using the value directly.  config of ICQ to perform"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Feedback Loop",
+      "description": "Replace value with value from message or response from another flow’s latest output before execution"
+    },
+    "intento.intent.v1beta1.ICQConfig": {
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "chainId": {
+          "type": "string"
+        },
+        "timeoutPolicy": {
+          "enum": [
+            "REJECT_QUERY_RESPONSE",
+            "RETRY_QUERY_REQUEST",
+            "EXECUTE_QUERY_CALLBACK"
+          ],
+          "type": "string",
+          "title": "Timeout Policy"
+        },
+        "timeoutDuration": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "format": "regex"
+        },
+        "queryType": {
+          "type": "string",
+          "description": "e.g. store/bank/key store/staking/key"
+        },
+        "queryKey": {
+          "type": "string",
+          "description": "key in the store that stores the query e.g. stakingtypes.GetValidatorKey(validatorAddressBz)"
+        },
+        "response": {
+          "type": "string",
+          "description": "should be reset after execution",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "ICQ Config",
+      "description": "config for using interchain queries"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRegisterAccount",
+  "definitions": {
+    "MsgRegisterAccount": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Account",
+      "description": "MsgRegisterAccount registers an interchain account for the given owner over the specified connection pair"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSubmitFlow",
+  "definitions": {
+    "MsgSubmitFlow": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "msgs": {
+          "items": {
+            "properties": {
+              "typeUrl": {
+                "type": "string",
+                "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+              }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Any",
+            "description": "`Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a message in C++.     Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     } Example 2: Pack and unpack a message in Java.     Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }     // or ...     if (any.isSameTypeAs(Foo.getDefaultInstance())) {       foo = any.unpack(Foo.getDefaultInstance());     }  Example 3: Pack and unpack a message in Python.     foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go      foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      } The pack methods provided by protobuf library will by default use 'type.googleapis.com/full.type.name' as the type URL and the unpack methods only use the fully qualified type name after the last '/' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\". JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:     package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }     {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     } If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):     {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "duration": {
+          "type": "string",
+          "description": "duration defines the time that the code should run for"
+        },
+        "startAt": {
+          "type": "string",
+          "description": "start_at when set as a unix time after block inclusion, creates a custom start time for execution"
+        },
+        "interval": {
+          "type": "string",
+          "description": "interval defines the interval between auto_msg calls"
+        },
+        "feeFunds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "optional fees to be used for flow execution limiting the amount of fees incurred"
+        },
+        "configuration": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ExecutionConfiguration",
+          "additionalProperties": false,
+          "description": "optional configuration parameters"
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "optional connection ID interchain account"
+        },
+        "hostedIcaConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.HostedICAConfig",
+          "additionalProperties": false,
+          "description": "optional use of a hosted account"
+        },
+        "conditions": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ExecutionConditions",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Submit Flow",
+      "description": "MsgSubmitFlow creates, submits and schedules msgs to be executed locally or over IBC with conditions"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.intent.v1beta1.Comparison": {
+      "properties": {
+        "flowId": {
+          "type": "string",
+          "description": "get the latest response value from other flow, optional"
+        },
+        "responseIndex": {
+          "type": "integer",
+          "description": "index of the message response, optional"
+        },
+        "responseKey": {
+          "type": "string",
+          "description": "e.g. Amount[0].Amount, FromAddress, optional"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "can be anything from sdk.Int, sdk.Coin, sdk.Coins, string, []string, []sdk.Int"
+        },
+        "operator": {
+          "enum": [
+            "EQUAL",
+            "CONTAINS",
+            "NOT_CONTAINS",
+            "SMALLER_THAN",
+            "LARGER_THAN",
+            "GREATER_EQUAL",
+            "LESS_EQUAL",
+            "STARTS_WITH",
+            "ENDS_WITH",
+            "NOT_EQUAL"
+          ],
+          "type": "string",
+          "title": "enum AfterGetValueOperator {\n   PARSE = 0;\n   MULITPLY = 1;\n   DIVIDE = 2;\n   SUBSTRACT = 3;\n   ADD = 4;\n }",
+          "description": "enum AfterGetValueOperator {   PARSE = 0;   MULITPLY = 1;   DIVIDE = 2;   SUBSTRACT = 3;   ADD = 4; }  Comparison operators that can be used for various types."
+        },
+        "operand": {
+          "type": "string"
+        },
+        "icqConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ICQConfig",
+          "additionalProperties": false,
+          "description": "bool calculate_difference = 7; //True: Calculate the difference with the previous value.  config of ICQ to perform"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Comparison",
+      "description": "Comparison is checked on the response in JSON before execution of flow and outputs true or false"
+    },
+    "intento.intent.v1beta1.ExecutionConditions": {
+      "properties": {
+        "feedbackLoops": {
+          "items": {
+            "$ref": "#/definitions/intento.intent.v1beta1.FeedbackLoop"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Replace value with value from message or response from another flow’s latest output"
+        },
+        "comparisons": {
+          "items": {
+            "$ref": "#/definitions/intento.intent.v1beta1.Comparison"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Comparison with response response value"
+        },
+        "stopOnSuccessOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that when executing succesfully, stops execution"
+        },
+        "stopOnFailureOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that when not executing succesfully, stops execution"
+        },
+        "skipOnFailureOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that should be executed succesfully after their latest call before execution is allowed"
+        },
+        "skipOnSuccessOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that should fail after their latest call before execution is allowed"
+        },
+        "useAndForComparisons": {
+          "type": "boolean",
+          "description": "True: Use AND for combining comparisons. False: Use OR for combining comparisons."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Execution Conditions",
+      "description": "ExecutionConditions provides execution conditions for the flow"
+    },
+    "intento.intent.v1beta1.ExecutionConfiguration": {
+      "properties": {
+        "saveResponses": {
+          "type": "boolean",
+          "description": "if true, the flow response outputs are saved and can be used in logic"
+        },
+        "updatingDisabled": {
+          "type": "boolean",
+          "description": "if true, the flow is not updatable"
+        },
+        "stopOnSuccess": {
+          "type": "boolean",
+          "description": "If true, will execute until we get a successful Flow, if false/unset will always execute"
+        },
+        "stopOnFailure": {
+          "type": "boolean",
+          "description": "If true, will execute until successful Flow, if false/unset will always execute"
+        },
+        "stopOnTimeout": {
+          "type": "boolean",
+          "description": "If true, will stop if message times oiut"
+        },
+        "fallbackToOwnerBalance": {
+          "type": "boolean",
+          "description": "If true, owner account balance is used when trigger account funds run out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Execution Configuration",
+      "description": "ExecutionConfiguration provides the execution-related configuration of the flow"
+    },
+    "intento.intent.v1beta1.FeedbackLoop": {
+      "properties": {
+        "flowId": {
+          "type": "string",
+          "description": "flow to get the latest response value from, optional"
+        },
+        "responseIndex": {
+          "type": "integer",
+          "description": "index of the responses"
+        },
+        "responseKey": {
+          "type": "string",
+          "description": "for example \"Amount\""
+        },
+        "msgsIndex": {
+          "type": "integer",
+          "description": "index of the msg to replace"
+        },
+        "msgKey": {
+          "type": "string",
+          "description": "key of the message to replace (e.g. Amount[0].Amount, FromAddress)"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "can be anything from sdk.Int, sdk.Coin, sdk.Coins, string, []string, []sdk.Int"
+        },
+        "icqConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ICQConfig",
+          "additionalProperties": false,
+          "description": "bool calculate_difference = 7; //True: calculate the difference with the previous value instead of using the value directly.  config of ICQ to perform"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Feedback Loop",
+      "description": "Replace value with value from message or response from another flow’s latest output before execution"
+    },
+    "intento.intent.v1beta1.HostedICAConfig": {
+      "properties": {
+        "hostedAddress": {
+          "type": "string"
+        },
+        "feeCoinLimit": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Hosted ICA Config",
+      "description": "config for hosted account"
+    },
+    "intento.intent.v1beta1.ICQConfig": {
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "chainId": {
+          "type": "string"
+        },
+        "timeoutPolicy": {
+          "enum": [
+            "REJECT_QUERY_RESPONSE",
+            "RETRY_QUERY_REQUEST",
+            "EXECUTE_QUERY_CALLBACK"
+          ],
+          "type": "string",
+          "title": "Timeout Policy"
+        },
+        "timeoutDuration": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "format": "regex"
+        },
+        "queryType": {
+          "type": "string",
+          "description": "e.g. store/bank/key store/staking/key"
+        },
+        "queryKey": {
+          "type": "string",
+          "description": "key in the store that stores the query e.g. stakingtypes.GetValidatorKey(validatorAddressBz)"
+        },
+        "response": {
+          "type": "string",
+          "description": "should be reset after execution",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "ICQ Config",
+      "description": "config for using interchain queries"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSubmitTx",
+  "definitions": {
+    "MsgSubmitTx": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "msg": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Submit Tx",
+      "description": "MsgSubmitTx creates and submits an arbitrary msg to be executed locally or using an interchain account"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateFlow",
+  "definitions": {
+    "MsgUpdateFlow": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "msgs": {
+          "items": {
+            "properties": {
+              "typeUrl": {
+                "type": "string",
+                "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+              }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Any",
+            "description": "`Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a message in C++.     Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     } Example 2: Pack and unpack a message in Java.     Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }     // or ...     if (any.isSameTypeAs(Foo.getDefaultInstance())) {       foo = any.unpack(Foo.getDefaultInstance());     }  Example 3: Pack and unpack a message in Python.     foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go      foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      } The pack methods provided by protobuf library will by default use 'type.googleapis.com/full.type.name' as the type URL and the unpack methods only use the fully qualified type name after the last '/' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\". JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:     package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }     {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     } If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):     {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "end_time when set defines the time that the code should run for"
+        },
+        "startAt": {
+          "type": "string",
+          "description": "start_at when set as a unix time after block inclusion, creates a custom start time for execution"
+        },
+        "interval": {
+          "type": "string",
+          "description": "interval defines the interval between auto_msg calls"
+        },
+        "feeFunds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "add fees for flow execution, optional"
+        },
+        "configuration": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ExecutionConfiguration",
+          "additionalProperties": false
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "hostedIcaConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.HostedICAConfig",
+          "additionalProperties": false
+        },
+        "conditions": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ExecutionConditions",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Flow",
+      "description": "MsgUpdateFlow updates an arbitrary msg to be executed locally or using an interchain account"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.intent.v1beta1.Comparison": {
+      "properties": {
+        "flowId": {
+          "type": "string",
+          "description": "get the latest response value from other flow, optional"
+        },
+        "responseIndex": {
+          "type": "integer",
+          "description": "index of the message response, optional"
+        },
+        "responseKey": {
+          "type": "string",
+          "description": "e.g. Amount[0].Amount, FromAddress, optional"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "can be anything from sdk.Int, sdk.Coin, sdk.Coins, string, []string, []sdk.Int"
+        },
+        "operator": {
+          "enum": [
+            "EQUAL",
+            "CONTAINS",
+            "NOT_CONTAINS",
+            "SMALLER_THAN",
+            "LARGER_THAN",
+            "GREATER_EQUAL",
+            "LESS_EQUAL",
+            "STARTS_WITH",
+            "ENDS_WITH",
+            "NOT_EQUAL"
+          ],
+          "type": "string",
+          "title": "enum AfterGetValueOperator {\n   PARSE = 0;\n   MULITPLY = 1;\n   DIVIDE = 2;\n   SUBSTRACT = 3;\n   ADD = 4;\n }",
+          "description": "enum AfterGetValueOperator {   PARSE = 0;   MULITPLY = 1;   DIVIDE = 2;   SUBSTRACT = 3;   ADD = 4; }  Comparison operators that can be used for various types."
+        },
+        "operand": {
+          "type": "string"
+        },
+        "icqConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ICQConfig",
+          "additionalProperties": false,
+          "description": "bool calculate_difference = 7; //True: Calculate the difference with the previous value.  config of ICQ to perform"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Comparison",
+      "description": "Comparison is checked on the response in JSON before execution of flow and outputs true or false"
+    },
+    "intento.intent.v1beta1.ExecutionConditions": {
+      "properties": {
+        "feedbackLoops": {
+          "items": {
+            "$ref": "#/definitions/intento.intent.v1beta1.FeedbackLoop"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Replace value with value from message or response from another flow’s latest output"
+        },
+        "comparisons": {
+          "items": {
+            "$ref": "#/definitions/intento.intent.v1beta1.Comparison"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Comparison with response response value"
+        },
+        "stopOnSuccessOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that when executing succesfully, stops execution"
+        },
+        "stopOnFailureOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that when not executing succesfully, stops execution"
+        },
+        "skipOnFailureOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that should be executed succesfully after their latest call before execution is allowed"
+        },
+        "skipOnSuccessOf": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "optional array of dependent intents that should fail after their latest call before execution is allowed"
+        },
+        "useAndForComparisons": {
+          "type": "boolean",
+          "description": "True: Use AND for combining comparisons. False: Use OR for combining comparisons."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Execution Conditions",
+      "description": "ExecutionConditions provides execution conditions for the flow"
+    },
+    "intento.intent.v1beta1.ExecutionConfiguration": {
+      "properties": {
+        "saveResponses": {
+          "type": "boolean",
+          "description": "if true, the flow response outputs are saved and can be used in logic"
+        },
+        "updatingDisabled": {
+          "type": "boolean",
+          "description": "if true, the flow is not updatable"
+        },
+        "stopOnSuccess": {
+          "type": "boolean",
+          "description": "If true, will execute until we get a successful Flow, if false/unset will always execute"
+        },
+        "stopOnFailure": {
+          "type": "boolean",
+          "description": "If true, will execute until successful Flow, if false/unset will always execute"
+        },
+        "stopOnTimeout": {
+          "type": "boolean",
+          "description": "If true, will stop if message times oiut"
+        },
+        "fallbackToOwnerBalance": {
+          "type": "boolean",
+          "description": "If true, owner account balance is used when trigger account funds run out"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Execution Configuration",
+      "description": "ExecutionConfiguration provides the execution-related configuration of the flow"
+    },
+    "intento.intent.v1beta1.FeedbackLoop": {
+      "properties": {
+        "flowId": {
+          "type": "string",
+          "description": "flow to get the latest response value from, optional"
+        },
+        "responseIndex": {
+          "type": "integer",
+          "description": "index of the responses"
+        },
+        "responseKey": {
+          "type": "string",
+          "description": "for example \"Amount\""
+        },
+        "msgsIndex": {
+          "type": "integer",
+          "description": "index of the msg to replace"
+        },
+        "msgKey": {
+          "type": "string",
+          "description": "key of the message to replace (e.g. Amount[0].Amount, FromAddress)"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "can be anything from sdk.Int, sdk.Coin, sdk.Coins, string, []string, []sdk.Int"
+        },
+        "icqConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.ICQConfig",
+          "additionalProperties": false,
+          "description": "bool calculate_difference = 7; //True: calculate the difference with the previous value instead of using the value directly.  config of ICQ to perform"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Feedback Loop",
+      "description": "Replace value with value from message or response from another flow’s latest output before execution"
+    },
+    "intento.intent.v1beta1.HostedICAConfig": {
+      "properties": {
+        "hostedAddress": {
+          "type": "string"
+        },
+        "feeCoinLimit": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Hosted ICA Config",
+      "description": "config for hosted account"
+    },
+    "intento.intent.v1beta1.ICQConfig": {
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "chainId": {
+          "type": "string"
+        },
+        "timeoutPolicy": {
+          "enum": [
+            "REJECT_QUERY_RESPONSE",
+            "RETRY_QUERY_REQUEST",
+            "EXECUTE_QUERY_CALLBACK"
+          ],
+          "type": "string",
+          "title": "Timeout Policy"
+        },
+        "timeoutDuration": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "format": "regex"
+        },
+        "queryType": {
+          "type": "string",
+          "description": "e.g. store/bank/key store/staking/key"
+        },
+        "queryKey": {
+          "type": "string",
+          "description": "key in the store that stores the query e.g. stakingtypes.GetValidatorKey(validatorAddressBz)"
+        },
+        "response": {
+          "type": "string",
+          "description": "should be reset after execution",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "ICQ Config",
+      "description": "config for using interchain queries"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateHostedAccount",
+  "definitions": {
+    "MsgUpdateHostedAccount": {
+      "properties": {
+        "admin": {
+          "type": "string"
+        },
+        "hostedAddress": {
+          "type": "string"
+        },
+        "hostFeeConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.HostFeeConfig",
+          "additionalProperties": false,
+          "description": "string connection_id = 3 [(gogoproto.customname) = \"ConnectionID\"];"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Hosted Account"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.intent.v1beta1.HostFeeConfig": {
+      "properties": {
+        "admin": {
+          "type": "string"
+        },
+        "feeCoinsSuported": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Host Fee Config"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "params": {
+          "$ref": "#/definitions/intento.mint.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the request type for updating module's params. Since: v14"
+    },
+    "intento.mint.v1beta1.Params": {
+      "properties": {
+        "mintDenom": {
+          "type": "string",
+          "description": "type of coin to mint"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "the time the chain starts",
+          "format": "date-time"
+        },
+        "initialAnnualProvisions": {
+          "type": "string",
+          "description": "initial annual provisions"
+        },
+        "reductionFactor": {
+          "type": "string",
+          "description": "factor to reduce inflation by each year"
+        },
+        "blocksPerYear": {
+          "type": "string",
+          "description": "expected blocks per year"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params holds parameters for the mint module."
+    }
+  }
+}
+]

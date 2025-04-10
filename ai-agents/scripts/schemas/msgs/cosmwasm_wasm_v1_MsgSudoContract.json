@@ -1,0 +1,26 @@
+{
+  "$ref": "#/definitions/MsgSudoContract",
+  "definitions": {
+    "MsgSudoContract": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Sudo Contract",
+      "description": "MsgSudoContract is the MsgSudoContract request type. Since: 0.40"
+    }
+  }
+}

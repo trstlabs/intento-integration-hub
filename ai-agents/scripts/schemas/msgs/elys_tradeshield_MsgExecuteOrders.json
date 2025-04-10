@@ -1,0 +1,27 @@
+{
+  "$ref": "#/definitions/MsgExecuteOrders",
+  "definitions": {
+    "MsgExecuteOrders": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "spotOrderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "perpetualOrderIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Execute Orders"
+    }
+  }
+}

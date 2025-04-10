@@ -1,0 +1,37 @@
+{
+  "$ref": "#/definitions/MsgFundCommunityPool",
+  "definitions": {
+    "MsgFundCommunityPool": {
+      "properties": {
+        "amount": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "depositor": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Fund Community Pool",
+      "description": "MsgFundCommunityPool allows an account to directly fund the community pool."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$ref": "#/definitions/MsgAddPool",
+  "definitions": {
+    "MsgAddPool": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "pool": {
+          "$ref": "#/definitions/elys.leveragelp.AddPool",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add Pool"
+    },
+    "elys.leveragelp.AddPool": {
+      "properties": {
+        "ammPoolId": {
+          "type": "string"
+        },
+        "leverageMax": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Add Pool"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$ref": "#/definitions/MsgUpdateClientConfig",
+  "definitions": {
+    "MsgUpdateClientConfig": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client identifier"
+        },
+        "config": {
+          "$ref": "#/definitions/ibc.core.client.v2.Config",
+          "additionalProperties": false,
+          "description": "allowed relayers NOTE: All fields in the config must be supplied."
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Client Config",
+      "description": "MsgUpdateClientConfig defines the sdk.Msg type to update the configuration for a given client"
+    },
+    "ibc.core.client.v2.Config": {
+      "properties": {
+        "allowedRelayers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "allowed_relayers defines the set of allowed relayers for IBC V2 protocol for the given client"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Config",
+      "description": "Config is a **per-client** configuration struct that sets which relayers are allowed to relay v2 IBC messages for a given client. If it is set, then only relayers in the allow list can send v2 messages If it is not set, then the client allows permissionless relaying of v2 messages"
+    }
+  }
+}

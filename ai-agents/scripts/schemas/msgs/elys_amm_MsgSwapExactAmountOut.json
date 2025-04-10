@@ -1,0 +1,59 @@
+{
+  "$ref": "#/definitions/MsgSwapExactAmountOut",
+  "definitions": {
+    "MsgSwapExactAmountOut": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.SwapAmountOutRoute"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "tokenOut": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tokenInMaxAmount": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Swap Exact Amount Out"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "elys.amm.SwapAmountOutRoute": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "tokenInDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Swap Amount Out Route"
+    }
+  }
+}

@@ -1,0 +1,782 @@
+[
+{
+  "$ref": "#/definitions/MsgAddCodeUploadParamsAddresses",
+  "definitions": {
+    "MsgAddCodeUploadParamsAddresses": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add Code Upload Params Addresses",
+      "description": "MsgAddCodeUploadParamsAddresses is the MsgAddCodeUploadParamsAddresses request type."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgClearAdmin",
+  "definitions": {
+    "MsgClearAdmin": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the actor that signed the messages"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Clear Admin",
+      "description": "MsgClearAdmin removes any admin stored for a smart contract"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgExecuteContract",
+  "definitions": {
+    "MsgExecuteContract": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        },
+        "funds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Funds coins that are transferred to the contract on execution"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Execute Contract",
+      "description": "MsgExecuteContract submits the given message data to a smart contract"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgIBCCloseChannel",
+  "definitions": {
+    "MsgIBCCloseChannel": {
+      "properties": {
+        "channel": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg IBC Close Channel",
+      "description": "MsgIBCCloseChannel port and channel need to be owned by the contract"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgIBCSend",
+  "definitions": {
+    "MsgIBCSend": {
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "the channel by which the packet will be sent"
+        },
+        "timeoutHeight": {
+          "type": "string",
+          "description": "Timeout height relative to the current block height. The timeout is disabled when set to 0."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "Timeout timestamp (in nanoseconds) relative to the current block timestamp. The timeout is disabled when set to 0."
+        },
+        "data": {
+          "type": "string",
+          "description": "Data is the payload to transfer. We must not make assumption what format or content is in here.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg IBC Send",
+      "description": "MsgIBCSend"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgInstantiateContract2",
+  "definitions": {
+    "MsgInstantiateContract2": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "admin": {
+          "type": "string",
+          "description": "Admin is an optional address that can execute migrations"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID is the reference to the stored WASM code"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label is optional metadata to be stored with a contract instance."
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        },
+        "funds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Funds coins that are transferred to the contract on instantiation"
+        },
+        "salt": {
+          "type": "string",
+          "description": "Salt is an arbitrary value provided by the sender. Size can be 1 to 64.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "fixMsg": {
+          "type": "boolean",
+          "description": "FixMsg include the msg value into the hash for the predictable address. Default is false"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Instantiate Contract 2",
+      "description": "MsgInstantiateContract2 create a new smart contract instance for the given code id with a predictable address."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgInstantiateContract",
+  "definitions": {
+    "MsgInstantiateContract": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "admin": {
+          "type": "string",
+          "description": "Admin is an optional address that can execute migrations"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID is the reference to the stored WASM code"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label is optional metadata to be stored with a contract instance."
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        },
+        "funds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Funds coins that are transferred to the contract on instantiation"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Instantiate Contract",
+      "description": "MsgInstantiateContract create a new smart contract instance for the given code id."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgMigrateContract",
+  "definitions": {
+    "MsgMigrateContract": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID references the new WASM code"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Migrate Contract",
+      "description": "MsgMigrateContract runs a code upgrade/ downgrade for a smart contract"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgPinCodes",
+  "definitions": {
+    "MsgPinCodes": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "codeIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "CodeIDs references the new WASM codes"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Pin Codes",
+      "description": "MsgPinCodes is the MsgPinCodes request type. Since: 0.40"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgRemoveCodeUploadParamsAddresses",
+  "definitions": {
+    "MsgRemoveCodeUploadParamsAddresses": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Remove Code Upload Params Addresses",
+      "description": "MsgRemoveCodeUploadParamsAddresses is the MsgRemoveCodeUploadParamsAddresses request type."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgStoreAndInstantiateContract",
+  "definitions": {
+    "MsgStoreAndInstantiateContract": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "WASMByteCode can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "instantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "InstantiatePermission to apply on contract creation, optional"
+        },
+        "unpinCode": {
+          "type": "boolean",
+          "description": "UnpinCode code on upload, optional. As default the uploaded contract is pinned to cache."
+        },
+        "admin": {
+          "type": "string",
+          "description": "Admin is an optional address that can execute migrations"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label is optional metadata to be stored with a contract instance."
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        },
+        "funds": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Funds coins that are transferred from the authority account to the contract on instantiation"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source is the URL where the code is hosted"
+        },
+        "builder": {
+          "type": "string",
+          "description": "Builder is the docker image used to build the code deterministically, used for smart contract verification"
+        },
+        "codeHash": {
+          "type": "string",
+          "description": "CodeHash is the SHA256 sum of the code outputted by builder, used for smart contract verification",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store And Instantiate Contract",
+      "description": "MsgStoreAndInstantiateContract is the MsgStoreAndInstantiateContract request type. Since: 0.40"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgStoreAndMigrateContract",
+  "definitions": {
+    "MsgStoreAndMigrateContract": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "WASMByteCode can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "instantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "InstantiatePermission to apply on contract creation, optional"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store And Migrate Contract",
+      "description": "MsgStoreAndMigrateContract is the MsgStoreAndMigrateContract request type. Since: 0.42"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgStoreCode",
+  "definitions": {
+    "MsgStoreCode": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the actor that signed the messages"
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "WASMByteCode can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "instantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "InstantiatePermission access control to apply on contract creation, optional"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store Code",
+      "description": "MsgStoreCode submit Wasm code to the system"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSudoContract",
+  "definitions": {
+    "MsgSudoContract": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Sudo Contract",
+      "description": "MsgSudoContract is the MsgSudoContract request type. Since: 0.40"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUnpinCodes",
+  "definitions": {
+    "MsgUnpinCodes": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "codeIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "CodeIDs references the WASM codes"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Unpin Codes",
+      "description": "MsgUnpinCodes is the MsgUnpinCodes request type. Since: 0.40"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateAdmin",
+  "definitions": {
+    "MsgUpdateAdmin": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "newAdmin": {
+          "type": "string",
+          "description": "NewAdmin address to be set"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Admin",
+      "description": "MsgUpdateAdmin sets a new admin for a smart contract"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateContractLabel",
+  "definitions": {
+    "MsgUpdateContractLabel": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "newLabel": {
+          "type": "string",
+          "description": "NewLabel string to be set"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Contract Label",
+      "description": "MsgUpdateContractLabel sets a new label for a smart contract"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateInstantiateConfig",
+  "definitions": {
+    "MsgUpdateInstantiateConfig": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID references the stored WASM code"
+        },
+        "newInstantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "NewInstantiatePermission is the new access control"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Instantiate Config",
+      "description": "MsgUpdateInstantiateConfig updates instantiate config for a smart contract"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/wasm parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the MsgUpdateParams request type. Since: 0.40"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    },
+    "cosmwasm.wasm.v1.Params": {
+      "properties": {
+        "codeUploadAccess": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false
+        },
+        "instantiateDefaultPermission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of wasm parameters."
+    }
+  }
+}
+]

@@ -1,0 +1,51 @@
+{
+  "$ref": "#/definitions/MsgUpdateInstantiateConfig",
+  "definitions": {
+    "MsgUpdateInstantiateConfig": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "codeId": {
+          "type": "string",
+          "description": "CodeID references the stored WASM code"
+        },
+        "newInstantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "NewInstantiatePermission is the new access control"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Instantiate Config",
+      "description": "MsgUpdateInstantiateConfig updates instantiate config for a smart contract"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}

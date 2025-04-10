@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgData",
+  "definitions": {
+    "MsgData": {
+      "properties": {
+        "msgType": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Data",
+      "description": "MsgData defines the data returned in a Result object during message execution."
+    }
+  }
+}

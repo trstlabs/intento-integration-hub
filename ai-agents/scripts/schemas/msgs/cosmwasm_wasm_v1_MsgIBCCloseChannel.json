@@ -1,0 +1,16 @@
+{
+  "$ref": "#/definitions/MsgIBCCloseChannel",
+  "definitions": {
+    "MsgIBCCloseChannel": {
+      "properties": {
+        "channel": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg IBC Close Channel",
+      "description": "MsgIBCCloseChannel port and channel need to be owned by the contract"
+    }
+  }
+}

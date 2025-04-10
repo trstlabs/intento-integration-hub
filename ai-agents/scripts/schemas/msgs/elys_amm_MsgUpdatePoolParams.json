@@ -1,0 +1,39 @@
+{
+  "$ref": "#/definitions/MsgUpdatePoolParams",
+  "definitions": {
+    "MsgUpdatePoolParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "poolParams": {
+          "$ref": "#/definitions/elys.amm.PoolParams",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool Params"
+    },
+    "elys.amm.PoolParams": {
+      "properties": {
+        "swapFee": {
+          "type": "string"
+        },
+        "useOracle": {
+          "type": "boolean"
+        },
+        "feeDenom": {
+          "type": "string",
+          "description": "denom for fee collection"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Pool Params"
+    }
+  }
+}

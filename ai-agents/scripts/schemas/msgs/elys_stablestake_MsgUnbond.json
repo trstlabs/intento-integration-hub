@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgUnbond",
+  "definitions": {
+    "MsgUnbond": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Unbond"
+    }
+  }
+}

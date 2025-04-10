@@ -1,0 +1,25 @@
+{
+  "$ref": "#/definitions/MsgUpdateContractLabel",
+  "definitions": {
+    "MsgUpdateContractLabel": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "newLabel": {
+          "type": "string",
+          "description": "NewLabel string to be set"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Contract Label",
+      "description": "MsgUpdateContractLabel sets a new label for a smart contract"
+    }
+  }
+}

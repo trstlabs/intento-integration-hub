@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgClearAdmin",
+  "definitions": {
+    "MsgClearAdmin": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the actor that signed the messages"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Clear Admin",
+      "description": "MsgClearAdmin removes any admin stored for a smart contract"
+    }
+  }
+}

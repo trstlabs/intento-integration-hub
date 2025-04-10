@@ -1,0 +1,62 @@
+{
+  "$ref": "#/definitions/MsgStoreAndMigrateContract",
+  "definitions": {
+    "MsgStoreAndMigrateContract": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "wasmByteCode": {
+          "type": "string",
+          "description": "WASMByteCode can be raw or gzip compressed",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "instantiatePermission": {
+          "$ref": "#/definitions/cosmwasm.wasm.v1.AccessConfig",
+          "additionalProperties": false,
+          "description": "InstantiatePermission to apply on contract creation, optional"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Store And Migrate Contract",
+      "description": "MsgStoreAndMigrateContract is the MsgStoreAndMigrateContract request type. Since: 0.42"
+    },
+    "cosmwasm.wasm.v1.AccessConfig": {
+      "properties": {
+        "permission": {
+          "enum": [
+            "ACCESS_TYPE_UNSPECIFIED",
+            "ACCESS_TYPE_NOBODY",
+            "ACCESS_TYPE_EVERYBODY",
+            "ACCESS_TYPE_ANY_OF_ADDRESSES"
+          ],
+          "type": "string",
+          "title": "Access Type",
+          "description": "AccessType permission types"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Access Config",
+      "description": "AccessConfig access control type."
+    }
+  }
+}

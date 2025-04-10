@@ -1,0 +1,45 @@
+{
+  "$ref": "#/definitions/MsgConnectionOpenConfirm",
+  "definitions": {
+    "MsgConnectionOpenConfirm": {
+      "properties": {
+        "connectionId": {
+          "type": "string"
+        },
+        "proofAck": {
+          "type": "string",
+          "description": "proof for the change of the connection state on Chain A: `INIT -> OPEN`",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Confirm",
+      "description": "MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of connection state to OPEN on Chain A."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}

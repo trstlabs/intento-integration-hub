@@ -1,0 +1,78 @@
+{
+  "$ref": "#/definitions/MsgMultiSend",
+  "definitions": {
+    "MsgMultiSend": {
+      "properties": {
+        "inputs": {
+          "items": {
+            "$ref": "#/definitions/cosmos.bank.v1beta1.Input"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "Inputs, despite being `repeated`, only allows one sender input. This is checked in MsgMultiSend's ValidateBasic."
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/definitions/cosmos.bank.v1beta1.Output"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Multi Send",
+      "description": "MsgMultiSend represents an arbitrary multi-in, multi-out send message."
+    },
+    "cosmos.bank.v1beta1.Input": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "coins": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Input",
+      "description": "Input models transaction input."
+    },
+    "cosmos.bank.v1beta1.Output": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "coins": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Output",
+      "description": "Output models transaction outputs."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}

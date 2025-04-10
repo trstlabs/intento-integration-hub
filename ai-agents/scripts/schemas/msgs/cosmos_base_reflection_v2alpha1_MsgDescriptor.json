@@ -1,0 +1,17 @@
+{
+  "$ref": "#/definitions/MsgDescriptor",
+  "definitions": {
+    "MsgDescriptor": {
+      "properties": {
+        "msgTypeUrl": {
+          "type": "string",
+          "description": "msg_type_url contains the TypeURL of a sdk.Msg."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Descriptor",
+      "description": "MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction"
+    }
+  }
+}

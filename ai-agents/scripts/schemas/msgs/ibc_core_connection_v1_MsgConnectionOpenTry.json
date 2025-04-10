@@ -1,0 +1,150 @@
+{
+  "$ref": "#/definitions/MsgConnectionOpenTry",
+  "definitions": {
+    "MsgConnectionOpenTry": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "previousConnectionId": {
+          "type": "string",
+          "description": "Deprecated: this field is unused. Crossing hellos are no longer supported in core IBC."
+        },
+        "clientState": {
+          "properties": {
+            "typeUrl": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "description": "Deprecated: this field is unused."
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Counterparty",
+          "additionalProperties": false
+        },
+        "delayPeriod": {
+          "type": "string"
+        },
+        "counterpartyVersions": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.connection.v1.Version"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "proofInit": {
+          "type": "string",
+          "description": "proof of the initialization the connection on Chain A: `UNINITIALIZED -> INIT`",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofClient": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofConsensus": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "consensusHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false,
+          "description": "Deprecated: this field is unused."
+        },
+        "signer": {
+          "type": "string"
+        },
+        "hostConsensusStateProof": {
+          "type": "string",
+          "description": "Deprecated: this field is unused.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Connection Open Try",
+      "description": "MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a connection on Chain B."
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    },
+    "ibc.core.commitment.v1.MerklePrefix": {
+      "properties": {
+        "keyPrefix": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Merkle Prefix",
+      "description": "MerklePrefix is merkle path prefixed to the key. The constructed key from the Path and the key will be append(Path.KeyPath, append(Path.KeyPrefix, key...))"
+    },
+    "ibc.core.connection.v1.Counterparty": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "identifies the client on the counterparty chain associated with a given connection."
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "identifies the connection end on the counterparty chain associated with a given connection."
+        },
+        "prefix": {
+          "$ref": "#/definitions/ibc.core.commitment.v1.MerklePrefix",
+          "additionalProperties": false,
+          "description": "commitment merkle prefix of the counterparty chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines the counterparty chain associated with a connection end."
+    },
+    "ibc.core.connection.v1.Version": {
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "unique version identifier"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of features compatible with the specified identifier"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Version",
+      "description": "Version defines the versioning scheme used to negotiate the IBC version in the connection handshake."
+    }
+  }
+}

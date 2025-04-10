@@ -1,0 +1,23 @@
+{
+  "$ref": "#/definitions/MsgRemoveCodeUploadParamsAddresses",
+  "definitions": {
+    "MsgRemoveCodeUploadParamsAddresses": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Authority is the address of the governance account."
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Remove Code Upload Params Addresses",
+      "description": "MsgRemoveCodeUploadParamsAddresses is the MsgRemoveCodeUploadParamsAddresses request type."
+    }
+  }
+}

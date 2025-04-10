@@ -1,0 +1,25 @@
+{
+  "$ref": "#/definitions/MsgUpdateGroupAdmin",
+  "definitions": {
+    "MsgUpdateGroupAdmin": {
+      "properties": {
+        "admin": {
+          "type": "string",
+          "description": "admin is the current account address of the group admin."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "group_id is the unique ID of the group."
+        },
+        "newAdmin": {
+          "type": "string",
+          "description": "new_admin is the group new admin account address."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Group Admin",
+      "description": "MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type."
+    }
+  }
+}

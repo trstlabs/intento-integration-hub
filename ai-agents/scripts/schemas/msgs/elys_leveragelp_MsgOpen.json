@@ -1,0 +1,30 @@
+{
+  "$ref": "#/definitions/MsgOpen",
+  "definitions": {
+    "MsgOpen": {
+      "properties": {
+        "creator": {
+          "type": "string"
+        },
+        "collateralAsset": {
+          "type": "string"
+        },
+        "collateralAmount": {
+          "type": "string"
+        },
+        "ammPoolId": {
+          "type": "string"
+        },
+        "leverage": {
+          "type": "string"
+        },
+        "stopLossPrice": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Open"
+    }
+  }
+}

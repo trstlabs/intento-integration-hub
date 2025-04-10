@@ -1,0 +1,42 @@
+{
+  "$ref": "#/definitions/MsgAddPool",
+  "definitions": {
+    "MsgAddPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "depositDenom": {
+          "type": "string"
+        },
+        "interestRate": {
+          "type": "string"
+        },
+        "interestRateMax": {
+          "type": "string"
+        },
+        "interestRateMin": {
+          "type": "string"
+        },
+        "interestRateIncrease": {
+          "type": "string"
+        },
+        "interestRateDecrease": {
+          "type": "string"
+        },
+        "healthGainFactor": {
+          "type": "string"
+        },
+        "maxLeverageRatio": {
+          "type": "string"
+        },
+        "maxWithdrawRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add Pool"
+    }
+  }
+}

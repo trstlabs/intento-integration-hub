@@ -1,0 +1,41 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.protocolpool.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/protocolpool parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.protocolpool.v1.Params": {
+      "properties": {
+        "enabledDistributionDenoms": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "EnabledDistributionDenoms lists the denoms that are allowed to be distributed. This is to avoid spending time distributing undesired tokens to continuous funds and budgets."
+        },
+        "distributionFrequency": {
+          "type": "string",
+          "description": "DistributionFrequency is the frequency (in terms of blocks) that funds are distributed out from the x/protocolpool module."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the protocolpool module."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$ref": "#/definitions/MsgAddExternalRewardDenom",
+  "definitions": {
+    "MsgAddExternalRewardDenom": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "rewardDenom": {
+          "type": "string"
+        },
+        "minAmount": {
+          "type": "string"
+        },
+        "supported": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Add External Reward Denom"
+    }
+  }
+}

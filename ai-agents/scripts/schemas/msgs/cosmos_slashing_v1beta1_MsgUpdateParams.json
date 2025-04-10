@@ -1,0 +1,53 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.slashing.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/slashing parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.slashing.v1beta1.Params": {
+      "properties": {
+        "signedBlocksWindow": {
+          "type": "string"
+        },
+        "minSignedPerWindow": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "downtimeJailDuration": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "format": "regex"
+        },
+        "slashFractionDoubleSign": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "slashFractionDowntime": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params represents the parameters used for by the slashing module."
+    }
+  }
+}

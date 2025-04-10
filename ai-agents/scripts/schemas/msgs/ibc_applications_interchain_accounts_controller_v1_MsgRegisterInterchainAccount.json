@@ -1,0 +1,32 @@
+{
+  "$ref": "#/definitions/MsgRegisterInterchainAccount",
+  "definitions": {
+    "MsgRegisterInterchainAccount": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "ordering": {
+          "enum": [
+            "ORDER_NONE_UNSPECIFIED",
+            "ORDER_UNORDERED",
+            "ORDER_ORDERED"
+          ],
+          "type": "string",
+          "title": "Order",
+          "description": "Order defines if a channel is ORDERED or UNORDERED"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Interchain Account",
+      "description": "MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount"
+    }
+  }
+}

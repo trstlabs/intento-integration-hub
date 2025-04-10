@@ -1,0 +1,338 @@
+[
+{
+  "$ref": "#/definitions/MsgExitPool",
+  "definitions": {
+    "MsgExitPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "shareInAmount": {
+          "type": "string"
+        },
+        "tokenOutMins": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Exit Pool",
+      "description": "===================== MsgExitPool"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgExitSwapExternAmountOut",
+  "definitions": {
+    "MsgExitSwapExternAmountOut": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "tokenOut": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "shareInMaxAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Exit Swap Extern Amount Out",
+      "description": "===================== MsgExitSwapExternAmountOut"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgExitSwapShareAmountIn",
+  "definitions": {
+    "MsgExitSwapShareAmountIn": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "tokenOutDenom": {
+          "type": "string"
+        },
+        "shareInAmount": {
+          "type": "string"
+        },
+        "tokenOutMinAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Exit Swap Share Amount In",
+      "description": "===================== MsgExitSwapShareAmountIn"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgJoinPool",
+  "definitions": {
+    "MsgJoinPool": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "shareOutAmount": {
+          "type": "string"
+        },
+        "tokenInMaxs": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Join Pool",
+      "description": "===================== MsgJoinPool This is really MsgJoinPoolNoSwap"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgJoinSwapExternAmountIn",
+  "definitions": {
+    "MsgJoinSwapExternAmountIn": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "tokenIn": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "shareOutMinAmount": {
+          "type": "string",
+          "description": "repeated cosmos.base.v1beta1.Coin tokensIn = 5 [   (gogoproto.moretags) = \"yaml:\\\"tokens_in\\\"\",   (gogoproto.nullable) = false ];"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Join Swap Extern Amount In",
+      "description": "===================== MsgJoinSwapExternAmountIn TODO: Rename to MsgJoinSwapExactAmountIn"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgJoinSwapShareAmountOut",
+  "definitions": {
+    "MsgJoinSwapShareAmountOut": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "tokenInDenom": {
+          "type": "string"
+        },
+        "shareOutAmount": {
+          "type": "string"
+        },
+        "tokenInMaxAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Join Swap Share Amount Out",
+      "description": "===================== MsgJoinSwapShareAmountOut"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSwapExactAmountIn",
+  "definitions": {
+    "MsgSwapExactAmountIn": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/osmosis.poolmanager.v1beta1.SwapAmountInRoute"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "tokenIn": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        },
+        "tokenOutMinAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Swap Exact Amount In",
+      "description": "===================== MsgSwapExactAmountIn"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "osmosis.poolmanager.v1beta1.SwapAmountInRoute": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "tokenOutDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Swap Amount In Route"
+    }
+  }
+}
+,{
+  "$ref": "#/definitions/MsgSwapExactAmountOut",
+  "definitions": {
+    "MsgSwapExactAmountOut": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/osmosis.poolmanager.v1beta1.SwapAmountOutRoute"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "tokenInMaxAmount": {
+          "type": "string"
+        },
+        "tokenOut": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Swap Exact Amount Out"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "osmosis.poolmanager.v1beta1.SwapAmountOutRoute": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "tokenInDenom": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Swap Amount Out Route"
+    }
+  }
+}
+]

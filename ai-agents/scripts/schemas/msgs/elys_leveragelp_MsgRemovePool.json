@@ -1,0 +1,18 @@
+{
+  "$ref": "#/definitions/MsgRemovePool",
+  "definitions": {
+    "MsgRemovePool": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Remove Pool"
+    }
+  }
+}

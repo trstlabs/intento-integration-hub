@@ -1,0 +1,49 @@
+{
+  "$ref": "#/definitions/MsgCreateGroup",
+  "definitions": {
+    "MsgCreateGroup": {
+      "properties": {
+        "admin": {
+          "type": "string",
+          "description": "admin is the account address of the group admin."
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/cosmos.group.v1.MemberRequest"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "members defines the group members."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "metadata is any arbitrary metadata to attached to the group."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Groups",
+      "description": "Groups  MsgCreateGroup is the Msg/CreateGroup request type."
+    },
+    "cosmos.group.v1.MemberRequest": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "address is the member's account address."
+        },
+        "weight": {
+          "type": "string",
+          "description": "weight is the member's voting weight that should be greater than 0."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "metadata is any arbitrary metadata attached to the member."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Member Request",
+      "description": "MemberRequest represents a group member to be used in Msg server requests. Contrary to `Member`, it doesn't have any `added_at` field since this field cannot be set as part of requests."
+    }
+  }
+}

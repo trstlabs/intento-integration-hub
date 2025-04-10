@@ -1,0 +1,29 @@
+{
+  "$ref": "#/definitions/MsgSend",
+  "definitions": {
+    "MsgSend": {
+      "properties": {
+        "classId": {
+          "type": "string",
+          "description": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
+        },
+        "id": {
+          "type": "string",
+          "description": "id defines the unique identification of nft"
+        },
+        "sender": {
+          "type": "string",
+          "description": "sender is the address of the owner of nft"
+        },
+        "receiver": {
+          "type": "string",
+          "description": "receiver is the receiver address of nft"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Send",
+      "description": "MsgSend represents a message to send a nft from one account to another account."
+    }
+  }
+}

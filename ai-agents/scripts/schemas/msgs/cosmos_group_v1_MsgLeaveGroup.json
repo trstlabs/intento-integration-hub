@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgLeaveGroup",
+  "definitions": {
+    "MsgLeaveGroup": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "address is the account address of the group member."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "group_id is the unique ID of the group."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Leave Group",
+      "description": "MsgLeaveGroup is the Msg/LeaveGroup request type."
+    }
+  }
+}

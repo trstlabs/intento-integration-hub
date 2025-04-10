@@ -1,0 +1,66 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.tradeshield.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.tradeshield.Params": {
+      "properties": {
+        "marketOrderEnabled": {
+          "type": "boolean"
+        },
+        "stakeEnabled": {
+          "type": "boolean"
+        },
+        "processOrdersEnabled": {
+          "type": "boolean"
+        },
+        "swapEnabled": {
+          "type": "boolean"
+        },
+        "perpetualEnabled": {
+          "type": "boolean"
+        },
+        "rewardEnabled": {
+          "type": "boolean"
+        },
+        "leverageEnabled": {
+          "type": "boolean"
+        },
+        "limitProcessOrder": {
+          "type": "string"
+        },
+        "rewardPercentage": {
+          "type": "string",
+          "description": "For incentive system v2"
+        },
+        "marginError": {
+          "type": "string"
+        },
+        "minimumDeposit": {
+          "type": "string"
+        },
+        "tolerance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}

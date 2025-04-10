@@ -1,0 +1,41 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.applications.interchain_accounts.host.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the 27-interchain-accounts/host parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the payload for Msg/UpdateParams"
+    },
+    "ibc.applications.interchainAccounts.host.v1.Params": {
+      "properties": {
+        "hostEnabled": {
+          "type": "boolean",
+          "description": "host_enabled enables or disables the host submodule."
+        },
+        "allowMessages": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of on-chain interchain accounts parameters. The following parameters may be used to disable the host submodule."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$ref": "#/definitions/MsgVoteWeighted",
+  "definitions": {
+    "MsgVoteWeighted": {
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "description": "proposal_id defines the unique id of the proposal."
+        },
+        "voter": {
+          "type": "string",
+          "description": "voter is the voter address for the proposal."
+        },
+        "options": {
+          "items": {
+            "$ref": "#/definitions/cosmos.gov.v1.WeightedVoteOption"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "options defines the weighted vote options."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "metadata is any arbitrary metadata attached to the VoteWeighted."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Vote Weighted",
+      "description": "MsgVoteWeighted defines a message to cast a vote."
+    },
+    "cosmos.gov.v1.WeightedVoteOption": {
+      "properties": {
+        "option": {
+          "enum": [
+            "VOTE_OPTION_UNSPECIFIED",
+            "VOTE_OPTION_YES",
+            "VOTE_OPTION_ABSTAIN",
+            "VOTE_OPTION_NO",
+            "VOTE_OPTION_NO_WITH_VETO"
+          ],
+          "type": "string",
+          "title": "Vote Option",
+          "description": "VoteOption enumerates the valid vote options for a given governance proposal."
+        },
+        "weight": {
+          "type": "string",
+          "description": "weight is the vote weight associated with the vote option."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Weighted Vote Option",
+      "description": "WeightedVoteOption defines a unit of vote for vote split."
+    }
+  }
+}

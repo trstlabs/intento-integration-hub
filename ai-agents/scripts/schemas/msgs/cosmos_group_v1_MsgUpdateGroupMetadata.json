@@ -1,0 +1,25 @@
+{
+  "$ref": "#/definitions/MsgUpdateGroupMetadata",
+  "definitions": {
+    "MsgUpdateGroupMetadata": {
+      "properties": {
+        "admin": {
+          "type": "string",
+          "description": "admin is the account address of the group admin."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "group_id is the unique ID of the group."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "metadata is the updated group's metadata."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Group Metadata",
+      "description": "MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type."
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$ref": "#/definitions/MsgDelegate",
+  "definitions": {
+    "MsgDelegate": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        },
+        "validatorAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Delegate",
+      "description": "MsgDelegate defines a SDK message for performing a delegation of coins from a delegator to a validator."
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    }
+  }
+}

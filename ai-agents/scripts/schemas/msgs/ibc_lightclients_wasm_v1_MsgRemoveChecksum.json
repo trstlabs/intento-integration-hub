@@ -1,0 +1,23 @@
+{
+  "$ref": "#/definitions/MsgRemoveChecksum",
+  "definitions": {
+    "MsgRemoveChecksum": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "checksum": {
+          "type": "string",
+          "description": "checksum is the sha256 hash to be removed from the store",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Remove Checksum",
+      "description": "MsgRemoveChecksum defines the request type for the MsgRemoveChecksum rpc."
+    }
+  }
+}

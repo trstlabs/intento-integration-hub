@@ -1,0 +1,25 @@
+{
+  "$ref": "#/definitions/MsgUpdateAdmin",
+  "definitions": {
+    "MsgUpdateAdmin": {
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "Sender is the that actor that signed the messages"
+        },
+        "newAdmin": {
+          "type": "string",
+          "description": "NewAdmin address to be set"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Contract is the address of the smart contract"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Admin",
+      "description": "MsgUpdateAdmin sets a new admin for a smart contract"
+    }
+  }
+}

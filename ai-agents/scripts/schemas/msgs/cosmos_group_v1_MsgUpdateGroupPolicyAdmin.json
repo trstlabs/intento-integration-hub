@@ -1,0 +1,25 @@
+{
+  "$ref": "#/definitions/MsgUpdateGroupPolicyAdmin",
+  "definitions": {
+    "MsgUpdateGroupPolicyAdmin": {
+      "properties": {
+        "admin": {
+          "type": "string",
+          "description": "admin is the account address of the group admin."
+        },
+        "groupPolicyAddress": {
+          "type": "string",
+          "description": "group_policy_address is the account address of the group policy."
+        },
+        "newAdmin": {
+          "type": "string",
+          "description": "new_admin is the new group policy admin."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Group Policy Admin",
+      "description": "MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type."
+    }
+  }
+}

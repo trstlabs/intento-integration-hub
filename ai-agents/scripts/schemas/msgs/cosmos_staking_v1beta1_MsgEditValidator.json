@@ -1,0 +1,55 @@
+{
+  "$ref": "#/definitions/MsgEditValidator",
+  "definitions": {
+    "MsgEditValidator": {
+      "properties": {
+        "description": {
+          "$ref": "#/definitions/cosmos.staking.v1beta1.Description",
+          "additionalProperties": false
+        },
+        "validatorAddress": {
+          "type": "string"
+        },
+        "commissionRate": {
+          "type": "string",
+          "description": "We pass a reference to the new commission rate and min self delegation as it's not mandatory to update. If not updated, the deserialized rate will be zero with no way to distinguish if an update was intended. REF: #2373"
+        },
+        "minSelfDelegation": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Edit Validator",
+      "description": "MsgEditValidator defines a SDK message for editing an existing validator."
+    },
+    "cosmos.staking.v1beta1.Description": {
+      "properties": {
+        "moniker": {
+          "type": "string",
+          "description": "moniker defines a human-readable name for the validator."
+        },
+        "identity": {
+          "type": "string",
+          "description": "identity defines an optional identity signature (ex. UPort or Keybase)."
+        },
+        "website": {
+          "type": "string",
+          "description": "website defines an optional website link."
+        },
+        "securityContact": {
+          "type": "string",
+          "description": "security_contact defines an optional email for security contact."
+        },
+        "details": {
+          "type": "string",
+          "description": "details define other optional details."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Description",
+      "description": "Description defines a validator description."
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.perpetual.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.perpetual.Params": {
+      "properties": {
+        "leverageMax": {
+          "type": "string"
+        },
+        "borrowInterestRateMax": {
+          "type": "string"
+        },
+        "borrowInterestRateMin": {
+          "type": "string"
+        },
+        "borrowInterestRateIncrease": {
+          "type": "string"
+        },
+        "borrowInterestRateDecrease": {
+          "type": "string"
+        },
+        "healthGainFactor": {
+          "type": "string"
+        },
+        "maxOpenPositions": {
+          "type": "string"
+        },
+        "poolOpenThreshold": {
+          "type": "string"
+        },
+        "borrowInterestPaymentFundPercentage": {
+          "type": "string"
+        },
+        "borrowInterestPaymentFundAddress": {
+          "type": "string"
+        },
+        "safetyFactor": {
+          "type": "string"
+        },
+        "borrowInterestPaymentEnabled": {
+          "type": "boolean"
+        },
+        "whitelistingEnabled": {
+          "type": "boolean"
+        },
+        "perpetualSwapFee": {
+          "type": "string"
+        },
+        "maxLimitOrder": {
+          "type": "string"
+        },
+        "fixedFundingRate": {
+          "type": "string"
+        },
+        "minimumLongTakeProfitPriceRatio": {
+          "type": "string",
+          "description": "minimum value for take_profit_price/current price for long, should be greater than 1"
+        },
+        "maximumLongTakeProfitPriceRatio": {
+          "type": "string",
+          "description": "max value for take_profit_price/current price for long, should be greater than 1"
+        },
+        "maximumShortTakeProfitPriceRatio": {
+          "type": "string",
+          "description": "max value for take_profit_price/current price for short, should be less than 1"
+        },
+        "enableTakeProfitCustodyLiabilities": {
+          "type": "boolean",
+          "description": "No need for minimumShortTakeProfitPriceRatio as it will be 0, checked in validate message"
+        },
+        "weightBreakingFeeFactor": {
+          "type": "string",
+          "description": "We create this and send this value to estimate swap ONLY when opening and closing the position Ideally this value is set to half. When trader open a position if they receive a weight balance bonus (which is half of weight breaking fee, ideally) then while closing position they are charged weight breaking fee. So we just directly apply half weight breaking fee on perpetual swaps Question: does each need to have separate value of this because PoolParams.WeightRecoveryFeePortion can be different Also, if trader has no bonus only fee, then overall we are only applying the fee half time"
+        },
+        "enabledPools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params"
+    }
+  }
+}

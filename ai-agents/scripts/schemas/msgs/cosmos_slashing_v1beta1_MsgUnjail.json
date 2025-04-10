@@ -1,0 +1,16 @@
+{
+  "$ref": "#/definitions/MsgUnjail",
+  "definitions": {
+    "MsgUnjail": {
+      "properties": {
+        "validatorAddr": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Unjail",
+      "description": "MsgUnjail defines the Msg/Unjail request type"
+    }
+  }
+}

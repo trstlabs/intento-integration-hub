@@ -1,0 +1,22 @@
+{
+  "$ref": "#/definitions/MsgRegisterAccount",
+  "definitions": {
+    "MsgRegisterAccount": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Account",
+      "description": "MsgRegisterAccount registers an interchain account for the given owner over the specified connection pair"
+    }
+  }
+}

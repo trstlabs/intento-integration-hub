@@ -1,0 +1,34 @@
+{
+  "$ref": "#/definitions/MsgRegisterCounterparty",
+  "definitions": {
+    "MsgRegisterCounterparty": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client identifier"
+        },
+        "counterpartyMerklePrefix": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "counterparty merkle prefix",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "counterpartyClientId": {
+          "type": "string",
+          "description": "counterparty client identifier"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Register Counterparty",
+      "description": "MsgRegisterCounterparty defines a message to register a counterparty on a client"
+    }
+  }
+}

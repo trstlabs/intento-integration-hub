@@ -1,0 +1,16 @@
+{
+  "$ref": "#/definitions/MsgWithdrawValidatorCommission",
+  "definitions": {
+    "MsgWithdrawValidatorCommission": {
+      "properties": {
+        "validatorAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Withdraw Validator Commission",
+      "description": "MsgWithdrawValidatorCommission withdraws the full commission to the validator address."
+    }
+  }
+}

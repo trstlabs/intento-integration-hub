@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/MsgLoadTest",
+  "definitions": {
+    "MsgLoadTest": {
+      "properties": {
+        "caller": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "ops": {
+          "items": {
+            "$ref": "#/definitions/cosmos.benchmark.v1.Op"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Load Test",
+      "description": "MsgLoadTestOps defines a message containing a sequence of load test operations."
+    },
+    "cosmos.benchmark.v1.Op": {
+      "properties": {
+        "seed": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "keyLength": {
+          "type": "string"
+        },
+        "valueLength": {
+          "type": "string"
+        },
+        "iterations": {
+          "type": "integer"
+        },
+        "delete": {
+          "type": "boolean"
+        },
+        "exists": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Op",
+      "description": "Op is a message describing a benchmark operation."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$ref": "#/definitions/MsgPruneAllowances",
+  "definitions": {
+    "MsgPruneAllowances": {
+      "properties": {
+        "pruner": {
+          "type": "string",
+          "description": "pruner is the address of the user pruning expired allowances."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Prune Allowances",
+      "description": "MsgPruneAllowances prunes expired fee allowances."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$ref": "#/definitions/MsgAuthorizeCircuitBreaker",
+  "definitions": {
+    "MsgAuthorizeCircuitBreaker": {
+      "properties": {
+        "granter": {
+          "type": "string",
+          "description": "granter is the granter of the circuit breaker permissions and must have LEVEL_SUPER_ADMIN."
+        },
+        "grantee": {
+          "type": "string",
+          "description": "grantee is the account authorized with the provided permissions."
+        },
+        "permissions": {
+          "$ref": "#/definitions/cosmos.circuit.v1.Permissions",
+          "additionalProperties": false,
+          "description": "permissions are the circuit breaker permissions that the grantee receives. These will overwrite any existing permissions. LEVEL_NONE_UNSPECIFIED can be specified to revoke all permissions."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Authorize Circuit Breaker",
+      "description": "MsgAuthorizeCircuitBreaker defines the Msg/AuthorizeCircuitBreaker request type."
+    },
+    "cosmos.circuit.v1.Permissions": {
+      "properties": {
+        "level": {
+          "enum": [
+            "LEVEL_NONE_UNSPECIFIED",
+            "LEVEL_SOME_MSGS",
+            "LEVEL_ALL_MSGS",
+            "LEVEL_SUPER_ADMIN"
+          ],
+          "type": "string",
+          "title": "Level",
+          "description": "Level is the permission level."
+        },
+        "limitTypeUrls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "limit_type_urls is used with LEVEL_SOME_MSGS to limit the lists of Msg type URLs that the account can trip. It is an error to use limit_type_urls with a level other than LEVEL_SOME_MSGS."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Permissions",
+      "description": "Permissions are the permissions that an account has to trip or reset the circuit breaker."
+    }
+  }
+}

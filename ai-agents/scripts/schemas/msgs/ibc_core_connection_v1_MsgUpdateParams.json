@@ -1,0 +1,34 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.core.connection.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the connection parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the sdk.Msg type to update the connection parameters."
+    },
+    "ibc.core.connection.v1.Params": {
+      "properties": {
+        "maxExpectedTimePerBlock": {
+          "type": "string",
+          "description": "maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the largest amount of time that the chain might reasonably take to produce the next block under normal operating conditions. A safe choice is 3-5x the expected time per block."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of Connection parameters."
+    }
+  }
+}

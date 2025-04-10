@@ -1,0 +1,34 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.applications.interchain_accounts.controller.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the 27-interchain-accounts/controller parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the payload for Msg/UpdateParams"
+    },
+    "ibc.applications.interchainAccounts.controller.v1.Params": {
+      "properties": {
+        "controllerEnabled": {
+          "type": "boolean",
+          "description": "controller_enabled enables or disables the controller submodule."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of on-chain interchain accounts parameters. The following parameters may be used to disable the controller submodule."
+    }
+  }
+}

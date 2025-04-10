@@ -1,0 +1,37 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "params": {
+          "$ref": "#/definitions/ibc.core.client.v1.Params",
+          "additionalProperties": false,
+          "description": "params defines the client parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams defines the sdk.Msg type to update the client parameters."
+    },
+    "ibc.core.client.v1.Params": {
+      "properties": {
+        "allowedClients": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "allowed_clients defines the list of allowed client state types which can be created and interacted with. If a client type is removed from the allowed clients list, usage of this client will be disabled until it is added again to the list."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the set of IBC light client parameters."
+    }
+  }
+}

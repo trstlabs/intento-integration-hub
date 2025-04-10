@@ -1,0 +1,80 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/definitions/elys.masterchef.Params",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.masterchef.IncentiveInfo": {
+      "properties": {
+        "edenAmountPerYear": {
+          "type": "string",
+          "description": "reward amount in eden for 1 year"
+        },
+        "blocksDistributed": {
+          "type": "string",
+          "description": "blocks distributed"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Incentive Info"
+    },
+    "elys.masterchef.Params": {
+      "properties": {
+        "lpIncentives": {
+          "$ref": "#/definitions/elys.masterchef.IncentiveInfo",
+          "additionalProperties": false
+        },
+        "rewardPortionForLps": {
+          "type": "string",
+          "description": "gas fees and swap fees portion for lps, `100 - reward_portion_for_lps - reward_portion_for_stakers = revenue percent for protocol`."
+        },
+        "rewardPortionForStakers": {
+          "type": "string",
+          "description": "gas fees and swap fees portion for stakers, `100 - reward_portion_for_lps - reward_portion_for_stakers = revenue percent for protocol`."
+        },
+        "maxEdenRewardAprLps": {
+          "type": "string",
+          "description": "Maximum eden reward apr for lps - [0 - 0.3]"
+        },
+        "supportedRewardDenoms": {
+          "items": {
+            "$ref": "#/definitions/elys.masterchef.SupportedRewardDenom"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        },
+        "protocolRevenueAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params"
+    },
+    "elys.masterchef.SupportedRewardDenom": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "minAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Supported Reward Denom"
+    }
+  }
+}

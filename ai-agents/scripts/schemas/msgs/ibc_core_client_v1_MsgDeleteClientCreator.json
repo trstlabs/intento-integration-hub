@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgDeleteClientCreator",
+  "definitions": {
+    "MsgDeleteClientCreator": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "client identifier"
+        },
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Delete Client Creator",
+      "description": "MsgDeleteClientCreator defines a message to delete the client creator of a client"
+    }
+  }
+}

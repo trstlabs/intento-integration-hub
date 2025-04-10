@@ -1,0 +1,98 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "block": {
+          "$ref": "#/definitions/tendermint.types.BlockParams",
+          "additionalProperties": false,
+          "description": "params defines the x/consensus parameters to update. VersionsParams is not included in this Msg because it is tracked separarately in x/upgrade. NOTE: All parameters must be supplied."
+        },
+        "evidence": {
+          "$ref": "#/definitions/tendermint.types.EvidenceParams",
+          "additionalProperties": false
+        },
+        "validator": {
+          "$ref": "#/definitions/tendermint.types.ValidatorParams",
+          "additionalProperties": false
+        },
+        "abci": {
+          "$ref": "#/definitions/tendermint.types.ABCIParams",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "tendermint.types.ABCIParams": {
+      "properties": {
+        "voteExtensionsEnableHeight": {
+          "type": "string",
+          "description": "vote_extensions_enable_height configures the first height during which vote extensions will be enabled. During this specified height, and for all subsequent heights, precommit messages that do not contain valid extension data will be considered invalid. Prior to this height, vote extensions will not be used or accepted by validators on the network. Once enabled, vote extensions will be created by the application in ExtendVote, passed to the application for validation in VerifyVoteExtension and given to the application to use when proposing a block during PrepareProposal."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "ABCI Params",
+      "description": "ABCIParams configure functionality specific to the Application Blockchain Interface."
+    },
+    "tendermint.types.BlockParams": {
+      "properties": {
+        "maxBytes": {
+          "type": "string",
+          "description": "Max block size, in bytes. Note: must be greater than 0"
+        },
+        "maxGas": {
+          "type": "string",
+          "description": "Max gas per block. Note: must be greater or equal to -1"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Block Params",
+      "description": "BlockParams contains limits on the block size."
+    },
+    "tendermint.types.EvidenceParams": {
+      "properties": {
+        "maxAgeNumBlocks": {
+          "type": "string",
+          "description": "Max age of evidence, in blocks. The basic formula for calculating this is: MaxAgeDuration / {average block time}."
+        },
+        "maxAgeDuration": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "Max age of evidence, in time. It should correspond with an app's \"unbonding period\" or other similar mechanism for handling [Nothing-At-Stake attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).",
+          "format": "regex"
+        },
+        "maxBytes": {
+          "type": "string",
+          "description": "This sets the maximum size of total evidence in bytes that can be committed in a single block. and should fall comfortably under the max block bytes. Default is 1048576 or 1MB"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Evidence Params",
+      "description": "EvidenceParams determine how we handle evidence of malfeasance."
+    },
+    "tendermint.types.ValidatorParams": {
+      "properties": {
+        "pubKeyTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Validator Params",
+      "description": "ValidatorParams restrict the public key types validators can use. NOTE: uses ABCI pubkey naming, not Amino names."
+    }
+  }
+}

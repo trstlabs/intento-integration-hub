@@ -1,0 +1,56 @@
+{
+  "$ref": "#/definitions/MsgFeedMultipleExternalLiquidity",
+  "definitions": {
+    "MsgFeedMultipleExternalLiquidity": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "liquidity": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.ExternalLiquidity"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Feed Multiple External Liquidity"
+    },
+    "elys.amm.AssetAmountDepth": {
+      "properties": {
+        "asset": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Asset Amount Depth"
+    },
+    "elys.amm.ExternalLiquidity": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "amountDepthInfo": {
+          "items": {
+            "$ref": "#/definitions/elys.amm.AssetAmountDepth"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "External Liquidity",
+      "description": "ExternalLiquidity defines price, volume, and time information for an exchange rate."
+    }
+  }
+}

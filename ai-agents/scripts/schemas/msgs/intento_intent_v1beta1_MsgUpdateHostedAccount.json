@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/MsgUpdateHostedAccount",
+  "definitions": {
+    "MsgUpdateHostedAccount": {
+      "properties": {
+        "admin": {
+          "type": "string"
+        },
+        "hostedAddress": {
+          "type": "string"
+        },
+        "hostFeeConfig": {
+          "$ref": "#/definitions/intento.intent.v1beta1.HostFeeConfig",
+          "additionalProperties": false,
+          "description": "string connection_id = 3 [(gogoproto.customname) = \"ConnectionID\"];"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Hosted Account"
+    },
+    "cosmos.base.v1beta1.Coin": {
+      "properties": {
+        "denom": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Coin",
+      "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+    },
+    "intento.intent.v1beta1.HostFeeConfig": {
+      "properties": {
+        "admin": {
+          "type": "string"
+        },
+        "feeCoinsSuported": {
+          "items": {
+            "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Host Fee Config"
+    }
+  }
+}

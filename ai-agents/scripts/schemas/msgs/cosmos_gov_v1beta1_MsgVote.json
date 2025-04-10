@@ -1,0 +1,33 @@
+{
+  "$ref": "#/definitions/MsgVote",
+  "definitions": {
+    "MsgVote": {
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "description": "proposal_id defines the unique id of the proposal."
+        },
+        "voter": {
+          "type": "string",
+          "description": "voter is the voter address for the proposal."
+        },
+        "option": {
+          "enum": [
+            "VOTE_OPTION_UNSPECIFIED",
+            "VOTE_OPTION_YES",
+            "VOTE_OPTION_ABSTAIN",
+            "VOTE_OPTION_NO",
+            "VOTE_OPTION_NO_WITH_VETO"
+          ],
+          "type": "string",
+          "title": "Vote Option",
+          "description": "VoteOption enumerates the valid vote options for a given governance proposal."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Vote",
+      "description": "MsgVote defines a message to cast a vote."
+    }
+  }
+}

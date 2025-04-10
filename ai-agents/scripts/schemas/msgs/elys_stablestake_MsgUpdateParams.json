@@ -1,0 +1,65 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/elys.stablestake.Params",
+          "additionalProperties": false,
+          "description": "NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params"
+    },
+    "elys.stablestake.Params": {
+      "properties": {
+        "legacyDepositDenom": {
+          "type": "string"
+        },
+        "legacyRedemptionRate": {
+          "type": "string"
+        },
+        "epochLength": {
+          "type": "string"
+        },
+        "legacyInterestRate": {
+          "type": "string"
+        },
+        "legacyInterestRateMax": {
+          "type": "string"
+        },
+        "legacyInterestRateMin": {
+          "type": "string"
+        },
+        "legacyInterestRateIncrease": {
+          "type": "string"
+        },
+        "legacyInterestRateDecrease": {
+          "type": "string"
+        },
+        "legacyHealthGainFactor": {
+          "type": "string"
+        },
+        "totalValue": {
+          "type": "string"
+        },
+        "legacyMaxLeverageRatio": {
+          "type": "string"
+        },
+        "legacyMaxWithdrawRatio": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the module."
+    }
+  }
+}

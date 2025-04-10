@@ -1,0 +1,32 @@
+{
+  "$ref": "#/definitions/MsgMigrateContract",
+  "definitions": {
+    "MsgMigrateContract": {
+      "properties": {
+        "signer": {
+          "type": "string",
+          "description": "signer address"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "the client id of the contract"
+        },
+        "checksum": {
+          "type": "string",
+          "description": "checksum is the sha256 hash of the new wasm byte code for the contract",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "msg": {
+          "type": "object",
+          "description": "is an object and will be encoded to a string before submission .",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Migrate Contract",
+      "description": "MsgMigrateContract defines the request type for the MigrateContract rpc."
+    }
+  }
+}

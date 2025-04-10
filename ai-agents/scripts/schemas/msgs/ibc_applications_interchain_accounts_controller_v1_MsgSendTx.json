@@ -1,0 +1,52 @@
+{
+  "$ref": "#/definitions/MsgSendTx",
+  "definitions": {
+    "MsgSendTx": {
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "connectionId": {
+          "type": "string"
+        },
+        "packetData": {
+          "$ref": "#/definitions/ibc.applications.interchain_accounts.v1.InterchainAccountPacketData",
+          "additionalProperties": false
+        },
+        "relativeTimeout": {
+          "type": "string",
+          "description": "Relative timeout timestamp provided will be added to the current block time during transaction execution. The timeout timestamp must be non-zero."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Send Tx",
+      "description": "MsgSendTx defines the payload for Msg/SendTx"
+    },
+    "ibc.applications.interchainAccounts.v1.InterchainAccountPacketData": {
+      "properties": {
+        "type": {
+          "enum": [
+            "TYPE_UNSPECIFIED",
+            "TYPE_EXECUTE_TX"
+          ],
+          "type": "string",
+          "title": "Type",
+          "description": "Type defines a classification of message issued from a controller chain to its associated interchain accounts host"
+        },
+        "data": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "memo": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Interchain Account Packet Data",
+      "description": "InterchainAccountPacketData is comprised of a raw transaction, type of transaction and optional memo field."
+    }
+  }
+}

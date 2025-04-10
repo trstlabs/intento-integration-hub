@@ -1,0 +1,16 @@
+{
+  "$ref": "#/definitions/MsgWithdrawElysStakingRewards",
+  "definitions": {
+    "MsgWithdrawElysStakingRewards": {
+      "properties": {
+        "delegatorAddress": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Withdraw Elys Staking Rewards",
+      "description": "MsgWithdrawElysStakingRewards represents delegation withdrawal to a delegator from all the validators."
+    }
+  }
+}

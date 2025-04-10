@@ -1,0 +1,35 @@
+{
+  "$ref": "#/definitions/MsgUpdatePoolMultipliers",
+  "definitions": {
+    "MsgUpdatePoolMultipliers": {
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "poolMultipliers": {
+          "items": {
+            "$ref": "#/definitions/elys.masterchef.PoolMultiplier"
+          },
+          "additionalProperties": false,
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Pool Multipliers"
+    },
+    "elys.masterchef.PoolMultiplier": {
+      "properties": {
+        "poolId": {
+          "type": "string"
+        },
+        "multiplier": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Pool Multiplier"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgRevokeAllowance",
+  "definitions": {
+    "MsgRevokeAllowance": {
+      "properties": {
+        "granter": {
+          "type": "string",
+          "description": "granter is the address of the user granting an allowance of their funds."
+        },
+        "grantee": {
+          "type": "string",
+          "description": "grantee is the address of the user being granted an allowance of another user's funds."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Revoke Allowance",
+      "description": "MsgRevokeAllowance removes any existing Allowance from Granter to Grantee."
+    }
+  }
+}

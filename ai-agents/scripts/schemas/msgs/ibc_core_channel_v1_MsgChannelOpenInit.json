@@ -1,0 +1,85 @@
+{
+  "$ref": "#/definitions/MsgChannelOpenInit",
+  "definitions": {
+    "MsgChannelOpenInit": {
+      "properties": {
+        "portId": {
+          "type": "string"
+        },
+        "channel": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Channel",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Channel Open Init",
+      "description": "MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It is called by a relayer on Chain A."
+    },
+    "ibc.core.channel.v1.Channel": {
+      "properties": {
+        "state": {
+          "enum": [
+            "STATE_UNINITIALIZED_UNSPECIFIED",
+            "STATE_INIT",
+            "STATE_TRYOPEN",
+            "STATE_OPEN",
+            "STATE_CLOSED"
+          ],
+          "type": "string",
+          "title": "State",
+          "description": "State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN, or UNINITIALIZED."
+        },
+        "ordering": {
+          "enum": [
+            "ORDER_NONE_UNSPECIFIED",
+            "ORDER_UNORDERED",
+            "ORDER_ORDERED"
+          ],
+          "type": "string",
+          "title": "Order",
+          "description": "Order defines if a channel is ORDERED or UNORDERED"
+        },
+        "counterparty": {
+          "$ref": "#/definitions/ibc.core.channel.v1.Counterparty",
+          "additionalProperties": false,
+          "description": "counterparty channel end"
+        },
+        "connectionHops": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "list of connection identifiers, in order, along which packets sent on this channel will travel"
+        },
+        "version": {
+          "type": "string",
+          "description": "opaque channel version, which is agreed upon during the handshake"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Channel",
+      "description": "Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets."
+    },
+    "ibc.core.channel.v1.Counterparty": {
+      "properties": {
+        "portId": {
+          "type": "string",
+          "description": "port on the counterparty chain which owns the other end of the channel."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "channel end on the counterparty chain"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Counterparty",
+      "description": "Counterparty defines a channel end counterparty"
+    }
+  }
+}

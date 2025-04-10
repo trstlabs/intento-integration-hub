@@ -1,0 +1,38 @@
+{
+  "$ref": "#/definitions/MsgCreatePerpetualCloseOrder",
+  "definitions": {
+    "MsgCreatePerpetualCloseOrder": {
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "legacyTriggerPriceV1": {
+          "$ref": "#/definitions/elys.tradeshield.LegacyTriggerPriceV1",
+          "additionalProperties": false
+        },
+        "triggerPrice": {
+          "type": "string"
+        },
+        "positionId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Create Perpetual Close Order"
+    },
+    "elys.tradeshield.LegacyTriggerPriceV1": {
+      "properties": {
+        "tradingAssetDenom": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Legacy Trigger Price V 1"
+    }
+  }
+}

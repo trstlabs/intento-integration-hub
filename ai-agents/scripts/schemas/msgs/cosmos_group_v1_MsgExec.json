@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgExec",
+  "definitions": {
+    "MsgExec": {
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "description": "proposal is the unique ID of the proposal."
+        },
+        "executor": {
+          "type": "string",
+          "description": "executor is the account address used to execute the proposal."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Exec",
+      "description": "MsgExec is the Msg/Exec request type."
+    }
+  }
+}

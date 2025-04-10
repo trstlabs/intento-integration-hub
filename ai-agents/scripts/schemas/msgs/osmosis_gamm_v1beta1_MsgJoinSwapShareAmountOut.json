@@ -1,0 +1,28 @@
+{
+  "$ref": "#/definitions/MsgJoinSwapShareAmountOut",
+  "definitions": {
+    "MsgJoinSwapShareAmountOut": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "tokenInDenom": {
+          "type": "string"
+        },
+        "shareOutAmount": {
+          "type": "string"
+        },
+        "tokenInMaxAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Join Swap Share Amount Out",
+      "description": "===================== MsgJoinSwapShareAmountOut"
+    }
+  }
+}

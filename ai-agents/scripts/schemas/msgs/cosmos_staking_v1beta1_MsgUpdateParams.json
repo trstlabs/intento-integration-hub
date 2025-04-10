@@ -1,0 +1,56 @@
+{
+  "$ref": "#/definitions/MsgUpdateParams",
+  "definitions": {
+    "MsgUpdateParams": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        },
+        "params": {
+          "$ref": "#/definitions/cosmos.staking.v1beta1.Params",
+          "additionalProperties": false,
+          "description": "params defines the x/staking parameters to update. NOTE: All parameters must be supplied."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Update Params",
+      "description": "MsgUpdateParams is the Msg/UpdateParams request type."
+    },
+    "cosmos.staking.v1beta1.Params": {
+      "properties": {
+        "unbondingTime": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "unbonding_time is the time duration of unbonding.",
+          "format": "regex"
+        },
+        "maxValidators": {
+          "type": "integer",
+          "description": "max_validators is the maximum number of validators."
+        },
+        "maxEntries": {
+          "type": "integer",
+          "description": "max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio)."
+        },
+        "historicalEntries": {
+          "type": "integer",
+          "description": "historical_entries is the number of historical entries to persist."
+        },
+        "bondDenom": {
+          "type": "string",
+          "description": "bond_denom defines the bondable coin denomination."
+        },
+        "minCommissionRate": {
+          "type": "string",
+          "description": "min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Params",
+      "description": "Params defines the parameters for the x/staking module."
+    }
+  }
+}

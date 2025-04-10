@@ -1,0 +1,17 @@
+{
+  "$ref": "#/definitions/MsgCancelUpgrade",
+  "definitions": {
+    "MsgCancelUpgrade": {
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "authority is the address that controls the module (defaults to x/gov unless overwritten)."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Cancel Upgrade",
+      "description": "MsgCancelUpgrade is the Msg/CancelUpgrade request type."
+    }
+  }
+}

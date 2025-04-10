@@ -1,0 +1,107 @@
+{
+  "$ref": "#/definitions/MsgRecvPacket",
+  "definitions": {
+    "MsgRecvPacket": {
+      "properties": {
+        "packet": {
+          "$ref": "#/definitions/ibc.core.channel.v2.Packet",
+          "additionalProperties": false
+        },
+        "proofCommitment": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "proofHeight": {
+          "$ref": "#/definitions/ibc.core.client.v1.Height",
+          "additionalProperties": false
+        },
+        "signer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Recv Packet",
+      "description": "MsgRecvPacket receives an incoming IBC packet."
+    },
+    "ibc.core.channel.v2.Packet": {
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+        },
+        "sourceClient": {
+          "type": "string",
+          "description": "identifies the sending client on the sending chain."
+        },
+        "destinationClient": {
+          "type": "string",
+          "description": "identifies the receiving client on the receiving chain."
+        },
+        "timeoutTimestamp": {
+          "type": "string",
+          "description": "timeout timestamp in seconds after which the packet times out."
+        },
+        "payloads": {
+          "items": {
+            "$ref": "#/definitions/ibc.core.channel.v2.Payload"
+          },
+          "additionalProperties": false,
+          "type": "array",
+          "description": "a list of payloads, each one for a specific application."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Packet",
+      "description": "Packet defines a type that carries data across different chains through IBC"
+    },
+    "ibc.core.channel.v2.Payload": {
+      "properties": {
+        "sourcePort": {
+          "type": "string",
+          "description": "specifies the source port of the packet."
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "specifies the destination port of the packet."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of the specified application."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "the encoding used for the provided value."
+        },
+        "value": {
+          "type": "string",
+          "description": "the raw bytes for the payload.",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Payload",
+      "description": "Payload contains the source and destination ports and payload for the application (version, encoding, raw bytes)"
+    },
+    "ibc.core.client.v1.Height": {
+      "properties": {
+        "revisionNumber": {
+          "type": "string",
+          "description": "the revision that the client is currently on"
+        },
+        "revisionHeight": {
+          "type": "string",
+          "description": "the height within the given revision"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Height",
+      "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag. This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height."
+    }
+  }
+}

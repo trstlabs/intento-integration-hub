@@ -1,0 +1,22 @@
+{
+  "$ref": "#/definitions/MsgRevoke",
+  "definitions": {
+    "MsgRevoke": {
+      "properties": {
+        "granter": {
+          "type": "string"
+        },
+        "grantee": {
+          "type": "string"
+        },
+        "msgTypeUrl": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Revoke",
+      "description": "MsgRevoke revokes any authorization with the provided sdk.Msg type on the granter's account with that has been granted to the grantee."
+    }
+  }
+}

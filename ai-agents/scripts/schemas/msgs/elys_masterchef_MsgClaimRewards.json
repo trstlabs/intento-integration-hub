@@ -1,0 +1,21 @@
+{
+  "$ref": "#/definitions/MsgClaimRewards",
+  "definitions": {
+    "MsgClaimRewards": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Claim Rewards"
+    }
+  }
+}

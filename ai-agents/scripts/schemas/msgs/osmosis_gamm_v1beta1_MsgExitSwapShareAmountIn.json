@@ -1,0 +1,28 @@
+{
+  "$ref": "#/definitions/MsgExitSwapShareAmountIn",
+  "definitions": {
+    "MsgExitSwapShareAmountIn": {
+      "properties": {
+        "sender": {
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "tokenOutDenom": {
+          "type": "string"
+        },
+        "shareInAmount": {
+          "type": "string"
+        },
+        "tokenOutMinAmount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Msg Exit Swap Share Amount In",
+      "description": "===================== MsgExitSwapShareAmountIn"
+    }
+  }
+}
