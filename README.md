@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/0bd44452-5979-46d6-a10a-e4f0419e3129)
 
 # Intento Integration Hub
 
