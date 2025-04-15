@@ -1,7 +1,3 @@
-Nice—this is a great foundation for combining routing logic with streaming and DCA. Here's a clean, documented summary of the **Intento Flow: Token Stream + Swap** flow creation process, capturing the full logic and intent of your code:
-
----
-
 ### 🧠 **Intento Token Stream Flow for Swap Routing**
 **Goal:** Expand Skip:Go by allowing a routed swap (across chains) to be streamed over time. This reduces slippage, enables DCA strategies, and wraps the swap logic in an `Intento Flow`.
 
