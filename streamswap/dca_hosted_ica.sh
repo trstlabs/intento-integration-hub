@@ -8,8 +8,8 @@
 # ==== ACCOUNT CONFIGURATION ====
 
 USER=usr1
-INTO_ADDRESS=into18ajuj6drylfdvt4d37peexle47ljxqa5v8r6n8
-HOST_ADDRESS=inj1wdplq6qjh2xruc7qqagma9ya665q6qhcwj9k72
+INTO_USER_ADDRESS=into18ajuj6drylfdvt4d37peexle47ljxqa5v8r6n8
+HOST_USER_ADDRESS=inj1wdplq6qjh2xruc7qqagma9ya665q6qhcwj9k72
 # ==== TOKEN CONFIGURATION ====
 
 TARGET_DENOM=uinj # Example token to supply for Injective
@@ -51,7 +51,7 @@ cat <<EOF >"$msg_dca_file"
 {
   "subscribe": {
     "stream_id": "$STREAM_ID",
-    "operator_target": "$HOST_ADDRESS",
+    "operator_target": "$HOST_USER_ADDRESS",
     "operator": "ICA_ADDR"
   }
 }
@@ -94,7 +94,7 @@ msg_execute_contract_json=$(cat "$msg_execute_contract_file")
 memo='{"flow": {
   "msgs": ['"$msg_execute_contract_json"'],
   "label": "DCA via hosted ICA 🎯",
-  "owner": "'$INTO_ADDRESS'",
+  "owner": "'$INTO_USER_ADDRESS'",
   "duration": "'$DURATION'",
   "start_at": "'$START_AT'",
   "interval": "'$INTERVAL'",
@@ -107,13 +107,13 @@ echo $memo
 
 # ==== EXECUTE IBC TRANSFER ====
 
-TRANSFER_TX_RES=$(inejectived tx ibc-transfer transfer transfer $CHANNEL_TO_INTENTO $INTO_ADDRESS 1000$INTO_FEE_IBC_DENOM \
+TRANSFER_TX_RES=$(injectived tx ibc-transfer transfer transfer $CHANNEL_TO_INTENTO $INTO_USER_ADDRESS 1000$INTO_FEE_IBC_DENOM \
   --from $USER \
   --memo "$memo" \
   -y \
   --node https://sentry.tm.injective.network \
   --fees 1000uinj \
-  --gas 400000 \
+  --gas 300000 \
   --chain-id $TARGET_CHAIN_ID)
 
 echo "Flow Submitted!"
@@ -123,7 +123,7 @@ echo $TRANSFER_TX_RES
 # On Intento, authentication is in place for hosted account to only execute messages with a valid signer so no one can execute actions on your behalf, only you. See https://docs.intento.zone/module/authentication for more details.
 # In the frontend, this can be signed and broadcasted in the same transaction as the transfer for improved UX.
 
-injectived authz grant $HOST_ADDR generic --msg-type "/cosmwasm.wasm.v1.MsgExecuteContract" --from $USER -y
+injectived authz grant $HOSTED_ADDR generic --msg-type "/cosmwasm.wasm.v1.MsgExecuteContract" --from $USER -y
 
 ############################################################
 # 🔍 Tip: Retrieve hosted ICA address using:
