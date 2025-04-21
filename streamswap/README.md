@@ -2,8 +2,6 @@
 
 This guide outlines how to integrate a **DCA (Dollar-Cost Averaging)** feature into a StreamSwap stream. It includes technical flows, UX patterns, and code references to streamline implementation across different blockchains.
 
----
-
 ## ✨ Idea: Early Pledge Unlocks DCA
 
 Participants who **pledge early** (e.g. 50 ATOM or 200 USDC) before a stream starts unlock the ability to **DCA into the stream**. Once unlocked, these participants can continue to add funds gradually over time, as the sale progresses. They would receive the benefit of **purchasing tokens at different price points**, which helps mitigate risk from potential price fluctuations during the stream.
@@ -38,8 +36,6 @@ This approach is valuable both for the stream owner and for the participants. He
 A **“Start DCA” button** can be enabled in the frontend once the early pledge is complete.  
 On click, this triggers the corresponding flow on Intento via a `MsgTransfer` with `flow` memo.
 
----
-
 ## 🛠 Code Examples
 
 Integration-ready scripts and examples:
@@ -47,8 +43,6 @@ Integration-ready scripts and examples:
 - `dca_hosted_ica.sh` – Bash: Hosted ICA setup
 - `dca_self-hosted_ica.sh` – Bash: Self-hosted ICA setup
 - `dca_hosted_ica.ts` – TypeScript: Hosted ICA with `MsgExec` support for optimal UX
-
----
 
 ### **Technical Options for DCA Integration**
 
