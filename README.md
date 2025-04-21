@@ -32,6 +32,8 @@ Other useful links
 - [Block Explorer](https://explorer.intento.zone/)
 - [Networks repository](https://github.com/trstlabs/networks)
 - [IntentoJS NPM package](https://www.npmjs.com/package/intentojs)
+- [Swagger LCD Endpoint](https://lcd.intento.zone/swagger/)
+- [RPC endpoint](https://rpc.intento.zone/)
 
 ## 📮 Questions or Suggestions?
 
