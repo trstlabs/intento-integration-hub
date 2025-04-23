@@ -22,6 +22,16 @@ Each folder in this repo represents an integration, which can include:
 | `streamswap` | Initial prototype for streaming token swaps — enabling time-based DCA execution via interchain flows. |
 | `tokenstream.fun` | Experimental integration using Skip API and IBC hooks to demonstrate decentralized DCA strategies across chains. |
 
+
+### General Flows
+
+| Flow Name                                | Description                                                                                                 | Link                                                                                  |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| Simple Recurring Transfer (AuthZ + ICA) | Sends recurring transfers using AuthZ over Interchain Accounts.                                             | [View Flow](https://triggerportal.zone/flows/60285)                                   |
+| Recurring Transfer with Balance Check    | Uses Interchain Query (ICQ) to validate available balance before executing a recurring transfer.            | [View Flow](https://triggerportal.zone/flows/60283)                                   |
+| Host Chain Autocompound (Cosmos Coins)   | Auto-compounds staking rewards directly on the host chain for Cosmos-based tokens.                          | [View Flow](https://triggerportal.zone/flows/60284)                                   |
+| Conditional Autocompound                 | Auto-compounding with conditional logic — such as minimum threshold or timing constraints.                  | [View Flow](https://triggerportal.zone/flows/60286)                                   |
+
 ## Learn more
 
 [Intento documentation](https://docs.intento.zone)
