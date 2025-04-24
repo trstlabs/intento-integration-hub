@@ -1,25 +1,27 @@
-content for the `buildFlowMemo.ts` utility:
+# ⚡ Intento Flows for Autocompounding Rewards on Elys
 
-- 🔁 Hosted & self-hosted examples
-- 📦 Packet Forwarding (PFM)
-- ✉️ Flow submission via `MsgTransfer`
-- 🌐 TriggerPortal integration via `flow-id` from events
-- 🤝 Running a hosted account for fee abstraction (optional, depends on setup preference)
-- ***
+This documentation showcases how to automate reward compounding on Elys through **Intento Flows** using both **hosted** and **self-hosted ICAs**. Intento enables the automation of complex cross-chain flows, such as claiming and staking rewards, using **authz**-driven execution and **IBC** transfers.
+
+**Containing**
+
+- 🔁 **Hosted & Self-Hosted Flows**: Define flows that can be executed either from user-managed accounts or through hosted accounts, simplifying gas management.
+- 🧠 **Flow Conditions**: Implement intelligent conditions like **feedback loops** and **value comparisons** (e.g., only autocompound if rewards exceed a threshold).
+- 🌐 **Monitoring Integration**: Link to TriggerPortal for real-time flow monitoring, alerts, and status updates.
+- 🤝 **Fee Abstraction via Hosted Accounts**: Run hosted accounts to abstract gas costs for users, ensuring seamless execution without manual intervention.
+
+This directory provides example flows to demonstrate how to set up Intento Flows for autocompounding rewards on Elys, including both self-hosted and hosted ICA configurations. These examples are designed to help developers integrate autocompounding strategies and automate cross-chain reward management with minimal friction.
 
 ## 🧰 `buildFlowMemo.ts`
 
-This utility generates a valid **IBC transfer memo** JSON structure for use with **Intento Flows**, wrapping custom Elys messages (like `MsgClaimRewards`, `MsgBond`, etc.) in a `MsgExec` (authz) message.
+This typescript utility generates a valid **IBC transfer memo** JSON structure for use with **Intento Flows**, wrapping custom Elys messages (like `MsgClaimRewards`, `MsgBond`, etc.) in a `MsgExec` (authz) message.
 
 Supports:
 
 - ✅ Hosted flows (via Interchain Accounts)
 - ✅ Self-hosted flows (run on user wallet)
 - ✅ Feedback loop conditions
-- ✅ Value comparisons (e.g., only trigger if reward > 1 uelys)
+- ✅ Value comparisons (e.g., only trigger if reward > 1000000)
 - ✅ Integration with TriggerPortal via emitted `flow-id`
-
----
 
 ## 🧪 Example: Hosted ICA Flow
 
@@ -58,10 +60,10 @@ const hostedMemo = buildFlowMemo({
     comparisons: [
       {
         response_index: 0,
-        response_key: "Amount.[0]",
-        operand: "1uelys",
+        response_key: "Amount.[0].Amount",
+        operand: "1000",
         operator: 4, // LARGER_THAN
-        value_type: "sdk.Coin",
+        value_type: "sdk.Int",
       },
     ],
   },
@@ -70,29 +72,6 @@ const hostedMemo = buildFlowMemo({
 console.log(hostedMemo);
 ```
 
----
-
-## 📦 Example: With Packet Forwarding (PFM)
-
-You can forward the memo from one chain to another (e.g., Cosmos Hub ATOM, or Noble USDC ) and use **PFM** to trigger the flow on arrival. It unwraps the asset you send and sends it over to Intento. This is useful for using a certain token for gas:
-
-```ts
-const pfmMemo = {
-  forward: {
-    receiver: "intento-submit-flow",
-    port: "transfer",
-    channel: "channel-xyz",
-    timeout: "10m",
-    retries: 2,
-  },
-  flow: hostedMemo.flow, // or self-hosted
-};
-```
-
-Use this `pfmMemo` as the `memo` field in your `MsgTransfer` along with the `hostedMemo` or `selfHostedMemo`.
-
----
-
 ## ✉️ Submitting Flow via MsgTransfer
 
 You submit your flow by embedding the memo inside a standard IBC `MsgTransfer`:
@@ -100,25 +79,18 @@ You submit your flow by embedding the memo inside a standard IBC `MsgTransfer`:
 ```ts
 const msgTransfer = {
   "@type": "/ibc.applications.transfer.v1.MsgTransfer",
-  sender: "into1...",
-  receiver: "pfm",
+  sender: "elys1...",
+  receiver: "",
   source_port: "transfer",
-  source_channel: "channel-osmo",
+  source_channel: "channel-elys",
   token: {
     denom:
       "ibc/F1B5C3489F881CC56ECC12EA903EFCF5D200B4D8123852C191A88A31AC79A8E4",
     amount: "123456",
   },
-  memo: JSON.stringify(pfmMemo),
+  memo: JSON.stringify(hostedMemo),
 };
 ```
-
-#### 🧠 Notes
-
-Receiver can be anything.
-With pfmMemo, the top-level memo must include both forward and flow sections.
-ATOM can now serve as the token for the Flow Account. This is used to pay for gas cost, and can be used to send over to the destination chain as well via MsgTransfer.
----
 
 ## 🌐 TriggerPortal Integration
 
@@ -163,16 +135,12 @@ Users can choose to manage their own gas on the destination chain, they can send
 Hosted Accounts can improve UX and reduce gas costs for users, while also providing a way to earn rewards.
 **Hosted Accounts** allow anyone to **execute flows** on behalf of other users without them needing to manage gas on the destination chain (**Elys** in this case). The flow uses **authz** (authorization) to ensure users stay in full control of their assets.
 
----
-
 ### 🧾 Why Run a Hosted Account?
 
 - Users submit flows from Cosmos, Osmosis, or other chains, without needing to manage gas on the destination chain (**Elys** in this case).
 - You **cover gas fees on Elys**
 - You can **earn INTO / ATOM rewards**
 - Optionally offer it as a **paid service**
-
----
 
 ### 🚀 Quick Start
 
@@ -218,8 +186,6 @@ intentod tx intent update-hosted-account \
   - You must have an **authz grant** for any MsgExec submitted.
 
 In other words: users **retain full control** over their funds, and hosted accounts are only permitted to submit on their behalf if granted.
-
----
 
 ### 📦 Example Use Case
 
