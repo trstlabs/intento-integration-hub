@@ -2,7 +2,6 @@
 
 #########################################
 # Configuration for ICA-based DCA Flow #
-# Method 2: Hosted ICA as Operator     #
 #########################################
 
 # ==== ACCOUNT CONFIGURATION ====
@@ -37,7 +36,7 @@ HOSTED_ACCS=$($INTO_MAIN_CMD q intent list-hosted-accounts --output json)
 # Use jq to filter the hosted_address based on the connection ID
 HOSTED_ADDR=$(echo "$HOSTED_ACCS" | jq -r --arg conn_id "connection-$TARGET_CONNECTION_ID" '.hosted_accounts[] | select(.ica_config.connection_id == $conn_id) | .hosted_address')
 
-if [ -z "$HOSTED_ICA_ADDR" ]; then
+if [ -z "$HOSTED_ADDR" ]; then
   echo "❌ Error: Hosted ICA not found for this connection ID. Make sure it's already registered."
   exit 1
 fi
@@ -69,7 +68,7 @@ cat <<EOF >"$msg_execute_contract_file"
   "msgs": [
     {
         "@type": "/cosmwasm.wasm.v1.MsgExecuteContract",
-        "sender": "ICA_ADDR",
+        "sender": "$HOST_USER_ADDRESS",
         "contract": "$CONTRACT_ADDRESS",
         "msg": "$BASE64_MSG_EXECUTE",
         "funds": [
