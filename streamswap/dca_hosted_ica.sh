@@ -1,93 +1,96 @@
 #!/bin/bash
 
 #########################################
-# Configuration for ICA-based DCA Flow #
-# Method 2: Hosted ICA as Operator     #
+# Configuration for ICA-based DCA Flow  #
+# Method 2: Hosted ICA as Operator      #
 #########################################
 
-# ==== ACCOUNT CONFIGURATION ====
+# ==== CONFIGURATION ====
 
-USER=usr1
-INTO_USER_ADDRESS=into18ajuj6drylfdvt4d37peexle47ljxqa5v8r6n8
-HOST_USER_ADDRESS=inj1wdplq6qjh2xruc7qqagma9ya665q6qhcwj9k72
-# ==== TOKEN CONFIGURATION ====
+# CLI binary and home directory - adjust as needed
+BIN="./build/osmosisd"
+HOME_DIR="./dockernet/state/osmo1"
 
-TARGET_DENOM=uinj # Example token to supply for Injective
-INTO_FEE_IBC_DENOM=ibc/F1B5C3489F881CC56ECC12EA903EFCF5D200B4D8123852C191A88A31AC79A8E4 # IBC denom for Intento fees incl hosted account fees
-# ==== DCA SETTINGS ====
+USER="testosmo"
+INTO_USER_ADDRESS="into18ajuj6drylfdvt4d37peexle47ljxqa5v8r6n8"
+HOST_USER_ADDRESS="osmo18ajuj6drylfdvt4d37peexle47ljxqa5t74wq8"
 
-CONTRACT_ADDRESS=inj1contractxyz... # Replace with actual StreamSwap contract address
-STREAM_ID="16"
+NODE="https://rpc.osmotest5.osmosis.zone"
+
+# Token details
+TARGET_DENOM="factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo" # Example token for Osmosis
+INTO_FEE_IBC_DENOM="ibc/4810C6E0DF162BD8BCEB9189DAFE25AF6B2A47323891BD3EB95365C0D2A889F6" # Fee denom for Intento + hosted account fees
+
+# DCA parameters
+CONTRACT_ADDRESS="osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l"
+STREAM_ID=45
 AMOUNT_DCA=100
 
-DURATION="6000s"
+DURATION="24h"
 INTERVAL="600s"
-START_AT="1688295600"
+START_AT="0"
 
-# ==== IBC CONFIGURATION ====
-
-TARGET_CHAIN_ID=injective-1
-TARGET_CONNECTION_ID=connection-123
-CHANNEL_TO_INTENTO=channel-123
+# IBC settings
+TARGET_CHAIN_ID="osmo-test-5"
+TARGET_CONNECTION_ID="connection-2"
+CHANNEL_TO_INTENTO="channel-10411"
 
 # ==== FETCH HOSTED ICA ADDRESS ====
 
-HOSTED_ACCS=$($INTO_MAIN_CMD q intent list-hosted-accounts --output json)
+echo "Fetching hosted ICA accounts..."
+HOSTED_ACCS=$(intentod --node https://rpc.intento.zone q intent list-hosted-accounts --output json)
 
-# Use jq to filter the hosted_address based on the connection ID
-HOSTED_ADDR=$(echo "$HOSTED_ACCS" | jq -r --arg conn_id "connection-$TARGET_CONNECTION_ID" '.hosted_accounts[] | select(.ica_config.connection_id == $conn_id) | .hosted_address')
+HOSTED_ADDR=$(echo "$HOSTED_ACCS" | jq -r --arg conn_id "$TARGET_CONNECTION_ID" \
+  '.hosted_accounts[] | select(.ica_config.connection_id == $conn_id) | .hosted_address')
 
-if [ -z "$HOSTED_ICA_ADDR" ]; then
-  echo "❌ Error: Hosted ICA not found for this connection ID. Make sure it's already registered."
+if [ -z "$HOSTED_ADDR" ]; then
+  echo "❌ Error: No hosted ICA found for connection ID $TARGET_CONNECTION_ID. Please register it first."
   exit 1
 fi
 
-echo "✅ Hosted Account Address: $HOSTED_ADDR" # this is an into-prefixed address
+echo "✅ Hosted ICA address found: $HOSTED_ADDR"
 
-# ==== CONSTRUCT COSMWASM MESSAGE ====
+# Get the interchain account address for the hosted account on the target chain
+HOSTED_ICA_ADDR=$(intentod --node https://rpc.intento.zone q intent interchainaccounts "$HOSTED_ADDR" "$TARGET_CONNECTION_ID" | awk '{print $2}')
+
+echo "Interchain Account Address on target chain: $HOSTED_ICA_ADDR"
+
+# ==== BUILD COSMWASM MESSAGE ====
 
 msg_dca_file="msg_dca_hosted.json"
-cat <<EOF >"$msg_dca_file"
+cat > "$msg_dca_file" <<EOF
 {
   "subscribe": {
-    "stream_id": "$STREAM_ID",
+    "stream_id": $STREAM_ID,
     "operator_target": "$HOST_USER_ADDRESS",
     "operator": "ICA_ADDR"
   }
 }
 EOF
 
-# ==== ENCODE AND WRAP MESSAGE ====
-
-BASE64_MSG_EXECUTE=$(base64 -w 0 "$msg_dca_file")
-echo "Base64 MsgExecuteContract: $BASE64_MSG_EXECUTE"
-
 msg_execute_contract_file="msg_execute_contract_hosted_dca.json"
-cat <<EOF >"$msg_execute_contract_file"
+cat > "$msg_execute_contract_file" <<EOF
 {
   "@type": "/cosmos.authz.v1beta1.MsgExec",
   "msgs": [
     {
-        "@type": "/cosmwasm.wasm.v1.MsgExecuteContract",
-        "sender": "ICA_ADDR",
-        "contract": "$CONTRACT_ADDRESS",
-        "msg": "$BASE64_MSG_EXECUTE",
-        "funds": [
-            {
-            "denom": "$TARGET_DENOM",
-            "amount": "$AMOUNT_DCA"
-            }
-        ]
+      "@type": "/cosmwasm.wasm.v1.MsgExecuteContract",
+      "sender": "$HOST_USER_ADDRESS",
+      "contract": "$CONTRACT_ADDRESS",
+      "msg": $(cat "$msg_dca_file"),
+      "funds": [
+        {
+          "denom": "$TARGET_DENOM",
+          "amount": "$AMOUNT_DCA"
+        }
+      ]
     }
   ],
-  "grantee": "ICA_ADDR"
+    "operator": "ICA_ADDR"
 }
 EOF
 
-## You may use the ICA_ADDR placeholder in the above example. It will be replaced with the actual hosted account ICA address on the host chain during the first flow execution.
-
 msg_execute_contract_json=$(cat "$msg_execute_contract_file")
-
 
 # ==== BUILD FLOW MEMO ====
 
@@ -99,34 +102,32 @@ memo='{"flow": {
   "start_at": "'$START_AT'",
   "interval": "'$INTERVAL'",
   "hosted_account": "'$HOSTED_ADDR'",
+  "hosted_fee_limit": "50uinto",
   "fallback": "true"
 }}'
 
-echo "Flow Memo:"
-echo $memo
+echo "Flow memo constructed:"
+echo "$memo"
 
 # ==== EXECUTE IBC TRANSFER ====
 
-TRANSFER_TX_RES=$(injectived tx ibc-transfer transfer transfer $CHANNEL_TO_INTENTO $INTO_USER_ADDRESS 1000$INTO_FEE_IBC_DENOM \
-  --from $USER \
+echo "Submitting IBC transfer with memo..."
+
+TRANSFER_TX_RES=$($BIN --home "$HOME_DIR" tx ibc-transfer transfer transfer "$CHANNEL_TO_INTENTO" "$INTO_USER_ADDRESS" 1000"$INTO_FEE_IBC_DENOM" \
+  --from "$USER" \
   --memo "$memo" \
   -y \
-  --node https://sentry.tm.injective.network \
-  --fees 1000uinj \
+  --node "$NODE" \
+  --fees 1000uosmo \
   --gas 300000 \
-  --chain-id $TARGET_CHAIN_ID)
+  --chain-id "$TARGET_CHAIN_ID")
 
-echo "Flow Submitted!"
-echo $TRANSFER_TX_RES
+echo "Flow submitted! Transaction result:"
+echo "$TRANSFER_TX_RES"
 
+# ==== NOTES ====
 # Grant the hosted account permission to execute the contract. This is required for the hosted account to be able to execute the contract. It can be finetuned to expire after a certain time.
 # On Intento, authentication is in place for hosted account to only execute messages with a valid signer so no one can execute actions on your behalf, only you. See https://docs.intento.zone/module/authentication for more details.
 # In the frontend, this can be signed and broadcasted in the same transaction as the transfer for improved UX.
 
-injectived authz grant $HOSTED_ADDR generic --msg-type "/cosmwasm.wasm.v1.MsgExecuteContract" --from $USER -y
-
-############################################################
-# 🔍 Tip: Retrieve hosted ICA address using:
-#     - CLI: ./build/intentod q intent list-hosted-accounts
-#     - LCD: https://lcd.intento.zone/swagger/#get-/intento/intent/v1beta1/hosted-accounts
-############################################################
+# osmosisd authz grant $HOSTED_ADDR generic --msg-type "/cosmwasm.wasm.v1.MsgExecuteContract" --from $USER -y

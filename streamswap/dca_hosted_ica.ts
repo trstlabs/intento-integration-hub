@@ -54,9 +54,7 @@ import {
               contract,
               msg: {
                 subscribe: {
-                  stream_id: streamId,
-                  operator_target: hostAddress,
-                  operator: hostedIcaAddress,
+                  stream_id: streamId
                 },
               },
               funds: [{ denom, amount: amountDca }],
