@@ -55,7 +55,7 @@ function buildFlowInputUrl({
             {
               typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
               value: {
-                sender: "GET_IBC_SENDER", // will be replaced with the user's IBC address automatically
+                sender: "Your Address", // will be replaced with the user's Osmosis address automatically
                 contract: "<STATIC_CONTRACT>",
                 msg: {
                   subscribe: {
@@ -113,7 +113,7 @@ For a working example of a fully-formed Intento Flow with a hosted ICA, MsgExec 
 👉 [Example Flow on Portal](https://portal.intento.zone/submit?flowInput={
   "duration":0,
   "msgs":[
-    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"GET_IBC_SENDER\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": []\n        }\n      }\n    ]\n  }\n}"
+    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"Your Address\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": []\n        }\n      }\n    ]\n  }\n}"
   ],
   "conditions": {
     "feedbackLoops": [],

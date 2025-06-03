@@ -1,7 +1,7 @@
 https://portal.intento.zone/submit?flowInput={
   "duration":0,
   "msgs":[
-    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"GET_IBC_SENDER\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": [\n            {\n              \"denom\": \"factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo\",\n              \"amount\": \"100\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"
+    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"Your Address\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": [\n            {\n              \"denom\": \"factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo\",\n              \"amount\": \"100\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"
   ],
   "conditions": {
     "feedbackLoops": [],
