@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #########################################
-# Configuration for ICA-based DCA Flow  #
-# Method 2: Hosted ICA as Operator      #
+# Configuration for ICA-based DCA Flow #
 #########################################
 
 # ==== CONFIGURATION ====
@@ -43,8 +42,8 @@ HOSTED_ACCS=$(intentod --node https://rpc.intento.zone q intent list-hosted-acco
 HOSTED_ADDR=$(echo "$HOSTED_ACCS" | jq -r --arg conn_id "$TARGET_CONNECTION_ID" \
   '.hosted_accounts[] | select(.ica_config.connection_id == $conn_id) | .hosted_address')
 
-if [ -z "$HOSTED_ADDR" ]; then
-  echo "❌ Error: No hosted ICA found for connection ID $TARGET_CONNECTION_ID. Please register it first."
+if [ -z "$HOSTED_ICA_ADDR" ]; then
+  echo "❌ Error: Hosted ICA not found for this connection ID. Make sure it's already registered."
   exit 1
 fi
 
@@ -74,16 +73,16 @@ cat > "$msg_execute_contract_file" <<EOF
   "@type": "/cosmos.authz.v1beta1.MsgExec",
   "msgs": [
     {
-      "@type": "/cosmwasm.wasm.v1.MsgExecuteContract",
-      "sender": "$HOST_USER_ADDRESS",
-      "contract": "$CONTRACT_ADDRESS",
-      "msg": $(cat "$msg_dca_file"),
-      "funds": [
-        {
-          "denom": "$TARGET_DENOM",
-          "amount": "$AMOUNT_DCA"
-        }
-      ]
+        "@type": "/cosmwasm.wasm.v1.MsgExecuteContract",
+        "sender": "ICA_ADDR",
+        "contract": "$CONTRACT_ADDRESS",
+        "msg": "$BASE64_MSG_EXECUTE",
+        "funds": [
+            {
+            "denom": "$TARGET_DENOM",
+            "amount": "$AMOUNT_DCA"
+            }
+        ]
     }
   ],
     "operator": "ICA_ADDR"
