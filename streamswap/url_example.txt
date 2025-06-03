@@ -1,0 +1,34 @@
+https://portal.intento.zone/submit?flowInput={
+  "duration":0,
+  "msgs":[
+    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"GET_IBC_SENDER\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": [\n            {\n              \"denom\": \"factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo\",\n              \"amount\": \"100\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"
+  ],
+  "conditions": {
+    "feedbackLoops": [],
+    "comparisons": [],
+    "stopOnSuccessOf": [],
+    "stopOnFailureOf": [],
+    "skipOnFailureOf": [],
+    "skipOnSuccessOf": [],
+    "useAndForComparisons": false
+  },
+  "configuration": {
+    "saveResponses": false,
+    "updatingDisabled": false,
+    "stopOnSuccess": false,
+    "stopOnFailure": false,
+    "stopOnTimeout": false,
+    "fallbackToOwnerBalance": true
+  },
+  "connectionId": "connection-2",
+  "hostedIcaConfig": {
+    "hostedAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
+    "feeCoinLimit": {
+      "denom": "uinto",
+      "amount": "50"
+    }
+  },
+  "label": "Subscribe via hosted ICA 🎯"
+}&imageUrl=https://testnet.streamswap.io/assets/logo-dark-CyJKup0l.png&chain=osmo-test-5&bgColor=#140739
+
+
