@@ -93,10 +93,10 @@ let flowID = data.events
   .attributes.find((attr) => attr.key == 'flow-id').value;
 
 // 🔔 Alerts:
-https://triggerportal.zone/alert?flowID=8
+https://portal.intento.zone/alert?flowID=8
 
 // 📊 Flow:
-https://triggerportal.zone/flows/8
+https://portal.intento.zone/flows/8
 ```
 
 You can configure alerts for:
