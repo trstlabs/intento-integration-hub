@@ -1,0 +1,54 @@
+https://portal.intento.zone/submit?flowInput={
+  "duration": 86400000,
+  "interval": 3600000,
+  "msgs": [
+    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/elys.estaking.MsgWithdrawElysStakingRewards\",\n        \"value\": {\n          \"delegator_address\": \"Your Address\"\n        }\n      }\n    ]\n  }\n}",
+    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/elys.commitment.MsgStake\",\n        \"value\": {\n          \"creator\": \"Your Address\",\n          \"amount\": \"1\",\n          \"asset\": \"ueden\",\n          \"validator_address\": \"elysvaloper1wajd6ekh9u37hyghyw4mme59qmjllzuyaceanm\"\n        }\n      }\n    ]\n  }\n}",
+    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/elys.commitment.MsgStake\",\n        \"value\": {\n          \"creator\": \"Your Address\",\n          \"amount\": \"1\",\n          \"asset\": \"uedenb\",\n          \"validator_address\": \"elysvaloper1wajd6ekh9u37hyghyw4mme59qmjllzuyaceanm\"\n        }\n      }\n    ]\n  }\n}"
+  ],
+  "conditions": {
+    "feedbackLoops": [
+      {
+        "flowId": "0",
+        "responseIndex": 0,
+        "responseKey": "Amount.[1].Amount",
+        "msgsIndex": 1,
+        "msgKey": "Amount",
+        "valueType": "sdk.Int"
+      }
+    ],
+    "comparisons": [
+      {
+        "flowId": "0",
+        "responseIndex": 0,
+        "responseKey": "Amount.[0].Amount",
+        "valueType": "sdk.Int",
+        "operator": 4,
+        "operand": "1"
+      }
+    ],
+    "stopOnSuccessOf": [],
+    "stopOnFailureOf": [],
+    "skipOnFailureOf": [],
+    "skipOnSuccessOf": [],
+    "useAndForComparisons": false
+  },
+  "configuration": {
+    "saveResponses": true,
+    "updatingDisabled": false,
+    "stopOnSuccess": false,
+    "stopOnFailure": false,
+    "stopOnTimeout": false,
+    "fallbackToOwnerBalance": true
+  },
+  "connectionId": "connection-3",
+  "hostedIcaConfig": {
+    "hostedAddress": "into12m09f4a8jeam4ysm7udq6449qf49grklr2c50xs3hzkuryh0znmqyql2u9",
+    "feeCoinLimit": {
+      "denom": "ibc/17409F270CB2FE874D5E3F339E958752DEC39319E5A44AD0399D2D1284AD499C",
+      "amount": "10000"
+    }
+  },
+  "label": "Autocompound"
+}&imageUrl=https://raw.githubusercontent.com/elys-network/elys-brand-assets/refs/heads/main/logos/Primary%20Logo%20-%20Curved%20Edge/Logo1.png&chain=elysicstestnet-1&theme="dark"&bgColor=#28303b
+

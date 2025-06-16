@@ -1,0 +1,22 @@
+https://portal.intento.zone/submit?flowInput={
+  "duration": 86400000,
+  "interval": 3600000,
+  "msgs": ["{ \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\", \"value\": { \"msgs\": [ { \"typeUrl\": \"/elys.amm.MsgSwapExactAmountIn\", \"value\": { \"sender\": \"Your Address\", \"token_in\": { \"denom\": \"ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349\", \"amount\": \"100\" }, \"routes\": [{\"pool_id\":2,\"token_out_denom\":\"uelys\"}], \"token_out_min_amount\": \"1\" } } ], \"grantee\": \"ICA_ADDR\" } }"],
+  "configuration": {
+    "saveResponses": true,
+    "updatingDisabled": false,
+    "stopOnSuccess": false,
+    "stopOnFailure": false,
+    "stopOnTimeout": false,
+    "fallbackToOwnerBalance": true
+  },
+  "connectionId": "connection-3",
+  "hostedIcaConfig": {
+    "hostedAddress": "into12m09f4a8jeam4ysm7udq6449qf49grklr2c50xs3hzkuryh0znmqyql2u9",
+    "feeCoinLimit": {
+      "denom": "ibc/17409F270CB2FE874D5E3F339E958752DEC39319E5A44AD0399D2D1284AD499C",
+      "amount": "50"
+    }
+  },
+  "label": "DCA into Elys"
+}&imageUrl=https://raw.githubusercontent.com/elys-network/elys-brand-assets/refs/heads/main/logos/Primary%20Logo%20-%20Curved%20Edge/Logo1.png&chain=elysicstestnet-1&theme="dark"&bgColor=#28303b

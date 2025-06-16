@@ -1,44 +1,82 @@
-# ⚡ Intento Flows for Autocompounding Rewards on Elys
+Here’s a revised version of the README that integrates the **DCA Flow** with an emphasis on driving volume to Elys, and promotes the **submit button** as the preferred integration pattern:
 
-This documentation showcases how to automate reward compounding on Elys through **Intento Flows** using both **hosted** and **self-hosted ICAs**. Intento enables the automation of complex cross-chain flows, such as claiming and staking rewards, using **authz**-driven execution and **IBC** transfers.
+---
 
-**Containing**
+# ⚡ Intento Flows for Autocompounding & DCA on Elys
 
-- 🔁 **Hosted & Self-Hosted Flows**: Define flows that can be executed either from user-managed accounts or through hosted accounts, simplifying gas management.
-- 🧠 **Flow Conditions**: Implement intelligent conditions like **feedback loops** and **value comparisons** (e.g., only autocompound if rewards exceed a threshold).
-- 🌐 **Monitoring Integration**: Link to TriggerPortal for real-time flow monitoring, alerts, and status updates.
-- 🤝 **Fee Abstraction via Hosted Accounts**: Run hosted accounts to abstract gas costs for users, ensuring seamless execution without manual intervention.
+This documentation showcases how to automate cross-chain actions on **Elys** using **Intento Flows** — supporting both **autocompounding rewards** and **DCA (dollar-cost averaging) flows**. These flows leverage **authz**, **IBC**, and **trigger conditions**, and can be submitted via a single **IBC transfer**.
 
-This directory provides example flows to demonstrate how to set up Intento Flows for autocompounding rewards on Elys, including both self-hosted and hosted ICA configurations. These examples are designed to help developers integrate autocompounding strategies and automate cross-chain reward management with minimal friction.
+---
 
-## 🧰 `buildFlowMemo.ts`
+## ✨ What’s Included
 
-This typescript utility generates a valid **IBC transfer memo** JSON structure for use with **Intento Flows**, wrapping custom Elys messages (like `MsgClaimRewards`, `MsgBond`, etc.) in a `MsgExec` (authz) message.
+* 🔁 **Hosted & Self-Hosted Flows** – Run flows using a hosted ICA (Intento-managed) or directly from user wallets.
+* 🧠 **Flow Conditions** – Automate based on reward thresholds, time intervals, or execution outcomes (feedback loops).
+* 🌐 **Intento Portal Integration** – Get flow monitoring and alerts for users in real-time.
+* 🧪 **Intento Portal Submi Integration** – Preferable UX pattern: one-click submission via dynamic URL with embedded memo.
+---
 
-Supports:
+## 🚀 Intento Portal Submit page (Preferred Integration)
 
-- ✅ Hosted flows (via Interchain Accounts)
-- ✅ Self-hosted flows (run on user wallet)
-- ✅ Feedback loop conditions
-- ✅ Value comparisons (e.g., only trigger if reward > 1000000)
-- ✅ Integration with TriggerPortal via emitted `flow-id`
+With Intento Portal Submit, the flow can be configured via  a **dynamic URL** where you can include user-specific inputs (like `token_in`) while keeping all other values preconfigured. This is the easiest way to integrate on the frontend. 
 
-## 🧪 Example: Hosted ICA Flow
+The page can be [customized](https://docs.intento.zone/module/submit-page) with a custom image, background color, and more.
+
+### Static parameter suggestions:
+
+* `duration`: e.g. 1 week `"604800000"`, or 1 month `"2678400000"`
+* `interval`: e.g. 1 day `"86400000"` or 1 week `"604800000"`
+* `fee_coin_limit`: e.g. `[{ denom: "ibc/elys", amount: "10000" }]` this is the limit the fee amount the hosted ICA can spend per execution
+* `label`: e.g. `"DCA Flow"`
+* `feeCoinLimit`: e.g. `ibc/F1B5...` (Elys uelys)
+
+### Dynamic parameter suggestions:
+
+* DCA: `token_in`
+* Autocompound: `validator_address` 
+
+### Styling parameter suggestions:
+
+Dark theme:
+imageUrl=https://raw.githubusercontent.com/elys-network/elys-brand-assets/refs/heads/main/logos/Primary%20Logo%20-%20Curved%20Edge/Logo1.png&chain=elysicstestnet-1&theme="dark"&bgColor=#28303b
+
+Fully black background:
+imageUrl=https://raw.githubusercontent.com/elys-network/elys-brand-assets/refs/heads/main/logos/Primary%20Logo%20-%20Curved%20Edge/Logo5.png&chain=elysicstestnet-1&theme="dark"&bgColor=#000000
+
+
+### Integration Pattern:
+
+Trigger the submit page URL from a **button in the Elys UI**. This pattern is scalable and avoids complex client-side flow memo generation.
+
+---
+
+## 💸 Example: DCA Flow Memo
+
+This can be used for submitting a DCA flow via your own frontend instead of the Intento Portal submit page if a direct integration is preferred.
 
 ```ts
-import { buildFlowMemo } from "./buildFlowMemo";
-
-const hostedMemo = buildFlowMemo({
+const dcaAndBondMemo = buildFlowMemo({
   mode: "hosted",
-  label: "Autocompound 🚀",
-  duration: "600s",
-  owner: "into1wdplq...",
+  label: "DCA Flow 🚰",
+  duration: "3600s", // total active time
+  interval: "300s",  // frequency
+  owner: "cosmos1...",
   hosted_account: "elys1ica...",
   hosted_fee_limit: [{ denom: "uelys", amount: "1000" }],
   msgs: [
     {
-      "@type": "/elys.masterchef.MsgClaimRewards",
-      pool_ids: ["1"],
+      "@type": "/elys.amm.MsgSwapExactAmountIn",
+      token_in: {
+        denom: "uelys",
+        amount: "10000",
+      },
+      routes: [
+        {
+          pool_id: "1",
+          token_out_denom: "ibc/F082B65C88E4B6D5EF1DB243CDA1D331D002759E938A0F5CD3FFDC5D53B3E349",
+        },
+      ],
+      sender: "elys1ica...",
     },
     {
       "@type": "/elys.stablestake.MsgBond",
@@ -47,149 +85,43 @@ const hostedMemo = buildFlowMemo({
       pool_id: "1",
     },
   ],
-  conditions: {
-    feedback_loops: [
-      {
-        response_index: 0,
-        response_key: "Amount.[0]",
-        msgs_index: 1,
-        msg_key: "Amount",
-        value_type: "sdk.Coin",
-      },
-    ],
-    comparisons: [
-      {
-        response_index: 0,
-        response_key: "Amount.[0].Amount",
-        operand: "1000",
-        operator: 4, // LARGER_THAN
-        value_type: "sdk.Int",
-      },
-    ],
-  },
 });
-
-console.log(hostedMemo);
 ```
 
-## ✉️ Submitting Flow via MsgTransfer
+---
 
-You submit your flow by embedding the memo inside a standard IBC `MsgTransfer`:
+## ✉️ Submitting via IBC Transfer
+
+Both autocompound and DCA flows are triggered with a single `MsgTransfer`, where the `memo` is the output of `buildFlowMemo()`.
 
 ```ts
 const msgTransfer = {
   "@type": "/ibc.applications.transfer.v1.MsgTransfer",
-  sender: "elys1...",
+  sender: "cosmos1...",
   receiver: "",
   source_port: "transfer",
-  source_channel: "channel-elys",
+  source_channel: "channel-elys-intento",
   token: {
-    denom:
-      "ibc/F1B5C3489F881CC56ECC12EA903EFCF5D200B4D8123852C191A88A31AC79A8E4",
+    denom: "uelys",
     amount: "123456",
   },
-  memo: JSON.stringify(hostedMemo),
+  memo: JSON.stringify(dcaAndBondMemo),
 };
 ```
 
-## 🌐 TriggerPortal Integration
-
-When the flow is submitted, the chain emits a `flow-created` event with a `flow-id`.  
-You can extract this to build TriggerPortal links for monitoring:
-
-```ts
-let flowID = data.events
-  .find((event) => event.type === "flow-created")
-  .attributes.find((attr) => attr.key === "flow-id").value;
-
-console.log("TriggerPortal:", {
-  flow: `https://triggerportal.zone/flows/${flowID}`,
-  alerts: `https://triggerportal.zone/alert?flowID=${flowID}`,
-});
-```
-
-You can share these links with users:
-
-- 🔗 **Flow Dashboard**:  
-  `https://triggerportal.zone/flows/${flowID}`
-
-- 🔔 **Flow Alerts**:  
-  `https://triggerportal.zone/alert?flowID=${flowID}`
-
-> 💡 Alerts can notify users when the flow:
->
-> - Runs (e.g., every hour)
-> - Encounters errors
-> - Fails to execute (e.g., insufficient funds)
-> - Times out or halts
-
-Here’s a new **📚 section** you can add to the **Elys README** or documentation in the integration repo. It explains how users can **run a Hosted Account** to enable flows for others, while earning rewards or offering it as a service.
-
-This abstracts away **gas costs on Elys** for end-users and makes running flows easier across chains.
-
 ---
 
-## 🤝 Run a Hosted Account for Interchain Flows
+## 📣 Why DCA Flows in Elys are Useful
 
-Users can choose to manage their own gas on the destination chain, they can send over funds to the Self-Hosted Account, or they can use a Hosted Account.
-Hosted Accounts can improve UX and reduce gas costs for users, while also providing a way to earn rewards.
-**Hosted Accounts** allow anyone to **execute flows** on behalf of other users without them needing to manage gas on the destination chain (**Elys** in this case). The flow uses **authz** (authorization) to ensure users stay in full control of their assets.
+Including DCA flows helps drive **consistent volume** to Elys by making token inflows and swap activity programmatic.
+Unlike one-off swaps, a DCA flow:
 
-### 🧾 Why Run a Hosted Account?
+* **Brings steady volume** to Elys
+* **Incentivizes token holders** to regularly buy and stake ELYS
+* **Simplifies the UX** with a one-click submit button
 
-- Users submit flows from Cosmos, Osmosis, or other chains, without needing to manage gas on the destination chain (**Elys** in this case).
-- You **cover gas fees on Elys**
-- You can **earn INTO / ATOM rewards**
-- Optionally offer it as a **paid service**
+This is ideal for:
 
-### 🚀 Quick Start
-
-#### 1. Create a Hosted Account
-
-```bash
-intentod tx intent create-hosted-account \
-  --connection-id connection-INTO-TO-ELY \
-  --host-connection-id connection-ELY-TO-INTO \
-  --fee-coins-suported "1uinto,10ibc/F1B5C3489F881CC56ECC12EA903EFCF5D200B4D8123852C191A88A31AC79A8E4" \
-  --from your-into-addr
-```
-
-- `--connection-id`: the **initiator’s** IBC connection ID (e.g., from Osmosis)
-- `--host-connection-id`: the **target** connection ID (e.g., to Elys)
-- `--hosted-account`: the ICA address created for you on Elys (via ICA registration)
-- `--fee-coins-suported`: Coins supported as fees for hosted account
-
-Fee coins supported are a base unit for gas calculation and a denom. A gas multiplier adjustment is applied to the base unit to calculate the total fee. For example, if the base unit is `1uatom` and the adjustment is `15%%`, and there is 100000 gas required, the fee will be `150000uatom` equal to `0.15 uatom`. The multiplier adjustment can be any number in **promille** and is an on chain parameter. See the swagger docs: https://lcd.intento.zone/swagger/#get-/intento/intent/v1beta1/params for the current value. See
-
-#### 2. Update or Rotate Hosted Account
-
-If you’ve rotated your ICA or changed setup:
-
-```bash
-intentod tx intent update-hosted-account \
-  --connection-id connection-OSMO-TO-ELY \
-  --host-connection-id connection-ELY-TO-OSMO \
-  --hosted-account into1hostedaccount \
-  --new-admin your-new-into-admin-addr \
-  --from your-into-addr
-```
-
-- `--fee-coins-suported`: Coins supported as fees for hosted account, optional here
-- `--hosted-account`: the address created on Intento via create-hosted-account.
-- You can retrieve this from the swagger docs: https://lcd.intento.zone/swagger/#get-/intento/intent/v1beta1/hosted-accounts/-admin-
-
-### 🔐 Security & Permissions
-
-- Hosted accounts **never get access to user funds**.
-- Our [authentication module](https://docs.intento.zone/module/authentication) enforces that:
-  - All flow actions must originate from the flow **owner’s wallet**.
-  - You must have an **authz grant** for any MsgExec submitted.
-
-In other words: users **retain full control** over their funds, and hosted accounts are only permitted to submit on their behalf if granted.
-
-### 📦 Example Use Case
-
-- A validator or relayer runs a hosted ICA on Elys.
-- Users create a flow using `buildFlowMemo()` with `"mode": "hosted"` and set `hosted_account` to that validator’s ICA address.
-- The hosted account signs and submits MsgExec + Msgs.
-- The user only pays gas **once**, on their origin chain (e.g., Cosmos Hub).
+* New user onboarding
+* Long-term ATOM and ELYS holders
+* Offering automated strategies to users
