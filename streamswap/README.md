@@ -35,7 +35,7 @@ This approach is valuable both for stream owners and participants:
 
 A **“Start DCA” button** can be enabled in the frontend once the early pledge is complete. Clicking this triggers the flow on Intento via a `MsgTransfer` with a `flow` memo.
 
-> **Pro tip:** Instead of manually building and submitting transactions, you can now leverage our **Submit Page** for easy flow initiation.
+> **Pro tip:** Instead of manually building and submitting transactions, StreamSwap can leverage our **Submit Page** for easy flow initiation.
 > This page abstracts all the complexity and guides the user through submitting flows with minimal friction.
 > Check out the detailed usage and integration instructions in [submit_url.md](submit_url.md).
 
@@ -72,7 +72,7 @@ Integration-ready scripts and examples:
 
 1. Create a flow on Intento via a `flow` memo in a `MsgTransfer` from the host chain.
 2. Use a **hosted interchain account** to manage host chain fees.
-3. Execute actions with `MsgExec` via AuthZ permissions, which can be signed and broadcast in the same transaction for better UX.
+3. Execute actions with `MsgExec` via AuthZ permissions, which can be signed and broadcast in the same transaction for better UX. This is the recommended approach and is part of the Intento Portal Submit Page UX.
 
 **Notes:**
 

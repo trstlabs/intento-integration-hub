@@ -1,18 +1,9 @@
 https://portal.intento.zone/submit?flowInput={
-  "msgs":[
-    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"Your Address\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": [\n            {\n              \"denom\": \"factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo\",\n              \"amount\": \"100\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"
-  ],
-  "conditions": {
-    "feedbackLoops": [],
-    "comparisons": [],
-    "stopOnSuccessOf": [],
-    "stopOnFailureOf": [],
-    "skipOnFailureOf": [],
-    "skipOnSuccessOf": [],
-    "useAndForComparisons": false
-  },
+  "duration": 86400000,
+  "interval": 3600000,
+  "msgs":["{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"osmo1vca5pkkdgt42hj5mjkclqqfla9dgkrhdjeyq3am8a69s4a774nzqvgsjpn\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"Your Address\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 47\n            }\n          },\n          \"funds\": [\n            {\n              \"denom\": \"factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo\",\n              \"amount\": \"100\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"],
   "configuration": {
-    "saveResponses": false,
+    "saveResponses": true,
     "updatingDisabled": false,
     "stopOnSuccess": false,
     "stopOnFailure": false,
@@ -23,11 +14,9 @@ https://portal.intento.zone/submit?flowInput={
   "hostedIcaConfig": {
     "hostedAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
     "feeCoinLimit": {
-      "denom": "uinto",
+      "denom": "ibc/92E0120F15D037353CFB73C14651FC8930ADC05B93100FD7754D3A689E53B333",
       "amount": "50"
     }
   },
-  "label": "Subscribe via hosted ICA 🎯"
+  "label": "♾️ DCA into stream 47"
 }&imageUrl=https://testnet.streamswap.io/assets/logo-dark-CyJKup0l.png&chain=osmo-test-5&bgColor=#140739
-
-

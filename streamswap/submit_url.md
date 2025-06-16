@@ -3,9 +3,9 @@
 This guide shows how to **dynamically create a `flowInput` URL** for a DCA subscription using StreamSwap. You'll dynamically fill in:
 
 * `amount`
-* `label` (optional)
-* `streamId`
 * `denom`
+* `stream_id`
+* `label` (optional)
 
 Everything else can be pre-filled.
 
@@ -25,6 +25,7 @@ Example:
 https://portal.intento.zone/submit?flowInput=<...>&imageUrl=https://portal.intento.zone/assets/logo-dark-CyJKup0l.png&chain=osmo-test-5&bgColor=#140739
 ```
 
+The page can be [customized](https://docs.intento.zone/module/submit-page) with a custom image, background color, and more.
 
 ---
 
@@ -108,24 +109,14 @@ function buildFlowInputUrl({
 
 ### Final Notes
 
-For a working example of a fully-formed Intento Flow with a hosted ICA, MsgExec wrapping, a `stream_id`, and `denom`, check this link:
+For a working example of a fully-formed Intento Flow with a hosted ICA on the Osmosis testnet, MsgExec wrapping, a `stream_id`, and `denom`, check this link:
 
-👉 [Example Flow on Portal](https://portal.intento.zone/submit?flowInput={
-  "duration":0,
-  "msgs":[
-    "{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"ICA_ADDR\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"Your Address\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 46\n            }\n          },\n          \"funds\": []\n        }\n      }\n    ]\n  }\n}"
-  ],
-  "conditions": {
-    "feedbackLoops": [],
-    "comparisons": [],
-    "stopOnSuccessOf": [],
-    "stopOnFailureOf": [],
-    "skipOnFailureOf": [],
-    "skipOnSuccessOf": [],
-    "useAndForComparisons": false
-  },
+👉 [Example Flow on Intento Portal Submit Page](https://portal.intento.zone/submit?flowInput={
+  "duration": 900000,
+  "interval": 300000,
+  "msgs":["{\n  \"typeUrl\": \"/cosmos.authz.v1beta1.MsgExec\",\n  \"value\": {\n    \"grantee\": \"osmo1vca5pkkdgt42hj5mjkclqqfla9dgkrhdjeyq3am8a69s4a774nzqvgsjpn\",\n    \"msgs\": [\n      {\n        \"typeUrl\": \"/cosmwasm.wasm.v1.MsgExecuteContract\",\n        \"value\": {\n          \"sender\": \"Your Address\",\n          \"contract\": \"osmo10wn49z4ncskjnmf8mq95uyfkj9kkveqx9jvxylccjs2w5lw4k6gsy4cj9l\",\n          \"msg\": {\n            \"subscribe\": {\n              \"stream_id\": 47\n            }\n          },\n          \"funds\": [\n            {\n              \"denom\": \"factory/osmo1nz7qdp7eg30sr959wvrwn9j9370h4xt6ttm0h3/ussosmo\",\n              \"amount\": \"100\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}"],
   "configuration": {
-    "saveResponses": false,
+    "saveResponses": true,
     "updatingDisabled": false,
     "stopOnSuccess": false,
     "stopOnFailure": false,
@@ -136,13 +127,10 @@ For a working example of a fully-formed Intento Flow with a hosted ICA, MsgExec 
   "hostedIcaConfig": {
     "hostedAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
     "feeCoinLimit": {
-      "denom": "uinto",
-      "amount": "50"
+      "denom": "ibc/92E0120F15D037353CFB73C14651FC8930ADC05B93100FD7754D3A689E53B333",
+      "amount": "50000"
     }
   },
-  "label": "Subscribe via hosted ICA 🎯"
+  "label": "♾️ DCA into StreamSwap stream"
 }&imageUrl=https://testnet.streamswap.io/assets/logo-dark-CyJKup0l.png&chain=osmo-test-5&bgColor=#140739)
-
-This should give a solid reference for handling JSON generation, dynamic parameters, and URL encoding.
-
 
