@@ -85,7 +85,7 @@ Example only, see [Skip API Contract](https://github.com/skip-mev/skip-go-cosmwa
 
 ## 🔗 Trigger Monitoring
 
-Once the flow is created, you can track it via TriggerPortal:
+Once the flow is created, you can track it via Intento Portal:
 
 ```ts
 let flowID = data.events
