@@ -20,7 +20,7 @@ This documentation showcases how to automate cross-chain actions on **Elys** usi
 
 With Intento Portal Submit, the flow can be configured via  a **dynamic URL** where you can include user-specific inputs (like `token_in`) while keeping all other values preconfigured. This is the easiest way to integrate on the frontend. 
 
-The page can be [customized](https://docs.intento.zone/module/submit-page) with a custom image, background color, and more.
+The page can be [customized](https://docs.intento.zone/using-flows/submit-page) with a custom image, background color, and more.
 
 ### Static parameter suggestions:
 
