@@ -41,9 +41,9 @@ Each stream can include a **minimum token out** safeguard:
 
 ---
 
-## Streaming via Authz (Integrated Chains)
+## Streaming Directly (Integrated Chains)
 
-* Use chains that support `authz` (e.g., Neutron, Osmosis).
+* Use chains that support `authz` (e.g., Cosmos Hub, Osmosis).
 * The grant is set up and **expires 10 minutes after the last execution**.
 * Everything is included in **a single transaction**: grant + flow creation.
 * Grants can be reused if not expired, making repeated use smooth.
@@ -59,17 +59,12 @@ Each stream can include a **minimum token out** safeguard:
 
 (*Roadmap:* Auto-funding the PFM account via affiliate fees.)
 
----
-
-Here’s a complete **“How to Use” + Testnet Guide** section, formatted for direct use in docs or UI onboarding:
 
 ---
 
 ## 🚀 How to Use tokenstream.fun
 
 Streaming a trade is simple. tokenstream auto-detects whether to use your wallet directly or route through Intento with PFM. Here’s how it works:
-
----
 
 ### **1. Select Tokens**
 
@@ -78,7 +73,6 @@ Choose the token you want to stream *from* and *to*.
 * Example: `USDC → OSMO`, `ATOM → ELYS`, etc.
 * The platform figures out the routing logic for you.
 
----
 
 ### **2. Configure Stream Settings**
 
@@ -109,7 +103,6 @@ Click the **footer** to expand configuration options:
 
   * Add your email to receive updates when executions happen.
 
----
 
 ### **3. Review & Start Stream**
 
@@ -132,19 +125,11 @@ No additional setup required.
 * After that, the app will prompt you to fund the derived account with gas tokens (e.g. ATOM on Osmosis).
 * Intento handles scheduling and stream execution.
 
----
-
 ### ✅ You're Done!
 
 * The stream executes based on your config.
 * You'll see tokens arriving over time.
 * Get notified by email (optional) or track on-chain.
-
----
-
-## 🧪 Testnet Guide
-
-Testnet streaming is supported for development and experimentation. Below are two sample flows you can try.
 
 ---
 
@@ -214,33 +199,8 @@ Stream OSMO from Neutron into ION on Osmosis using PFM routing and hosted execut
 * Testnet swaps use real IBC packets, PFM, and Skip\:Go test deployments.
 * For PFM flows, execution may be delayed a few blocks due to IBC confirmation.
 
-## Customization
-
-* **Start time:** Set in the future or now.
-* **Duration + interval:** Choose from presets or fully customize.
-* Compatible with most Skip:Go-supported IBC trade paths.
-
----
-
-## Testnet Guide
-
-### Example 1: OSMO on Neutron → ION on Osmosis
-
-* Uses **PFM**
-* Transfers OSMO from Neutron to Intento
-* Swaps into ION on Osmosis via Skip:Go
-
-### Example 2: USDC on Osmosis → OSMO on Osmosis
-
-* Uses **authz**
-* Streams swap of USDC to OSMO directly on Osmosis
-
----
-
 ## Notes & Limitations
 
 * **Skip:Go contracts** are assumed to follow a standard IBC-Hooks interface.
 * PFM-based streams require external funding of the derived sender account.
 * Non-Skip:Go messages (e.g., raw `MsgSend`) are possible but won't include trade routing.
-
----
