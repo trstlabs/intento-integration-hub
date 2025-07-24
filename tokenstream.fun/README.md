@@ -7,200 +7,201 @@
 1. **Direct from your wallet** using `authz` grants.
 2. **Via Intento chain** using **packet-forward middleware (PFM)**.
 
-In both cases, trades route through [Skip:Go](https://skip.build) contracts on DEXes like Osmosis, leveraging IBC hooks and standardized execution paths. This gives you flexibility in timing and control while keeping execution decentralized and programmable.
-
----
+In both cases, trades route through [Skip\:Go](https://skip.build) contracts on DEXes like Osmosis, leveraging IBC hooks and standardized execution paths. This gives you flexibility in timing and control while keeping execution decentralized and programmable.
 
 ## Streaming Modes
 
-There are **two ways to stream**:
+There are two **streaming styles** you can pick from:
 
-### 1. **Equal Parts**
+### 1. **Split Input**
 
-* The full input amount is split evenly across all intervals.
-* Great for **reducing price impact** across time without needing DCA.
+* Divides your total input into **equal portions** over time.
+* Great for reducing price impact from larger trades.
+* Think of it as a linear execution schedule, not classic DCA.
 
-### 2. **Stream in Bits**
+### 2. **Recur Input**
 
-* The set amount is streamed in discrete portions over time (e.g., smaller, non-uniform pieces).
-* More suited for **DCA** (Dollar Cost Averaging) in or out of a position.
+* Streams **smaller recurring amounts**, one per interval.
+* Mimics **DCA behavior**: each chunk gets its own market price.
+* Useful for buying/selling into volatility over time.
 
-Both modes remove emotional decision-making from trading and provide programmatic control over execution.
+Let me know if you also want to reflect this renaming in the UI, CLI output, or docs structure.
 
----
+Both methods help you trade with discipline and automation, not gut instinct. You choose how precise or aggressive the flow should be.
 
-## Trade Protection: Minimum Token Out
+## 🛡️ Price Guard
 
-Each stream can include a **minimum token out** safeguard:
+Each stream includes an optional **Price Guard** setting:
 
-* Ensures the output token amount meets your expectations.
-* Protects against unexpected slippage.
-* Implemented directly in the **Skip:Go contract**, using standard swap parameters.
+* Sets a **minimum output amount** you're willing to accept.
+* Protects against **slippage or bad rates** during volatile markets.
+* Enforced on-chain via **Skip\:Go contracts** using standard swap params.
 
-(*Upcoming:* Option to auto-cancel or halt the stream if slippage threshold is breached.)
-
----
+💡 *On roadmap:* Automatic **stream halt** if the price drops below your guard threshold.
 
 ## Streaming Directly (Integrated Chains)
 
-* Use chains that support `authz` (e.g., Cosmos Hub, Osmosis).
-* The grant is set up and **expires 10 minutes after the last execution**.
-* Everything is included in **a single transaction**: grant + flow creation.
-* Grants can be reused if not expired, making repeated use smooth.
+* Works with chains that support the Cosmos permission system `authz` (e.g. Osmosis Testnet).
+* One transaction creates a time-limited grant and starts the stream.
+* Grant expires **10 minutes after the last execution**, minimizing risk.
+* Smooth reuse of grants for back-to-back streams.
 
----
 
 ## Streaming via Intento + PFM
 
-* Token is **transferred from source chain to Intento** using PFM.
-* Intento executes the flow and routes via Skip:Go on the destination chain.
-* Requires separate funding of the **PFM sender account** (displayed after stream is created).
-* This architecture allows streaming from **non-authz** chains and broader trade flexibility.
+* Token is IBC-transferred from the **source chain to Intento** using PFM.
+* Intento executes the swap on your behalf using `MsgExec` and Skip\:Go.
+* You must fund a **derived sender account** (displayed after stream creation) to cover execution gas.
+* Lets you stream from **non-authz chains** like **Noble**.
 
-(*Roadmap:* Auto-funding the PFM account via affiliate fees.)
+(*On roadmap:* Auto-funding via affiliate margin or opt-in gas pooling.)
 
 
----
 
 ## 🚀 How to Use tokenstream.fun
 
-Streaming a trade is simple. tokenstream auto-detects whether to use your wallet directly or route through Intento with PFM. Here’s how it works:
+Streaming is frictionless. The app detects the routing method automatically:
 
 ### **1. Select Tokens**
 
-Choose the token you want to stream *from* and *to*.
+Pick a source and destination token.
 
-* Example: `USDC → OSMO`, `ATOM → ELYS`, etc.
-* The platform figures out the routing logic for you.
+* Examples:
 
+  * `USDC → OSMO`
+  * `OSMO → ION`
+  * `ATOM → ELYS`
+
+Routing is handled for you.
+
+Then hit `Swap`, on supported routes, you'll see the `Go Once` and `Stream` buttons.
 
 ### **2. Configure Stream Settings**
 
-Click the **footer** to expand configuration options:
+Open the **footer** for optional controls:
+
+* **Duration / Interval / Start Time**
+
+  * Full control over pacing
 
 * **Stream Mode**
 
-  * `Equal Parts`: Split the amount evenly across time.
-  * `Bits`: Smaller parts streamed at custom intervals (great for DCA).
+  * `Split Input` or `Recur input`
 
-* **Minimum Token Out**
+* **Price Guard**
 
-  * Slippage guard. The stream won’t execute below this rate.
+  * Slippage protection
 
-* **Duration**
+* **Email Notifications**
 
-  * Total length of the stream (e.g. 30 minutes, 2 hours, 1 day).
-
-* **Interval**
-
-  * How often to execute a portion (e.g. every 5 minutes).
-
-* **Start At**
-
-  * Choose to start the stream now or schedule it.
-
-* **Email Alerts** *(optional)*
-
-  * Add your email to receive updates when executions happen.
+  * Get alerts on each swap
 
 
 ### **3. Review & Start Stream**
 
-From the **Stream** page, click **"Stream"** to kick things off.
+From the **Stream** page, click **Stream** to begin.
 
-Depending on the routing method:
+Routing determines what happens next:
 
 #### 🔑 If using **Authz**:
 
-* You’ll approve a single transaction that:
-
-  * Creates a temporary grant (expires 10 min after last execution).
-  * Starts the stream from your wallet.
-
-No additional setup required.
+* One transaction sets a temporary grant and starts the stream.
+* Grant expires 10 minutes after the last execution.
 
 #### 🌉 If using **PFM + Intento**:
 
-* You’ll sign an IBC transfer to a derived **Intento sender account**.
-* After that, the app will prompt you to fund the derived account with gas tokens (e.g. ATOM on Osmosis).
-* Intento handles scheduling and stream execution.
+* First transaction sends your tokens via IBC to the Intento chain.
+* You’ll be shown the **Intento sender account** to fund with gas tokens (e.g. OSMO or INTO).
+* Once funded, the stream begins.
 
-### ✅ You're Done!
 
-* The stream executes based on your config.
-* You'll see tokens arriving over time.
-* Get notified by email (optional) or track on-chain.
+## 🔁 Example 1: OSMO → ION (Osmosis to Osmosis via Authz)
 
----
+### Scenario:
 
-### 🔁 Example 1: USDC → OSMO on Osmosis (via Authz)
+Streaming OSMO to ION on the same chain using a direct grant.
 
-#### Scenario:
+### Setup:
 
-You’re streaming USDC to OSMO, staying fully on Osmosis.
+* Connect Osmosis testnet wallet
+* Select `OSMO → ION`
+* Choose duration + interval
+* Submit single transaction (includes:
 
-#### Setup:
+  * `MsgGrant` + stream parameters)
 
-* Connect your Osmosis testnet wallet.
-* Select `USDC → OSMO`.
-* Configure stream duration and interval.
-* Approve the transaction. This includes:
+### Behavior:
 
-  * A `MsgGrant` for execution rights.
-  * The stream parameters.
+* Intento executes the flow on Osmosis using Skip\:Go
+* You receive ION over time
+* Grant expires 10 minutes after final execution
 
-#### Behavior:
+### Requirements:
 
-* Intento executes swaps using `MsgExec` and Skip:Go.
-* You receive OSMO in your wallet over time.
-* Grant expires 10 minutes after the last scheduled execution.
+* OSMO for the trade
+* OSMO for gas
 
-#### Requirements:
 
-* Fund Osmosis testnet wallet with:
 
-  * USDC (for trade).
-  * OSMO (for gas).
+## 🧵 Example 2: USDC (Noble) → OSMO (Osmosis via PFM + Intento)
 
----
+### Scenario:
 
-### 🧵 Example 2: OSMO on Neutron → ION on Osmosis (via PFM + Intento)
+Stream from a **non-authz** chain (Noble) into Osmosis using PFM.
 
-#### Scenario:
+### Setup:
 
-Stream OSMO from Neutron into ION on Osmosis using PFM routing and hosted execution.
+1. Connect Noble testnet wallet
+2. Select `USDC (Noble)` → `OSMO (Osmosis)`
+3. Configure stream
+4. Submit transaction to start the IBC transfer
 
-#### Setup:
+### Behavior:
 
-* Connect your Neutron testnet wallet.
-* Select `OSMO → ION`.
-* Configure your stream (e.g., equal parts over 1 hour).
-* Sign the transaction to initiate the IBC transfer via PFM.
+* USDC is IBC-transferred from Noble to Osmosis using PFM
+* Tokens land on a **derived Intento account** on Osmosis
+* You fund that address with **OSMO or INTO** for gas
+* Intento executes the stream into OSMO using Skip\:Go
 
-#### Behavior:
+### Requirements:
 
-* OSMO is IBC-transferred from Neutron to Osmosis, wrapped in a memo.
-* Tokens land on a **derived Intento account** on Osmosis.
-* Intento splits the amount and executes swaps into ION using Skip\:Go.
+* **Testnet USDC from Noble**
+* **Gas on Osmosis (e.g. OSMO)** to fund the derived account
+* Execution begins once account is funded
 
-#### Requirements:
 
-* Fund Neutron wallet with OSMO (for sending).
-* App will display the Osmosis **derived sender account** that needs to be funded with:
 
-  * ATOM or INTO (for gas).
-* Execution starts once funding is detected.
+## 🧰 Testnet Setup Tips
 
----
+### Get Testnet Tokens
 
-### 🧰 Testnet Setup Tips
+#### 🌀 OSMO (Osmosis testnet)
 
-* Use [Osmosis Testnet Faucet](https://faucet.osmosis.zone/) to get tokens.
-* Testnet swaps use real IBC packets, PFM, and Skip\:Go test deployments.
-* For PFM flows, execution may be delayed a few blocks due to IBC confirmation.
+* Telegram faucet: [Claim OSMO](https://t.me/c/2075185137/2462)
+* Discord command:
+
+  ```bash
+  $request {your osmo1 address} osmosis-test
+  ```
+
+  Join: [Intento Discord](https://discord.com/invite/hsVf9sYyZW)
+
+
+
+#### 💵 USDC (Noble testnet)
+
+* Go to: [faucet.circle.com](https://faucet.circle.com/)
+* Select **Noble**
+* Paste Noble testnet address (`noble1...`)
+* Click **Request Tokens**
+
+
+
+*All streams use real testnet IBC packets, Skip:Go contracts, and PFM routing.*
+Execution may be delayed a few blocks due to IBC confirmation.
 
 ## Notes & Limitations
 
-* **Skip:Go contracts** are assumed to follow a standard IBC-Hooks interface.
-* PFM-based streams require external funding of the derived sender account.
-* Non-Skip:Go messages (e.g., raw `MsgSend`) are possible but won't include trade routing.
+* **PFM-based streams** require external funding of the derived sender account for gas.
+* **Skip:Go** contracts assume a standardized IBC-Hooks and contracts.
+* Native support for additional DEXes, flow types, and automated funding is in progress.
