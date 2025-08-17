@@ -36,8 +36,8 @@ type BaseFlowParams = {
 
 type HostedFlowParams = BaseFlowParams & {
   mode: "hosted";
-  hosted_account: string;
-  hosted_fee_limit?: SdkCoin[];
+  trustless_agent: string;
+  fee_limit?: SdkCoin[];
 };
 
 type SelfHostedFlowParams = BaseFlowParams & {
@@ -62,7 +62,7 @@ export function buildFlowMemo(params: FlowParams): string {
   // Wrap each message in a MsgExec block
   const msgExec = (msg: any): any => ({
     "@type": "/cosmos.authz.v1beta1.MsgExec",
-    grantee: params.mode === "hosted" ? params.hosted_account : owner,
+    grantee: params.mode === "hosted" ? params.trustless_agent : owner,
     msgs: [msg],
   });
 
@@ -79,9 +79,9 @@ export function buildFlowMemo(params: FlowParams): string {
 
   // Append hosted or self-hosted mode specifics
   if (params.mode === "hosted") {
-    memo.flow.hosted_account = params.hosted_account;
-    if (params.hosted_fee_limit) {
-      memo.flow.hosted_fee_limit = params.hosted_fee_limit;
+    memo.flow.trustless_agent = params.trustless_agent;
+    if (params.fee_limit) {
+      memo.flow.fee_limit = params.fee_limit;
     }
   } else {
     memo.flow.cid = params.cid;

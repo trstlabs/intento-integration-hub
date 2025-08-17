@@ -1,6 +1,3 @@
-Here’s a revised version of the README that integrates the **DCA Flow** with an emphasis on driving volume to Elys, and promotes the **submit button** as the preferred integration pattern:
-
----
 
 # ⚡ Intento Flows for Autocompounding & DCA on Elys
 
@@ -10,7 +7,7 @@ This documentation showcases how to automate cross-chain actions on **Elys** usi
 
 ## ✨ What’s Included
 
-* 🔁 **Hosted & Self-Hosted Flows** – Run flows using a hosted ICA (Intento-managed) or directly from user wallets.
+* 🔁 **Hosted & Self-Hosted Flows** – Run flows using a Trustless Agent (Intento-managed) or directly from user wallets.
 * 🧠 **Flow Conditions** – Automate based on reward thresholds, time intervals, or execution outcomes (feedback loops).
 * 🌐 **Intento Portal Integration** – Get flow monitoring and alerts for users in real-time.
 * 🧪 **Intento Portal Submi Integration** – Preferable UX pattern: one-click submission via dynamic URL with embedded memo.
@@ -26,9 +23,9 @@ The page can be [customized](https://docs.intento.zone/using-flows/submit-page) 
 
 * `duration`: e.g. 1 week `"604800000"`, or 1 month `"2678400000"`
 * `interval`: e.g. 1 day `"86400000"` or 1 week `"604800000"`
-* `fee_coin_limit`: e.g. `[{ denom: "ibc/elys", amount: "10000" }]` this is the limit the fee amount the hosted ICA can spend per execution
+* `fee_coin_limit`: e.g. `[{ denom: "ibc/elys", amount: "10000" }]` this is the limit the fee amount the Trustless Agent can spend per execution
 * `label`: e.g. `"DCA Flow"`
-* `feeCoinLimit`: e.g. `ibc/F1B5...` (Elys uelys)
+* `feeLimit`: e.g. `ibc/F1B5...` (Elys uelys)
 
 ### Dynamic parameter suggestions:
 
@@ -61,8 +58,8 @@ const dcaAndBondMemo = buildFlowMemo({
   duration: "3600s", // total active time
   interval: "300s",  // frequency
   owner: "cosmos1...",
-  hosted_account: "elys1ica...",
-  hosted_fee_limit: [{ denom: "uelys", amount: "1000" }],
+  trustless_agent: "elys1ica...",
+  fee_limit: [{ denom: "uelys", amount: "1000" }],
   msgs: [
     {
       "@type": "/elys.amm.MsgSwapExactAmountIn",

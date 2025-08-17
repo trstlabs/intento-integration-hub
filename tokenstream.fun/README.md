@@ -7,9 +7,9 @@
 1. **Direct from your wallet** using `authz` grants.
 2. **Via Intento chain** using **packet-forward middleware (PFM)**.
 
-In both cases, trades route through [Skip\:Go](https://skip.build) contracts on DEXes like Osmosis, leveraging IBC hooks and standardized execution paths. This gives you flexibility in timing and control while keeping execution decentralized and programmable.
+In both cases, trades route through [Skip:Go](https://skip.build) contracts on DEXes like Osmosis, leveraging IBC hooks and standardized execution paths. This gives you flexibility in timing and control while keeping execution decentralized and programmable.
 
-## Streaming Modes
+## Streaming Styles
 
 There are two **streaming styles** you can pick from:
 
@@ -25,8 +25,6 @@ There are two **streaming styles** you can pick from:
 * Mimics **DCA behavior**: each chunk gets its own market price.
 * Useful for buying/selling into volatility over time.
 
-Let me know if you also want to reflect this renaming in the UI, CLI output, or docs structure.
-
 Both methods help you trade with discipline and automation, not gut instinct. You choose how precise or aggressive the flow should be.
 
 ## 🛡️ Price Guard
@@ -35,7 +33,7 @@ Each stream includes an optional **Price Guard** setting:
 
 * Sets a **minimum output amount** you're willing to accept.
 * Protects against **slippage or bad rates** during volatile markets.
-* Enforced on-chain via **Skip\:Go contracts** using standard swap params.
+* Enforced on-chain via **Skip:Go contracts** using standard swap params.
 
 💡 *On roadmap:* Automatic **stream halt** if the price drops below your guard threshold.
 
@@ -50,7 +48,7 @@ Each stream includes an optional **Price Guard** setting:
 ## Streaming via Intento + PFM
 
 * Token is IBC-transferred from the **source chain to Intento** using PFM.
-* Intento executes the swap on your behalf using `MsgExec` and Skip\:Go.
+* Intento executes the swap on your behalf using `MsgExec` and Skip:Go.
 * You must fund a **derived sender account** (displayed after stream creation) to cover execution gas.
 * Lets you stream from **non-authz chains** like **Noble**.
 
@@ -132,7 +130,7 @@ Streaming OSMO to ION on the same chain using a direct grant.
 
 ### Behavior:
 
-* Intento executes the flow on Osmosis using Skip\:Go
+* Intento executes the flow on Osmosis using Skip:Go
 * You receive ION over time
 * Grant expires 10 minutes after final execution
 
@@ -161,7 +159,7 @@ Stream from a **non-authz** chain (Noble) into Osmosis using PFM.
 * USDC is IBC-transferred from Noble to Osmosis using PFM
 * Tokens land on a **derived Intento account** on Osmosis
 * You fund that address with **OSMO or INTO** for gas
-* Intento executes the stream into OSMO using Skip\:Go
+* Intento executes the stream into OSMO using Skip:Go
 
 ### Requirements:
 

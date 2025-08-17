@@ -32,22 +32,22 @@ if [ -z "$INTO_USER" ] || [ -z "$ELYS_USER_ADDRESS" ] || [ -z "$DURATION" ] || [
 fi
 
 # Prerequisite:: Create a hosted interchain account (ICA) on Elys from Intento
-msg_create_hosted_account=$($INTO_MAIN_CMD tx intent create-hosted-account \
+msg_create_trustless_agent=$($INTO_MAIN_CMD tx intent create-hosted-account \
   --connection-id connection-$CONNECTION_ID \
   --host-connection-id connection-$HOST_CONNECTION_ID \
   --fee-coins-supported "1000"$INTO_DENOM, "1000"$ELYS_DENOM,"1000"$ELYS_USDC_DENOM \
   --from $INTO_USER --gas 250000 --keyring-backend test -y --chain-id $INTO_CHAIN_ID)
-echo $msg_create_hosted_account
+echo $msg_create_trustless_agent
 
-echo "Creating hosted ICA and retrieving..."
+echo "Creating Trustless Agent and retrieving..."
 sleep 120 # Wait for ICA creation to propagate
 
-# Fetch the hosted ICA address
-hosted_accounts=$($INTO_MAIN_CMD q intent list-hosted-accounts --output json)
-hosted_address_intento=$(echo "$hosted_accounts" | jq -r --arg conn_id "connection-$CONNECTION_ID" \
-  '.hosted_accounts[] | select(.ica_config.connection_id == $conn_id) | .hosted_address')
+# Fetch the Trustless Agent address
+trustless_agents=$($INTO_MAIN_CMD q intent list-trustless_agents --output json)
+trustless_agent_address_intento=$(echo "$trustless_agents" | jq -r --arg conn_id "connection-$CONNECTION_ID" \
+  '.trustless_agents[] | select(.ica_config.connection_id == $conn_id) | .agent_address')
 
-ica_address=$(intentod --node https://rpc.intento.zone q intent interchainaccounts "$hosted_address_intento" "connection-$CONNECTION_ID" | awk '{print $2}')
+ica_address=$(intentod --node https://rpc.intento.zone q intent interchainaccounts "$trustless_agent_address_intento" "connection-$CONNECTION_ID" | awk '{print $2}')
 
 echo "Interchain Account Address on Elys chain: $ica_address"
 
@@ -60,8 +60,8 @@ $ELYS_MAIN_CMD tx authz grant $ica_address generic --msg-type "/elys.commitment.
 sleep 5
 
 # Step 2: Fund the ICA with ELYS tokens to enable functionality
-FUND_HOSTED_ICA_AMOUNT=20000
-fund_ica_hosted=$($ELYS_MAIN_CMD tx bank send $ELYS_USER_ADDRESS $ica_address $FUND_HOSTED_ICA_AMOUNT$ELYS_DENOM --from $ELYS_USER -y  --fees 100uelys --keyring-backend test)
+FUND_TRUSTLESS_AGENT_ICA_AMOUNT=20000
+fund_ica_agent=$($ELYS_MAIN_CMD tx bank send $ELYS_USER_ADDRESS $ica_address $FUND_TRUSTLESS_AGENT_ICA_AMOUNT$ELYS_DENOM --from $ELYS_USER -y  --fees 100uelys --keyring-backend test)
 sleep 5
 
 # Step 3: Create the withdrawal message to claim staking rewards. Create the bond message to stake tokens on Elys. ICA_ADDR is a placeholder that will be replaced with the actual host account ICA address ahead of execution.
@@ -147,8 +147,8 @@ memo='{
     "duration":"'$DURATION'",
     "interval": "'$INTERVAL'",
     "label":"Autocompound",
-    "hosted_account": "'$hosted_address_intento'",
-    "hosted_fee_limit": "50uinto",
+    "trustless_agent": "'$trustless_agent_address_intento'",
+    "fee_limit": "50uinto",
     "start_at":"0",
     "owner": "'$INTO_USER_ADDRESS'",
     "fallback": "true",

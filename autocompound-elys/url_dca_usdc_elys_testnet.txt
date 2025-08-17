@@ -8,12 +8,12 @@ https://portal.intento.zone/submit?flowInput={
     "stopOnSuccess": false,
     "stopOnFailure": false,
     "stopOnTimeout": false,
-    "fallbackToOwnerBalance": true
+    "walletFallback": true
   },
   "connectionId": "connection-3",
-  "hostedIcaConfig": {
-    "hostedAddress": "into12m09f4a8jeam4ysm7udq6449qf49grklr2c50xs3hzkuryh0znmqyql2u9",
-    "feeCoinLimit": {
+  "trustlessAgent": {
+    "agentAddress": "into12m09f4a8jeam4ysm7udq6449qf49grklr2c50xs3hzkuryh0znmqyql2u9",
+    "feeLimit": {
       "denom": "ibc/17409F270CB2FE874D5E3F339E958752DEC39319E5A44AD0399D2D1284AD499C",
       "amount": "50"
     }

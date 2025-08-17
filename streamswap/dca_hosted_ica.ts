@@ -21,27 +21,27 @@ import {
   const main = async () => {
     // === USER CONFIG ===
     const userAddress = "inj1youraddress";
-    const hostedIcaAddress = "inj1hostedicaaddress...";
+    const trustlessAgentAddress = "inj1hostedicaaddress...";
     const contract = "inj1contractxyz...";
-    const hostAddress = "inj1wdplq6qjh2xruc7qqagma9ya665q6qhcwj9k72";
+    const agentAddress = "into1wdplq6qjh2xruc7qqagma9ya665q6qhcwj9k72";
   
     const streamId = "16";
     const denom = "uinj";
-    const amountDca = "100";
+    const amountDCA = "100";
     const feeDenom = "ibc/F1B5C3489F881CC56ECC12EA903EFCF5D200B4D8123852C191A88A31AC79A8E4";
   
     const duration = "6000s";
     const interval = "600s";
     const startAt = "1688295600";
     const channel = "channel-123";
-    const memoLabel = "DCA via hosted ICA 🎯";
+    const memoLabel = "DCA via Trustless Agent 🎯";
   
     // === FLOW MEMO OBJECT (plain JSON, not base64-encoded) ===
     const flowMemo = {
       flow: {
         label: memoLabel,
         owner: userAddress,
-        hosted_account: hostAddress,
+        trustless_agent: agentAddress,
         duration,
         interval,
         start_at: startAt,
@@ -50,14 +50,14 @@ import {
           {
             type_url: "/cosmwasm.wasm.v1.MsgExecuteContract",
             value: {
-              sender: hostedIcaAddress,
+              sender: trustlessAgentAddress,
               contract,
               msg: {
                 subscribe: {
                   stream_id: streamId
                 },
               },
-              funds: [{ denom, amount: amountDca }],
+              funds: [{ denom, amount: amountDCA }],
             },
           },
         ],
@@ -77,7 +77,7 @@ const toTimestamp = (date: Date) => {
     typeUrl: "/cosmos.authz.v1beta1.MsgGrant",
     value: MsgGrant.fromPartial({
       granter: userAddress,
-      grantee: hostedIcaAddress,
+      grantee: trustlessAgentAddress,
       grant: {
         authorization: {
           typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",

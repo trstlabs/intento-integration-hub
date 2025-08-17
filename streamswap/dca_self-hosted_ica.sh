@@ -135,5 +135,5 @@ echo $TRANSFER_TX_RES
 #
 # 🔍 Tip: Retrieve the ICA address (self-hosted) using:
 #     - CLI: intentod query intent interchainaccounts $INTO_ADDRESS connection-$CONNECTION_ID
-#     - LCD: https://lcd.intento.zone/swagger/#get-/intento/intent/v1beta1/address-to-ica
+#     - LCD: https://lcd.intento.zone/swagger/#get-/intento/intent/v1/address-to-ica
 ############################################################

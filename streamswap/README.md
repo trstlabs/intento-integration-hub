@@ -43,9 +43,9 @@ A **“Start DCA” button** can be enabled in the frontend once the early pledg
 
 Integration-ready scripts and examples:
 
-- `dca_hosted_ica.sh` – Bash: Hosted ICA setup
-- `dca_self-hosted_ica.sh` – Bash: Self-hosted ICA setup
-- `dca_hosted_ica.ts` – TypeScript: Hosted ICA with `MsgExec` support for optimal UX
+- `dca_hosted_ica.sh` – Bash: Trustless Agent setup
+- `dca_self-hosted_ica.sh` – Bash: Self-Trustless Agent setup
+- `dca_hosted_ica.ts` – TypeScript: Trustless Agent with `MsgExec` support for optimal UX
 - [submit_url.md](submit_url.md) – Detailed UX guide for the new **Submit Page**
 
 ### **Technical Options for DCA Integration**
@@ -55,9 +55,9 @@ Integration-ready scripts and examples:
 | **1. ICA (user-owned)**      | ✅      | ✅           | ✅                     | Medium         | ❌ Poor        | Requires pre-setup ICA address. Currently not compatible with Authz on Osmosis.                        |
 | **2. IBC Hooks (user addr)** | ✅      | ❌           | ❌                     | Low            | ✅ Good        | Uses user's Osmosis address. Requires smart contract for proper handling.                              |
 | **3. ICA + ICQ**             | ✅      | ✅           | ✅                     | 🔺 High        | ❌ Poor        | Uses interchain accounts with queries to track remote balances. Complex.                               |
-| **4. Hosted ICA + MsgExec**  | ✅      | ✅           | ❌                     | ✅ Low         | ✅✅ Excellent | Easiest user experience. Requires MsgExec support from Osmosis. Supported on the Injective blockchain. |
+| **4. Trustless Agent + MsgExec**  | ✅      | ✅           | ❌                     | ✅ Low         | ✅✅ Excellent | Easiest user experience. Requires MsgExec support from Osmosis. Supported on the Injective blockchain. |
 
-### Self-Hosted ICA Flow
+### Self-Trustless Agent Flow
 
 1. Create the ICA on Intento chain.
 2. Subscribe to the stream using the ICA address as operator.
@@ -68,7 +68,7 @@ Integration-ready scripts and examples:
 - ICA must be pre-created and funded by the user.
 - Works on any ICA-supporting chain but adds user friction.
 
-### Hosted ICA Flow
+### Trustless Agent Flow
 
 1. Create a flow on Intento via a `flow` memo in a `MsgTransfer` from the host chain.
 2. Use a **hosted interchain account** to manage host chain fees.

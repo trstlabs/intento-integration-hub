@@ -34,25 +34,25 @@ TARGET_CHAIN_ID="osmo-test-5"
 TARGET_CONNECTION_ID="connection-2"
 CHANNEL_TO_INTENTO="channel-10411"
 
-# ==== FETCH HOSTED ICA ADDRESS ====
+# ==== FETCH Trustless Agent ADDRESS ====
 
-echo "Fetching hosted ICA accounts..."
-HOSTED_ACCS=$(intentod --node https://rpc.intento.zone q intent list-hosted-accounts --output json)
+echo "Fetching Trustless Agent accounts..."
+HOSTED_ACCS=$(intentod --node https://rpc.intento.zone q intent list-trustless_agents --output json)
 
 HOSTED_ADDR=$(echo "$HOSTED_ACCS" | jq -r --arg conn_id "$TARGET_CONNECTION_ID" \
-  '.hosted_accounts[] | select(.ica_config.connection_id == $conn_id) | .hosted_address')
+  '.trustless_agents[] | select(.ica_config.connection_id == $conn_id) | .agent_address')
 
-if [ -z "$HOSTED_ICA_ADDR" ]; then
-  echo "❌ Error: Hosted ICA not found for this connection ID. Make sure it's already registered."
+if [ -z "$TRUSTLESS_AGENT_ICA_ADDR" ]; then
+  echo "❌ Error: Trustless Agent not found for this connection ID. Make sure it's already registered."
   exit 1
 fi
 
-echo "✅ Hosted ICA address found: $HOSTED_ADDR"
+echo "✅ Trustless Agent address found: $HOSTED_ADDR"
 
 # Get the interchain account address for the hosted account on the target chain
-HOSTED_ICA_ADDR=$(intentod --node https://rpc.intento.zone q intent interchainaccounts "$HOSTED_ADDR" "$TARGET_CONNECTION_ID" | awk '{print $2}')
+TRUSTLESS_AGENT_ICA_ADDR=$(intentod --node https://rpc.intento.zone q intent interchainaccounts "$HOSTED_ADDR" "$TARGET_CONNECTION_ID" | awk '{print $2}')
 
-echo "Interchain Account Address on target chain: $HOSTED_ICA_ADDR"
+echo "Interchain Account Address on target chain: $TRUSTLESS_AGENT_ICA_ADDR"
 
 # ==== BUILD COSMWASM MESSAGE ====
 
@@ -95,13 +95,13 @@ msg_execute_contract_json=$(cat "$msg_execute_contract_file")
 
 memo='{"flow": {
   "msgs": ['"$msg_execute_contract_json"'],
-  "label": "DCA via hosted ICA 🎯",
+  "label": "DCA via Trustless Agent 🎯",
   "owner": "'$INTO_USER_ADDRESS'",
   "duration": "'$DURATION'",
   "start_at": "'$START_AT'",
   "interval": "'$INTERVAL'",
-  "hosted_account": "'$HOSTED_ADDR'",
-  "hosted_fee_limit": "50uinto",
+  "trustless_agent": "'$HOSTED_ADDR'",
+  "fee_limit": "50uinto",
   "fallback": "true"
 }}'
 

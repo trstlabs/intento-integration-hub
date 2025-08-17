@@ -90,14 +90,14 @@ function buildFlowInputUrl({
       stopOnSuccess: false,
       stopOnFailure: false,
       stopOnTimeout: false,
-      fallbackToOwnerBalance: true
+      walletFallback: true
     },
-    hostedIcaConfig: {
-      hostedAddress: "<STATIC_HOSTED_ICA>",//into-prefixed address
-      feeCoinLimit: {
+    trustlessAgent: {
+      agentAddress: "<STATIC_TRUSTLESS_AGENT_ICA>",//into-prefixed address
+      feeLimit: [{
         denom: "uinto",
-        amount: "50"// Limits the gas fees per gas unit for the hosted ICA
-      }
+        amount: "50"// Limits the gas fees per gas unit for the Trustless Agent
+      }]
     },
     label
   };
@@ -109,7 +109,7 @@ function buildFlowInputUrl({
 
 ### Final Notes
 
-For a working example of a fully-formed Intento Flow with a hosted ICA on the Osmosis testnet, MsgExec wrapping, a `stream_id`, and `denom`, check this link:
+For a working example of a fully-formed Intento Flow with a Trustless Agent on the Osmosis testnet, MsgExec wrapping, a `stream_id`, and `denom`, check this link:
 
 👉 [Example Flow on Intento Portal Submit Page](https://portal.intento.zone/submit?flowInput={
   "duration": 900000,
@@ -121,15 +121,18 @@ For a working example of a fully-formed Intento Flow with a hosted ICA on the Os
     "stopOnSuccess": false,
     "stopOnFailure": false,
     "stopOnTimeout": false,
-    "fallbackToOwnerBalance": true
+    "walletFallback": true
   },
   "connectionId": "connection-2",
-  "hostedIcaConfig": {
-    "hostedAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
-    "feeCoinLimit": {
+  "trustlessAgent": {
+    "agentAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
+    "feeLimit": [{
       "denom": "ibc/92E0120F15D037353CFB73C14651FC8930ADC05B93100FD7754D3A689E53B333",
       "amount": "50000"
-    }
+    }, {
+      "denom": "ibc/uinto",
+      "amount": "100"
+    }]
   },
   "label": "♾️ DCA into StreamSwap stream"
 }&imageUrl=https://testnet.streamswap.io/assets/logo-dark-CyJKup0l.png&chain=osmo-test-5&bgColor=#140739)

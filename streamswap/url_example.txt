@@ -8,15 +8,18 @@ https://portal.intento.zone/submit?flowInput={
     "stopOnSuccess": false,
     "stopOnFailure": false,
     "stopOnTimeout": false,
-    "fallbackToOwnerBalance": true
+    "walletFallback": true
   },
   "connectionId": "connection-2",
-  "hostedIcaConfig": {
-    "hostedAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
-    "feeCoinLimit": {
+  "trustlessAgent": {
+    "agentAddress": "into1p9ccttjgzh5wlewm5s55qk73j9ccjt27x00tada89sfq5t9v69rsex0977",
+    "feeLimit": [{
       "denom": "ibc/92E0120F15D037353CFB73C14651FC8930ADC05B93100FD7754D3A689E53B333",
       "amount": "50"
-    }
+    }, {
+      "denom": "ibc/uinto",
+      "amount": "100"
+    }]
   },
   "label": "♾️ DCA into stream 47"
 }&imageUrl=https://testnet.streamswap.io/assets/logo-dark-CyJKup0l.png&chain=osmo-test-5&bgColor=#140739
