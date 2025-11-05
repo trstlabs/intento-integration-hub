@@ -1,143 +1,113 @@
 #!/bin/bash
-set -o errexit -o nounset -o pipefail
 
-SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+REPO_URL="https://github.com/cosmos/chain-registry.git"
 
-# directory for individual schema files
-MSGS_DIR="${SCRIPT_PATH}/schemas/msgs"
+OUTPUT_CHAIN_INFO_TESTNETS="../chain_info_testnets.json"
+OUTPUT_CHAIN_INFO_MAINNETS="../chain_info_mainnets.json"
+OUTPUT_ASSET_LIST_TESTNETS="../asset_list_testnets.json"
+OUTPUT_ASSET_LIST_MAINNETS="../asset_list_mainnets.json"
+OUTPUT_FILE_IBC="../ibc_info.json"
+OUTPUT_FILE_IBC_ICS20_MEMO_HOOKS="../ibc_ics20_memo_hooks.json"
 
-INDEX_FILE="${MSGS_DIR}/index.ts"
+git clone "$REPO_URL" chain-registry
+cd chain-registry
 
-# Recreate the msgs directory
-# mkdir -p "${MSGS_DIR}"
+echo "[" > "$OUTPUT_CHAIN_INFO_TESTNETS"
+echo "[" > "$OUTPUT_CHAIN_INFO_MAINNETS"
+echo "[" > "$OUTPUT_ASSET_LIST_TESTNETS"
+echo "[" > "$OUTPUT_ASSET_LIST_MAINNETS"
+echo "[" > "$OUTPUT_FILE_IBC"
+echo "[" > "$OUTPUT_FILE_IBC_ICS20_MEMO_HOOKS"
 
-# Remove old generated schemas
-# rm -rf schemas/msgs
+filter_chain() {
+    jq 'del(.codebase, .peers)' "$1"
+}
 
-Run buf generate
-cd ${SCRIPT_PATH}/ibc-go/proto
-proto_dirs=$(find ./ -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
-for dir in $proto_dirs; do
-  for file in $(find "${dir}" -maxdepth 1 -name '*.proto'); do
-    if grep go_package "$file" &>/dev/null; then
-      buf generate --template ${SCRIPT_PATH}/buf.gen.yaml "$file"
-    fi
-  done
-done
-
-cd ${SCRIPT_PATH}/cosmos-sdk/proto
-proto_dirs=$(find ./ -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
-for dir in $proto_dirs; do
-  for file in $(find "${dir}" -maxdepth 1 -name '*.proto'); do
-    if grep go_package "$file" &>/dev/null; then
-      buf generate --template ${SCRIPT_PATH}/buf.gen.yaml "$file"
-    fi
-  done
-done
-
-
-cd ${SCRIPT_PATH}/wasmd/proto
-proto_dirs=$(find ./ -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
-for dir in $proto_dirs; do
-  for file in $(find "${dir}" -maxdepth 1 -name '*.proto'); do
-    if grep go_package "$file" &>/dev/null; then
-      buf generate --template ${SCRIPT_PATH}/buf.gen.yaml "$file"
-    fi
-  done
-done
-
-cd ${SCRIPT_PATH}/intento/proto
-proto_dirs=$(find ./ -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
-for dir in $proto_dirs; do
-  for file in $(find "${dir}" -maxdepth 1 -name '*.proto'); do
-    if grep go_package "$file" &>/dev/null; then
-      buf generate --template ${SCRIPT_PATH}/buf.gen.yaml "$file"
-    fi
-  done
-done
-
-
-# Loop through all subdirectories in MSGS_DIR
-for dir in "$MSGS_DIR"/*; do
-    # Check if it is a directory
-    if [ -d "$dir" ]; then
-        # Get the directory name and replace dots with underscores
-        dir_name=$(basename "$dir" | tr '.' '_')
-
-        # Loop through all files in the subdirectory
-        for file in "$dir"/*; do
-            # Check if it is a file
-            if [ -f "$file" ]; then
-                # Get the file name
-                file_name=$(basename "$file")
-
-                # Generate the new file name with the prefix
-                new_file_name="${dir_name}_${file_name}"
-
-                # Move the file to the parent directory
-                mv "$file" "$MSGS_DIR/$new_file_name"
-            fi
-        done
-
-        # Remove the subdirectory
-        rm -r "$dir"
+# --- MAINNET chains (anything in top-level dirs not testnets/_IBC/_memo_keys)
+FIRST=true
+for FILE in */chain.json; do
+    DIR=$(dirname "$FILE")
+    case "$DIR" in
+        testnets|_IBC|_memo_keys) continue;;
+    esac
+    if $FIRST; then
+        filter_chain "$FILE" >> "$OUTPUT_CHAIN_INFO_MAINNETS"
+        FIRST=false
+    else
+        echo "," >> "$OUTPUT_CHAIN_INFO_MAINNETS"
+        filter_chain "$FILE" >> "$OUTPUT_CHAIN_INFO_MAINNETS"
     fi
 done
+echo "]" >> "$OUTPUT_CHAIN_INFO_MAINNETS"
 
-# Iterate over all JSON files in the msgs directory
-for json_file in "${MSGS_DIR}"/*.json; do
-    # Check if the file exists
-    if [ -f "$json_file" ]; then
-        # Get the file name without the extension
-        file_name=$(basename "${json_file%.*}")
-        
-        # Check if the file name starts with "Msg" and does not end with "Response"
-        if [[ "$file_name" == *Msg* && "$file_name" != *Response ]]; then
-            
-            # Convert the keys in the "properties" section of all definitions to camelCase
-            # Set additionalProperties to true at the correct level
-            # Remove specific 'value' object
-            updated_json=$(cat "$json_file" | jq '
-            def snake_to_camel:
-            gsub( "_(?<a>[a-z])"; .a|ascii_upcase);
-
-            def add_additional_properties:
-                if type == "object" then
-                    if any(values[]; type == "object" and has("typeUrl")) then
-                        . + {"additionalProperties": true}
-                    else
-                        with_entries(if .value | type == "object" then .value |= add_additional_properties else . end)
-                    end
-                else
-                    .
-                end;
-
-            walk(if type == "object" then with_entries(.key |= snake_to_camel) else . end) |
-            walk(if type == "object" and .msg? and .msg.type == "string" and .msg.format == "binary" then .msg = {
-                "type": "object",
-                "description": "is an object and will be encoded to a string before submission .",
-                "additionalProperties": true
-            } else . end) |
-            walk(add_additional_properties) |
-            walk(if type == "object" and .value? and .value.type == "string" and .value.description == "Must be a valid serialized protocol buffer of the above specified type." and .value.format == "binary" and .value.binaryEncoding == "base64" then del(.value) else . end)
-            ')
-            
-            # Overwrite the file with the modified JSON
-            echo "$updated_json" > "${MSGS_DIR}"/"$file_name"+"_tmp".json
-            
-            # Remove the "$schema" key
-            jq 'del(."$schema")' "${MSGS_DIR}"/"$file_name"+"_tmp".json > "$json_file"
-            
-            # Add an export statement to the index.ts file
-            echo "export { default as $file_name } from './$(basename "$json_file")';" >> "$INDEX_FILE"
-            rm "${MSGS_DIR}"/"$file_name"+"_tmp".json
-        else
-            rm "${MSGS_DIR}"/"$file_name".json
-        fi
+# --- TESTNET chains
+FIRST=true
+for FILE in testnets/*/chain.json; do
+    if $FIRST; then
+        filter_chain "$FILE" >> "$OUTPUT_CHAIN_INFO_TESTNETS"
+        FIRST=false
+    else
+        echo "," >> "$OUTPUT_CHAIN_INFO_TESTNETS"
+        filter_chain "$FILE" >> "$OUTPUT_CHAIN_INFO_TESTNETS"
     fi
 done
+echo "]" >> "$OUTPUT_CHAIN_INFO_TESTNETS"
 
+# --- MAINNET assetlists
+FIRST=true
+for FILE in */assetlist.json; do
+    DIR=$(dirname "$FILE")
+    case "$DIR" in
+        testnets|_IBC|_memo_keys) continue;;
+    esac
+    if $FIRST; then
+        cat "$FILE" >> "$OUTPUT_ASSET_LIST_MAINNETS"
+        FIRST=false
+    else
+        echo "," >> "$OUTPUT_ASSET_LIST_MAINNETS"
+        cat "$FILE" >> "$OUTPUT_ASSET_LIST_MAINNETS"
+    fi
+done
+echo "]" >> "$OUTPUT_ASSET_LIST_MAINNETS"
 
+# --- TESTNET assetlists
+FIRST=true
+for FILE in testnets/*/assetlist.json; do
+    if $FIRST; then
+        cat "$FILE" >> "$OUTPUT_ASSET_LIST_TESTNETS"
+        FIRST=false
+    else
+        echo "," >> "$OUTPUT_ASSET_LIST_TESTNETS"
+        cat "$FILE" >> "$OUTPUT_ASSET_LIST_TESTNETS"
+    fi
+done
+echo "]" >> "$OUTPUT_ASSET_LIST_TESTNETS"
 
+# --- IBC metadata
+FIRST=true
+for FILE in _IBC/*.json; do
+    if $FIRST; then
+        cat "$FILE" >> "$OUTPUT_FILE_IBC"
+        FIRST=false
+    else
+        echo "," >> "$OUTPUT_FILE_IBC"
+        cat "$FILE" >> "$OUTPUT_FILE_IBC"
+    fi
+done
+echo "]" >> "$OUTPUT_FILE_IBC"
 
-echo "Generated msg schemas and index.ts file in $MSGS_DIR"
+# --- Memo hooks
+FIRST=true
+for FILE in _memo_keys/*.json; do
+    if $FIRST; then
+        cat "$FILE" >> "$OUTPUT_FILE_IBC_ICS20_MEMO_HOOKS"
+        FIRST=false
+    else
+        echo "," >> "$OUTPUT_FILE_IBC_ICS20_MEMO_HOOKS"
+        cat "$FILE" >> "$OUTPUT_FILE_IBC_ICS20_MEMO_HOOKS"
+    fi
+done
+echo "]" >> "$OUTPUT_FILE_IBC_ICS20_MEMO_HOOKS"
+
+cd ..
+rm -rf chain-registry
